@@ -18,23 +18,23 @@ const PAYMENT_ROUTING_RULES: PaymentRoutingRule[] = [
     priority: 1
   },
   
-  // 🔥 订阅业务优先使用STRIPE（功能更强大）
+  // 🔥 订阅业务现在使用CREEM（已替换Stripe）
   {
     condition: {
       productType: ["subscription"]
     },
-    provider: "stripe",
+    provider: "creem",
     priority: 2
   },
   
-  // 💰 大额支付优先使用STRIPE（更安全）
+  // 💰 大额支付现在使用CREEM（已替换Stripe）
   {
     condition: {
       amount: {
         min: 10000 // $100 或 ¥100
       }
     },
-    provider: "stripe",
+    provider: "creem",
     priority: 3
   },
   
@@ -50,10 +50,10 @@ const PAYMENT_ROUTING_RULES: PaymentRoutingRule[] = [
     priority: 4
   },
   
-  // 🌍 其他地区默认使用STRIPE
+  // 🌍 其他地区默认使用CREEM（已替换Stripe）
   {
     condition: {},
-    provider: "stripe",
+    provider: "creem",
     priority: 10
   }
 ];
@@ -139,9 +139,9 @@ export function selectPaymentProvider(params: {
     }
   }
   
-  // 默认回退
+  // 默认回退 - 现在使用Creem作为默认选择
   const defaultProvider = process.env.NEXT_PUBLIC_DEFAULT_PAYMENT_PROVIDER as PaymentProvider;
-  return defaultProvider && isProviderAvailable(defaultProvider) ? defaultProvider : "stripe";
+  return defaultProvider && isProviderAvailable(defaultProvider) ? defaultProvider : "creem";
 }
 
 // 🔥 检查规则是否匹配
@@ -216,13 +216,13 @@ export function getPaymentConfig() {
 export function getRecommendedProviderByCurrency(currency: Currency): PaymentProvider {
   const currencyProviderMap: Record<Currency, PaymentProvider> = {
     CNY: "creem",
-    USD: "stripe",
-    EUR: "stripe",
-    GBP: "stripe",
-    JPY: "stripe"
+    USD: "creem",
+    EUR: "creem", 
+    GBP: "creem",
+    JPY: "creem"
   };
   
-  return currencyProviderMap[currency] || "stripe";
+  return currencyProviderMap[currency] || "creem";
 }
 
 // 🔥 格式化金额（转换为最小单位）

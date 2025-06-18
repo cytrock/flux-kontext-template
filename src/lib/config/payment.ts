@@ -4,8 +4,8 @@
 
 export const PAYMENT_CONFIG = {
   // === 🎯 主要控制开关 ===
-  STRIPE_ENABLED: true,        // ✅❌ 是否启用Stripe支付
-  CREEM_ENABLED: true,         // ✅❌ 是否启用Creem支付
+  STRIPE_ENABLED: false,       // ✅❌ 是否启用Stripe支付 - 已替换为Creem
+  CREEM_ENABLED: true,         // ✅❌ 是否启用Creem支付 - 主要支付提供商
   DEFAULT_PROVIDER: "creem" as "stripe" | "creem",   // 🎯 默认支付提供商
   MAINTENANCE_MODE: false,     // 🚧 维护模式（暂停所有支付）
   
@@ -15,16 +15,16 @@ export const PAYMENT_CONFIG = {
   
   // === 🌍 地区配置 ===
   CHINA_ONLY_CREEM: true,      // 🇨🇳 中国用户强制使用Creem
-  INTERNATIONAL_PREFER_STRIPE: true, // 🌍 国际用户优先使用Stripe
+  INTERNATIONAL_PREFER_STRIPE: false, // 🌍 国际用户现在也优先使用Creem
   
   // === 💰 金额配置 ===
   LARGE_AMOUNT_THRESHOLD: 10000, // 大额支付阈值（分）
-  LARGE_AMOUNT_PROVIDER: "stripe" as "stripe" | "creem", // 大额支付优先提供商
+  LARGE_AMOUNT_PROVIDER: "creem" as "stripe" | "creem", // 大额支付也优先使用Creem
   
   // === 📝 配置说明 ===
-  LAST_UPDATED: "2025-01-20",
+  LAST_UPDATED: "2025-06-16",
   UPDATED_BY: "管理员",
-  NOTES: "初始配置 - 双系统均启用"
+  NOTES: "已将Stripe替换为Creem作为主要支付提供商"
 }
 
 // 🔍 配置验证函数

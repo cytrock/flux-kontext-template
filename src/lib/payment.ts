@@ -46,7 +46,7 @@ interface ProviderStats {
 // 配置常量
 const MAX_ORDERS_PER_24H = 10 // 24小时内最大订单数
 const DEFAULT_PROVIDER: PaymentProvider = "creem" // 默认使用Creem
-const FALLBACK_PROVIDER: PaymentProvider = "stripe" // 备用提供商
+const FALLBACK_PROVIDER: PaymentProvider = "creem" // 备用提供商也使用Creem
 
 /**
  * 创建支付会话 - 统一入口
