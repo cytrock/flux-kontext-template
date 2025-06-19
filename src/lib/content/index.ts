@@ -18,7 +18,6 @@ export const seo = seoData             // SEO文案 (元数据、结构化数据
 
 // 为了向后兼容，保留一些导出方式
 export const footer = homeData.footer
-export const twitterShowcase = homeData.twitterShowcase
 
 // 类型定义
 export type HomeData = typeof homeData

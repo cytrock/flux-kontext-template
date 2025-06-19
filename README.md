@@ -127,7 +127,6 @@ src/components/
 ├── 📄 SmartImagePreview.tsx     # 智能图片预览 (215行)
 ├── 📄 UpgradePrompt.tsx         # 升级提示组件 (220行)
 ├── 📄 GoogleOneTap.tsx          # Google一键登录 (186行)
-├── 📄 TwitterShowcase.tsx       # Twitter展示组件 (177行)
 └── 📄 Analytics.tsx             # 分析统计组件 (126行)
 ```
 
@@ -339,12 +338,7 @@ scripts/
 
 ### 🟢 **可选文件 (可以删除)**
 
-1. **TwitterShowcase.tsx** (177行)
-   - 🎯 **作用**: Twitter展示组件
-   - 🔧 **功能**: 社交媒体展示
-   - ✅ **删除影响**: 轻微，主要功能不受影响
-
-2. **FAQ.tsx** (85行)
+1. **FAQ.tsx** (85行)
    - 🎯 **作用**: 常见问题页面
    - 🔧 **功能**: 用户帮助信息
    - ✅ **删除影响**: 轻微，可用其他方式提供帮助

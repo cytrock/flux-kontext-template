@@ -4,7 +4,6 @@ import Link from "next/link"
 import Script from "next/script"
 import { Button } from "@/components/ui/button"
 import { Navigation } from "@/components/Navigation"
-import { TwitterShowcase } from "@/components/TwitterShowcase"
 import { KeyFeatures } from "@/components/KeyFeatures"
 import { HowToSteps } from "@/components/HowToSteps"
 import { FAQ } from "@/components/FAQ"
@@ -90,9 +89,6 @@ export function HomeContent() {
         </div>
       </section>
 
-      {/* Twitter展示区域 */}
-      <TwitterShowcase />
-
       {/* Key Features Section */}
       <KeyFeatures />
 
@@ -105,11 +101,6 @@ export function HomeContent() {
       {/* Footer */}
       <Footer />
 
-      {/* 推特脚本 - 确保推特内容正常加载 */}
-      <Script 
-        src="https://platform.twitter.com/widgets.js" 
-        strategy="lazyOnload"
-      />
     </div>
   )
 } 
