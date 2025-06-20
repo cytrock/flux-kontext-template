@@ -60,13 +60,13 @@ export function HowToSteps() {
                 </div>
 
                 {/* Step Icon */}
-                <div className="w-12 h-12 bg-secondary/50 rounded-lg flex items-center justify-center mx-auto">
+                <div className="w-12 h-12 bg-ghibli-cream/90 rounded-lg flex items-center justify-center mx-auto shadow-md border border-ghibli-sage/30">
                   <img
                     src={step.icon}
                     alt={`${step.title} - AI Image Generation Step ${step.number} Icon`}
-                    className="w-6 h-6 filter brightness-0 invert opacity-80"
+                    className="w-6 h-6"
                     style={{
-                      filter: 'brightness(0) saturate(100%) invert(78%) sepia(15%) saturate(684%) hue-rotate(22deg) brightness(96%) contrast(89%)'
+                      filter: 'brightness(0) saturate(100%) invert(27%) sepia(65%) saturate(1200%) hue-rotate(85deg) brightness(90%) contrast(120%)'
                     }}
                     loading="lazy"
                     width="24"
