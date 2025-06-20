@@ -175,7 +175,7 @@ export function SignUpContent() {
       <div className="absolute top-4 left-4">
         <Link
           href="/"
-          className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-ghibli-cream bg-ghibli-green hover:bg-ghibli-green/80 transition-all duration-200"
+          className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-ghibli-forest bg-ghibli-cream hover:bg-ghibli-cream/90 transition-all duration-200"
         >
           <Home className="w-4 h-4 mr-2" />
           Back to Home

@@ -94,7 +94,7 @@ export function SignInContent() {
       <div className="absolute top-4 left-4">
         <Link
           href="/"
-          className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-ghibli-cream bg-ghibli-green hover:bg-ghibli-green/80 transition-all duration-200"
+          className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-ghibli-forest bg-ghibli-cream hover:bg-ghibli-cream/90 transition-all duration-200"
         >
           <Home className="w-4 h-4 mr-2" />
           Back to Home
@@ -128,7 +128,7 @@ export function SignInContent() {
             {auth.signIn.noAccount}{" "}
             <Link
               href="/auth/signup"
-              className="font-medium text-ghibli-cream hover:text-ghibli-cream/80 transition-colors"
+              className="font-bold text-ghibli-cream hover:text-ghibli-cream/80 transition-colors"
             >
               {auth.signIn.createNewAccount}
             </Link>
@@ -330,7 +330,7 @@ export function SignInContent() {
             <Link href="/auth/signup" passHref>
               <button
                 type="button"
-                className="group relative w-full flex justify-center py-2 px-4 border border-input text-sm font-medium rounded-md text-ghibli-cream bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                className="group relative w-full flex justify-center py-2 px-4 border border-input text-sm font-bold rounded-md text-ghibli-forest bg-ghibli-cream hover:bg-ghibli-cream/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
               >
                 {auth.signIn.createNewAccount}
               </button>
