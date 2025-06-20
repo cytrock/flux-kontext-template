@@ -963,6 +963,145 @@ export async function POST(request: NextRequest) {
           responseData.warning = safetyWarning;
         }
 
+        // 🎨 保存生成历史到Memory Garden (使用existing generations表)
+        try {
+          // 从action推断模型名称
+          const getModelFromAction = (action: string): string => {
+            if (action.includes('pro')) return 'pro';
+            if (action.includes('max')) return 'max';
+            if (action.includes('schnell')) return 'schnell';
+            if (action.includes('dev')) return 'dev';
+            if (action.includes('anime')) return 'anime';
+            if (action.includes('realism')) return 'realism';
+            return 'pro'; // 默认
+          };
+          
+          // 自动分析风格标签的简化版本
+          const analyzeStyleTags = (prompt: string, action: string, model: string): string[] => {
+            const tags: string[] = [];
+            const lowerPrompt = prompt.toLowerCase();
+            
+            // 基于模型添加风格标签
+            if (model === 'anime') tags.push('anime');
+            
+            // 基于动作添加标签
+            if (action.includes('text-to-image')) {
+              tags.push('text-to-image');
+            } else if (action.includes('edit-image')) {
+              tags.push('image-editing');
+            }
+            
+            // 基于prompt内容分析风格
+            if (lowerPrompt.includes('ghibli') || lowerPrompt.includes('studio ghibli')) {
+              tags.push('ghibli');
+            }
+            
+            if (lowerPrompt.includes('realistic') || lowerPrompt.includes('photorealistic')) {
+              tags.push('realistic');
+            }
+            
+            if (lowerPrompt.includes('anime') || lowerPrompt.includes('manga')) {
+              tags.push('anime');
+            }
+            
+            if (lowerPrompt.includes('portrait') || lowerPrompt.includes('face') || lowerPrompt.includes('person')) {
+              tags.push('portrait');
+            }
+            
+            if (lowerPrompt.includes('landscape') || lowerPrompt.includes('scenery') || lowerPrompt.includes('background')) {
+              tags.push('landscape');
+            }
+            
+            if (lowerPrompt.includes('nature') || lowerPrompt.includes('forest') || lowerPrompt.includes('mountain')) {
+              tags.push('nature');
+            }
+            
+            if (lowerPrompt.includes('fantasy') || lowerPrompt.includes('magic') || lowerPrompt.includes('dragon')) {
+              tags.push('fantasy');
+            }
+            
+            // 去重并返回
+            return [...new Set(tags)];
+          };
+          
+          // 分析生成类型和工作室类型
+          const getGenerationType = (action: string, hasInputImages: boolean): string => {
+            if (hasInputImages || action.includes('edit-image')) return 'image-to-image';
+            return 'text-to-image';
+          };
+          
+          const getStudioType = (action: string): string => {
+            if (action.includes('pro') || action.includes('max')) return 'professional-studio';
+            if (action.includes('anime')) return 'anime-studio';
+            if (action.includes('realism')) return 'realistic-studio';
+            if (action.includes('schnell')) return 'speed-studio';
+            return 'professional-studio'; // 默认
+          };
+          
+          const hasInputImages = !!(body.image_url || (body.image_urls && body.image_urls.length > 0));
+          
+          const generationData = {
+            user_id: user.id,
+            prompt: body.prompt,
+            model: getModelFromAction(body.action),
+            credits_used: requiredCredits,
+            image_urls: processedResult?.images?.map((img: any) => img.url) || [],
+            settings: {
+              action: body.action,
+              aspect_ratio: body.aspect_ratio,
+              guidance_scale: body.guidance_scale,
+              num_images: body.num_images || 1,
+              safety_tolerance: body.safety_tolerance,
+              output_format: body.output_format,
+              seed: body.seed
+            },
+            // Memory Garden 扩展字段
+            action: body.action,
+            generation_type: getGenerationType(body.action, hasInputImages),
+            studio_type: getStudioType(body.action),
+            input_image_url: body.image_url || null,
+            input_image_count: body.image_urls ? body.image_urls.length : (body.image_url ? 1 : 0),
+            style_tags: analyzeStyleTags(body.prompt, body.action, getModelFromAction(body.action)),
+            content_tags: [], // 可以后续扩展
+            generation_time_ms: Date.now() - startTime,
+            fal_request_id: (result as any)?.requestId,
+            device_type: request.headers.get('sec-ch-ua-mobile') === '?1' ? 'mobile' : 'desktop',
+            user_agent: request.headers.get('user-agent'),
+            ip_address: request.headers.get('cf-connecting-ip') || 
+                       request.headers.get('x-forwarded-for') || 
+                       request.headers.get('x-real-ip') || null
+          };
+          
+          console.log('🎨 Saving generation to Memory Garden (generations table)...');
+          console.log('📋 Generation data:', {
+            user_id: generationData.user_id,
+            action: generationData.action,
+            model: generationData.model,
+            credits_used: generationData.credits_used,
+            image_count: generationData.image_urls.length,
+            style_tags: generationData.style_tags
+          });
+          
+          const { createAdminClient } = await import('@/lib/supabase/server');
+          const supabase = createAdminClient();
+          
+          const { data, error } = await supabase
+            .from('generations')
+            .insert(generationData)
+            .select()
+            .single();
+          
+          if (error) {
+            console.error('❌ Failed to save generation history:', error);
+          } else {
+            console.log('✅ Generation history saved successfully to generations table:', data.id);
+          }
+          
+        } catch (historyError) {
+          console.error('⚠️ Failed to save generation history:', historyError);
+          // 不影响主要功能，只记录错误
+        }
+
         // 🔧 修复：确保返回正确的JSON响应结构
         console.log('✅ Returning successful response with data:', {
           success: responseData.success,

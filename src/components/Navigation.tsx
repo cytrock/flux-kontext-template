@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { useSession, signOut } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { LogoVariants } from "@/components/Logo"
-import { ChevronDown, User, LogOut, Code, BookOpen, Menu, X, Home, Zap, CreditCard } from "lucide-react"
+import { ChevronDown, User, LogOut, Code, BookOpen, Menu, X, Home, Zap, CreditCard, Flower2 } from "lucide-react"
 // 导入文案系统
 import { common } from "@/lib/content"
 
@@ -20,6 +20,12 @@ const navigationLinks = [
     name: "Generate",
     href: "/generate",
     icon: Zap,
+  },
+  {
+    name: "Memory Garden",
+    href: "/memory-garden",
+    icon: Flower2,
+    requiresAuth: true,
   },
   {
     name: "Pricing",
@@ -93,24 +99,35 @@ export function Navigation() {
         
         {/* 中间：桌面端导航菜单 - 居中显示 */}
         <nav className="hidden md:flex items-center justify-center flex-1 space-x-8">
-          {navigationLinks.map((link) => (
-            <div key={link.name} className="relative">
-              {/* 普通导航链接 */}
-              <Link 
-                href={link.href} 
-                className={`relative transition-all duration-200 hover:font-semibold active:scale-95 ${
-                  pathname === link.href || (link.href === '/resources' && pathname.startsWith('/resources'))
-                    ? 'text-ghibli-warm font-semibold' 
-                    : 'text-ghibli-cream hover:text-ghibli-warm'
-                }`}
-              >
-                {link.name}
-                {(pathname === link.href || (link.href === '/resources' && pathname.startsWith('/resources'))) && (
-                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-ghibli-warm rounded-full" />
-                )}
-              </Link>
-            </div>
-          ))}
+          {navigationLinks.map((link) => {
+            // 如果需要认证但用户未登录，则不显示
+            if (link.requiresAuth && !session) {
+              return null
+            }
+            
+            return (
+              <div key={link.name} className="relative">
+                {/* 普通导航链接 */}
+                <Link 
+                  href={link.href} 
+                  className={`relative transition-all duration-200 hover:font-semibold active:scale-95 ${
+                    pathname === link.href || 
+                    (link.href === '/resources' && pathname.startsWith('/resources')) ||
+                    (link.href === '/memory-garden' && pathname.startsWith('/memory-garden'))
+                      ? 'text-ghibli-warm font-semibold' 
+                      : 'text-ghibli-cream hover:text-ghibli-warm'
+                  }`}
+                >
+                  {link.name}
+                  {(pathname === link.href || 
+                    (link.href === '/resources' && pathname.startsWith('/resources')) ||
+                    (link.href === '/memory-garden' && pathname.startsWith('/memory-garden'))) && (
+                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-ghibli-warm rounded-full" />
+                  )}
+                </Link>
+              </div>
+            )
+          })}
         </nav>
 
         {/* 右侧：桌面端用户状态和按钮 */}
@@ -208,22 +225,31 @@ export function Navigation() {
         <div className="md:hidden bg-ghibli-olive/98 backdrop-blur-xl border-t border-ghibli-forest/20">
           <div className="container mx-auto px-4 py-4 space-y-4">
             {/* 移动端导航链接 */}
-            {navigationLinks.map((link) => (
-              <div key={link.name}>
-                {/* 普通移动端导航链接 */}
-                <Link
-                  href={link.href}
-                  className={`block py-2 px-3 rounded-md transition-all duration-200 hover:bg-ghibli-forest/20 hover:font-semibold active:scale-95 ${
-                    pathname === link.href || (link.href === '/resources' && pathname.startsWith('/resources'))
-                      ? 'text-ghibli-warm font-semibold bg-ghibli-forest/20' 
-                      : 'text-ghibli-cream'
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              </div>
-            ))}
+            {navigationLinks.map((link) => {
+              // 如果需要认证但用户未登录，则不显示
+              if (link.requiresAuth && !session) {
+                return null
+              }
+              
+              return (
+                <div key={link.name}>
+                  {/* 普通移动端导航链接 */}
+                  <Link
+                    href={link.href}
+                    className={`block py-2 px-3 rounded-md transition-all duration-200 hover:bg-ghibli-forest/20 hover:font-semibold active:scale-95 ${
+                      pathname === link.href || 
+                      (link.href === '/resources' && pathname.startsWith('/resources')) ||
+                      (link.href === '/memory-garden' && pathname.startsWith('/memory-garden'))
+                        ? 'text-ghibli-warm font-semibold bg-ghibli-forest/20' 
+                        : 'text-ghibli-cream'
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                </div>
+              )
+            })}
             
             {/* 移动端用户状态按钮 */}
             <div className="border-t border-ghibli-forest/20 pt-4">

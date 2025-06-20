@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS public.payment_configs (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- 生成记录表（用于图像生成历史）
+-- 🎨 Memory Garden - 生成记录表（用于图像生成历史）
 CREATE TABLE IF NOT EXISTS public.generations (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES public.users(id) ON DELETE CASCADE,
@@ -98,7 +98,30 @@ CREATE TABLE IF NOT EXISTS public.generations (
   credits_used INTEGER NOT NULL DEFAULT 1,
   image_urls TEXT[],
   settings JSONB,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+  
+  -- 🎨 Memory Garden 扩展字段
+  action VARCHAR(50), -- text-to-image-pro, edit-image-pro, etc.
+  generation_type VARCHAR(20) DEFAULT 'text-to-image', -- text-to-image, image-to-image, edit-image
+  studio_type VARCHAR(30), -- professional-studio, dreamy-animation, etc.
+  input_image_url VARCHAR(500), -- 输入图片URL (图生图时)
+  input_image_count INTEGER DEFAULT 0, -- 输入图片数量
+  style_tags TEXT[], -- ["ghibli", "anime", "realistic"] 风格标签
+  content_tags TEXT[], -- ["portrait", "landscape", "character"] 内容标签
+  quality_rating INTEGER, -- 用户评分 1-5
+  is_favorite BOOLEAN DEFAULT FALSE, -- 用户收藏
+  is_public BOOLEAN DEFAULT FALSE, -- 是否公开展示
+  visibility VARCHAR(20) DEFAULT 'private', -- private, public, shared
+  generation_time_ms INTEGER, -- 生成耗时(毫秒)
+  total_time_ms INTEGER, -- 总耗时包括队列等待
+  queue_time_ms INTEGER, -- 队列等待时间
+  fal_request_id VARCHAR(255), -- FAL API请求ID
+  device_type VARCHAR(50), -- desktop, mobile, tablet
+  user_agent TEXT, -- 用户代理
+  ip_address VARCHAR(45), -- IP地址
+  location_info JSONB, -- 位置信息
+  
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 -- 创建索引以提高查询性能

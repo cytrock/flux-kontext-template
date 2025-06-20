@@ -56,6 +56,8 @@ const nextConfig = {
       "images.unsplash.com",
       "ext.same-assets.com",
       "ugc.same-assets.com",
+      // FAL AI 图片域名
+      "fal.media",
       // R2存储域名
       process.env.NEXT_PUBLIC_DEMO_VIDEOS_URL?.replace('https://', '') || 
       "pub-49364ecf52e344d3a722a3c5bca11271.r2.dev",
@@ -79,6 +81,11 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "ugc.same-assets.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "fal.media",
         pathname: "/**",
       },
       {
