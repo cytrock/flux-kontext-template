@@ -4,6 +4,29 @@
 
 ## 🌟 最新更新 - 深牛油果绿配色方案
 
+### 2024-12-22 版本更新：简化导航结构 - 删除API Documentation
+
+**功能简化优化**
+- 删除了完整的API Documentation功能模块
+- 简化导航结构：Resources从下拉菜单改为直接链接
+- 移除了API Documentation页面 (`/resources/api`)
+- 删除了ApiDocumentation组件 (577行代码)
+- 清理了相关路由重定向规则
+
+**代码清理详情**
+- 删除文件：`src/app/resources/api/page.tsx`
+- 删除文件：`src/components/ApiDocumentation.tsx`
+- 更新Navigation组件：移除Resources下拉菜单逻辑
+- 更新ResourcesContent组件：移除API Documentation相关内容
+- 清理文案配置：删除common.json中的apiDocs字段
+- 更新vercel.json：删除/docs、/api-docs、/documentation重定向
+
+**导航体验改进**
+- Resources现在直接链接到/resources页面
+- 简化了用户操作流程，减少了复杂性
+- 保持了Resources Hub的完整功能
+- 统一了导航交互模式，所有菜单项都是直接链接
+
 ### 2024-12-22 版本更新：按钮样式统一优化
 
 **按钮风格一致性提升**
