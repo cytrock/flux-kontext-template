@@ -325,13 +325,6 @@ export function SignInContent() {
               </button>
             </Link>
           </div>
-
-          {/* 快捷键提示 */}
-          <div className="text-center">
-            <p className="text-xs text-muted-foreground">
-              💡 Tip: Press <kbd className="px-2 py-1 text-xs font-semibold text-foreground bg-muted border border-border rounded-lg">Ctrl + Enter</kbd> to sign in quickly
-            </p>
-          </div>
         </div>
       </div>
     </div>
