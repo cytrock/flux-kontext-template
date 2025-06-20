@@ -7,26 +7,29 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:scale-105 active:scale-95",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 hover:shadow-xl",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border border-input bg-background/80 backdrop-blur-sm shadow-sm hover:bg-accent hover:text-accent-foreground hover:border-accent",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        ghibli: "bg-gradient-to-r from-ghibli-forest to-ghibli-moss text-white shadow-lg hover:shadow-xl hover:from-ghibli-moss hover:to-ghibli-sage transform transition-all duration-300",
+        ghibliOutline: "border-2 border-ghibli-forest text-ghibli-forest bg-transparent hover:bg-ghibli-forest hover:text-white shadow-md hover:shadow-lg",
+        ghibliSoft: "bg-ghibli-mint/20 text-ghibli-forest border border-ghibli-mint/30 hover:bg-ghibli-mint/40 hover:border-ghibli-mint/50",
       },
       size: {
-        default: "h-9 px-4 py-2",
+        default: "h-10 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        lg: "h-12 rounded-lg px-8 text-base",
+        icon: "h-10 w-10",
       },
     },
     defaultVariants: {
@@ -64,15 +67,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {loading ? (
-          <>
+          <div className="flex items-center gap-2">
             <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-            Loading...
-          </>
+            <span>Loading...</span>
+          </div>
         ) : (
-          <>
+          <div className="flex items-center gap-2">
             {icon && icon}
             {children}
-          </>
+          </div>
         )}
       </button>
     )
