@@ -5,9 +5,12 @@ import { createAdminClient } from '@/lib/supabase/server'
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    // 🔧 修复Next.js 15的params异步处理
+    const params = await context.params
+    
     // 验证用户身份
     const session = await getServerSession(authOptions)
     if (!session?.user?.email) {

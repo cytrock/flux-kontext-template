@@ -2554,193 +2554,192 @@ export function FluxKontextGenerator() {
         </div>
 
         {/* 🔧 图片展示区域 */}
-        {console.log('🔧 UI渲染检查:', { generatedImagesLength: generatedImages.length, isGenerating })}
-            {generatedImages.length === 0 ? (
-              <Card className="h-96">
-                <CardContent className="h-full flex items-center justify-center">
-                  <div className="text-center">
-                {isGenerating ? (
-                  <>
-                    <Loader2 className="h-16 w-16 text-primary/50 mx-auto mb-4 animate-spin" />
-                    <h3 className="text-xl font-medium text-muted-foreground mb-2">
-                      Creating your image...
-                    </h3>
-                    {countdown > 0 && (
-                      <p className="text-sm text-muted-foreground/60">
-                        Estimated time remaining: ~{countdown} seconds
-                      </p>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <ImageIcon className="h-24 w-24 text-muted-foreground/30 mx-auto mb-6" />
-                    <h3 className="text-xl font-medium text-muted-foreground mb-3">
-                      Generated images will appear here
-                    </h3>
-                    <p className="text-muted-foreground/60 max-w-md mx-auto">
-                      {uploadedImages.length > 0 
-                        ? `Ready to edit ${uploadedImages.length} image${uploadedImages.length > 1 ? 's' : ''}. Add your editing instructions and click the generate button.`
-                        : "Enter a description and click generate to create new images."
-                      }
-                    </p>
-                  </>
+        {generatedImages.length === 0 ? (
+          <Card className="h-96">
+            <CardContent className="h-full flex items-center justify-center">
+              <div className="text-center">
+            {isGenerating ? (
+              <>
+                <Loader2 className="h-16 w-16 text-primary/50 mx-auto mb-4 animate-spin" />
+                <h3 className="text-xl font-medium text-muted-foreground mb-2">
+                  Creating your image...
+                </h3>
+                {countdown > 0 && (
+                  <p className="text-sm text-muted-foreground/60">
+                    Estimated time remaining: ~{countdown} seconds
+                  </p>
                 )}
-                  </div>
-                </CardContent>
-              </Card>
+              </>
             ) : (
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {generatedImages.map((image, index) => (
-                    <Card key={index} className="group overflow-hidden">
-                      <div className="relative">
-                        <img 
-                          src={image.url} 
-                          alt={`Generated ${index + 1}`}
-                          className="w-full aspect-square object-cover transition-transform group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-                        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={() => {
-                              // 🔧 快速编辑：获取对应输入框的文本并自动处理
-                              const cardElement = (document.activeElement?.closest('.group') || document.querySelector('.group:hover')) as HTMLElement
-                              const inputElement = cardElement?.querySelector('input[placeholder="Edit this image..."]') as HTMLInputElement
-                              const editText = inputElement?.value?.trim() || ""
-                              
-                              if (editText) {
-                                // 🔧 有文字就直接快速编辑
-                                handleQuickEdit(image, editText)
-                                // 🔧 清空输入框
-                                if (inputElement) inputElement.value = ''
-                              } else {
-                                // 🔧 修改：没有输入时只设置图片到编辑区，保留现有的编辑提示词不清空
-                                setUploadedImages([image.url])
-                                // 🔧 移除setEditPrompt("") - 保留用户输入
-                                window.scrollTo({ top: 0, behavior: 'smooth' })
-                              }
-                            }}
-                            title="Quick edit this image"
-                            className="h-8 w-8 p-0 bg-purple-600 hover:bg-purple-700 text-white border-purple-600"
-                          >
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            onClick={() => handleDownloadImage(image)}
-                            title="Download image"
-                            className="h-8 w-8 p-0 bg-purple-600 hover:bg-purple-700 text-white border-purple-600"
-                          >
-                            <Download className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </div>
-                      <CardContent className="p-3">
-                        <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
-                          "{image.prompt}"
-                        </p>
-                        <div className="flex items-center justify-between text-xs mb-3">
-                          <Badge variant="outline" className="text-xs">
-                            {image.action.replace('-', ' ')}
-                          </Badge>
-                          <span className="text-muted-foreground">
-                            {image.width && image.height 
-                              ? `${image.width}×${image.height}`
-                              : aspectRatio
-                            }
-                          </span>
-                        </div>
-                        
-                        <div className="grid grid-cols-3 gap-1 mb-2">
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            className="h-8 text-xs"
-                            onClick={async () => {
-                              // 🔧 优先使用FAL链接，如果没有就使用主链接
-                              const linkToCopy = (image as any).fal_url || image.url
-                              await handleCopyLink(linkToCopy)
-                            }}
-                            title="Copy image URL"
-                          >
-                            <Copy className="w-3 h-3 mr-1" />
-                            COPY
-                          </Button>
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={() => {
-                              // 🔧 新页面打开图片
-                              const openUrl = (image as any).fal_url || image.url
-                              window.open(openUrl, '_blank', 'noopener,noreferrer')
-                            }}
-                            title="Open in new page"
-                            className="h-8 text-xs"
-                          >
-                            <Eye className="w-3 h-3 mr-1" />
-                            OPEN
-                          </Button>
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={() => handleDownloadImage(image)}
-                            title="Download image"
-                            className="h-8 text-xs"
-                          >
-                            <Download className="w-3 h-3 mr-1" />
-                            DOWN
-                          </Button>
-                        </div>
-                    
-                        {/* 🔧 复制成功提示 - 设为固定位置，不影响布局 */}
-                        {copySuccess && (
-                          <div className="text-xs text-green-600 text-center py-1 rounded bg-green-50 border border-green-200 mb-2">
-                            ✅ {copySuccess}
-                          </div>
-                        )}
-                        
-                        <div className="border-t pt-3">
-                          <div className="flex gap-2">
-                            <Input
-                              placeholder="Edit this image..."
-                              className="flex-1 h-8 text-xs"
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' && (e.target as HTMLInputElement).value.trim()) {
-                                  const editText = (e.target as HTMLInputElement).value.trim()
-                                  handleQuickEdit(image, editText)
-                                  ;(e.target as HTMLInputElement).value = ''
-                                }
-                              }}
-                            />
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={(e) => {
-                                const inputElement = (e.target as HTMLElement).closest('.flex')?.querySelector('input') as HTMLInputElement
-                                const editText = inputElement?.value?.trim() || ""
-                                if (editText) {
-                                  handleQuickEdit(image, editText)
-                                  inputElement.value = ''
-                                } else {
-                                  setError("Please enter edit instructions")
-                                }
-                              }}
-                              className="h-8 w-8 p-0"
-                              title="Quick edit and generate"
-                            >
-                              <Zap className="h-3 w-3" />
-                            </Button>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </div>
+              <>
+                <ImageIcon className="h-24 w-24 text-muted-foreground/30 mx-auto mb-6" />
+                <h3 className="text-xl font-medium text-muted-foreground mb-3">
+                  Generated images will appear here
+                </h3>
+                <p className="text-muted-foreground/60 max-w-md mx-auto">
+                  {uploadedImages.length > 0 
+                    ? `Ready to edit ${uploadedImages.length} image${uploadedImages.length > 1 ? 's' : ''}. Add your editing instructions and click the generate button.`
+                    : "Enter a description and click generate to create new images."
+                  }
+                </p>
+              </>
             )}
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {generatedImages.map((image, index) => (
+                <Card key={index} className="group overflow-hidden">
+                  <div className="relative">
+                    <img 
+                      src={image.url} 
+                      alt={`Generated ${index + 1}`}
+                      className="w-full aspect-square object-cover transition-transform group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => {
+                          // 🔧 快速编辑：获取对应输入框的文本并自动处理
+                          const cardElement = (document.activeElement?.closest('.group') || document.querySelector('.group:hover')) as HTMLElement
+                          const inputElement = cardElement?.querySelector('input[placeholder="Edit this image..."]') as HTMLInputElement
+                          const editText = inputElement?.value?.trim() || ""
+                          
+                          if (editText) {
+                            // 🔧 有文字就直接快速编辑
+                            handleQuickEdit(image, editText)
+                            // 🔧 清空输入框
+                            if (inputElement) inputElement.value = ''
+                          } else {
+                            // 🔧 修改：没有输入时只设置图片到编辑区，保留现有的编辑提示词不清空
+                            setUploadedImages([image.url])
+                            // 🔧 移除setEditPrompt("") - 保留用户输入
+                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                          }
+                        }}
+                        title="Quick edit this image"
+                        className="h-8 w-8 p-0 bg-purple-600 hover:bg-purple-700 text-white border-purple-600"
+                      >
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={() => handleDownloadImage(image)}
+                        title="Download image"
+                        className="h-8 w-8 p-0 bg-purple-600 hover:bg-purple-700 text-white border-purple-600"
+                      >
+                        <Download className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                  <CardContent className="p-3">
+                    <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
+                      "{image.prompt}"
+                    </p>
+                    <div className="flex items-center justify-between text-xs mb-3">
+                      <Badge variant="outline" className="text-xs">
+                        {image.action.replace('-', ' ')}
+                      </Badge>
+                      <span className="text-muted-foreground">
+                        {image.width && image.height 
+                          ? `${image.width}×${image.height}`
+                          : aspectRatio
+                        }
+                      </span>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-1 mb-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="h-8 text-xs"
+                        onClick={async () => {
+                          // 🔧 优先使用FAL链接，如果没有就使用主链接
+                          const linkToCopy = (image as any).fal_url || image.url
+                          await handleCopyLink(linkToCopy)
+                        }}
+                        title="Copy image URL"
+                      >
+                        <Copy className="w-3 h-3 mr-1" />
+                        COPY
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => {
+                          // 🔧 新页面打开图片
+                          const openUrl = (image as any).fal_url || image.url
+                          window.open(openUrl, '_blank', 'noopener,noreferrer')
+                        }}
+                        title="Open in new page"
+                        className="h-8 text-xs"
+                      >
+                        <Eye className="w-3 h-3 mr-1" />
+                        OPEN
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => handleDownloadImage(image)}
+                        title="Download image"
+                        className="h-8 text-xs"
+                      >
+                        <Download className="w-3 h-3 mr-1" />
+                        DOWN
+                      </Button>
+                    </div>
+                
+                    {/* 🔧 复制成功提示 - 设为固定位置，不影响布局 */}
+                    {copySuccess && (
+                      <div className="text-xs text-green-600 text-center py-1 rounded bg-green-50 border border-green-200 mb-2">
+                        ✅ {copySuccess}
+                      </div>
+                    )}
+                    
+                    <div className="border-t pt-3">
+                      <div className="flex gap-2">
+                        <Input
+                          placeholder="Edit this image..."
+                          className="flex-1 h-8 text-xs"
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' && (e.target as HTMLInputElement).value.trim()) {
+                              const editText = (e.target as HTMLInputElement).value.trim()
+                              handleQuickEdit(image, editText)
+                              ;(e.target as HTMLInputElement).value = ''
+                            }
+                          }}
+                        />
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={(e) => {
+                            const inputElement = (e.target as HTMLElement).closest('.flex')?.querySelector('input') as HTMLInputElement
+                            const editText = inputElement?.value?.trim() || ""
+                            if (editText) {
+                              handleQuickEdit(image, editText)
+                              inputElement.value = ''
+                            } else {
+                              setError("Please enter edit instructions")
+                            }
+                          }}
+                          className="h-8 w-8 p-0"
+                          title="Quick edit and generate"
+                        >
+                          <Zap className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* 🔧 如何使用AI平台部分 */}
