@@ -4,30 +4,30 @@
 
 ## 🌟 最新更新 - 深牛油果绿配色方案
 
-### 2024-12-22 版本更新：首页文字对比度优化
+### 2024-12-22 版本更新：修复/generate页面文字颜色对比度
 
-**文字可读性提升**
-- 修复了首页特性介绍和使用步骤模块中文字颜色过暗的问题
-- 优化了在深绿色背景上的文字对比度，确保所有内容清晰可读
-- 受影响的文字内容包括：Character Consistency、Style Transfer、Multi-Image Support、Fast generation、Good quality、Cost effective等
+**视觉优化修复**
+- 修复了 `/generate` 页面在绿色背景上文字颜色过暗的问题
+- 所有深色文字已替换为高对比度的白色文字（`text-ghibli-cream`）
+- 确保所有用户界面元素在深牛油果绿背景下清晰可见
 
 **具体修复内容**
-- **KeyFeatures组件优化**：
-  - 主标题改为 `text-ghibli-cream` (白色)
-  - 描述文字改为 `text-ghibli-cream/90` (90%白色)
-  - 特性标题改为 `text-ghibli-cream`
-  - 特性描述改为 `text-ghibli-cream/80` (80%白色)
+- **Badge文字**: Character Consistency、Style Transfer、Multi-Image Support 等功能标签
+- **How to Use Our AI Platform**: 标题、步骤标题、描述文字、图标颜色
+- **Key AI Features**: 功能卡片标题和描述文字
+- **Frequently Asked Questions**: FAQ标题和回答文字
+- **AI Model Comparison**: 模型卡片标题和特性描述
 
-- **HowToSteps组件优化**：
-  - "How to Create Ghibli-Style Images" 描述文字改为 `text-ghibli-cream/90`
-  - 步骤标题改为 `text-ghibli-cream`
-  - 步骤描述改为 `text-ghibli-cream/80`
+**技术改进**
+- 统一使用 `text-ghibli-cream` 类确保主要文字为白色
+- 描述性文字使用 `text-ghibli-cream/80` 提供适当的透明度
+- 图标颜色从 `text-primary` 改为 `text-ghibli-cream` 
+- 保持了Ghibli设计语言的一致性和品牌识别度
 
-**视觉效果改进**
-- 在深牛油果绿 (#667B50) 背景上实现了高对比度文字显示
-- 保持了良好的视觉层次：标题最亮，描述稍淡，确保信息层级清晰
-- 符合Web内容无障碍指南(WCAG)的对比度要求
-- 提升了整体用户阅读体验
+**用户体验提升**
+- 显著改善了文字可读性，特别是在深色背景环境下
+- 确保了所有重要信息都能被用户清晰看到
+- 维持了优雅的视觉层次和对比度标准
 
 ### 2024-12-22 版本更新：修复/generate页面错误
 

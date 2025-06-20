@@ -1875,9 +1875,9 @@ export function FluxKontextGenerator() {
                     Create and edit professional images with advanced AI technology
                   </p>
                   <div className="flex flex-wrap justify-center gap-1">
-                    <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20 text-xs">Character Consistency</Badge>
-                    <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20 text-xs">Style Transfer</Badge>
-                    <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20 text-xs">Multi-Image Support</Badge>
+                    <Badge variant="outline" className="bg-primary/10 text-ghibli-cream border-primary/20 text-xs">Character Consistency</Badge>
+                    <Badge variant="outline" className="bg-primary/10 text-ghibli-cream border-primary/20 text-xs">Style Transfer</Badge>
+                    <Badge variant="outline" className="bg-primary/10 text-ghibli-cream border-primary/20 text-xs">Multi-Image Support</Badge>
                   </div>
                 </div>
 
@@ -1953,7 +1953,7 @@ export function FluxKontextGenerator() {
                             <Badge 
                               key={index} 
                               variant="outline" 
-                              className="bg-primary/5 text-primary border-primary/20 text-xs px-1 py-0"
+                              className="bg-primary/5 text-ghibli-cream border-primary/20 text-xs px-1 py-0"
                             >
                               {feature}
                             </Badge>
@@ -2660,34 +2660,34 @@ export function FluxKontextGenerator() {
       {/* 🔧 如何使用AI平台部分 */}
       <section className="mt-8 py-6 px-6 bg-muted/30 rounded-lg">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-6">
+          <h2 className="text-3xl font-bold text-center mb-6 text-ghibli-cream">
             How to Use Our AI Platform
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Upload className="w-8 h-8 text-primary" />
+                <Upload className="w-8 h-8 text-ghibli-cream" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">1. Upload Your Image</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-xl font-semibold mb-3 text-ghibli-cream">1. Upload Your Image</h3>
+              <p className="text-ghibli-cream/80">
                 Upload your image for character consistency and style analysis.
               </p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Edit className="w-8 h-8 text-primary" />
+                <Edit className="w-8 h-8 text-ghibli-cream" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">2. Write Editing Prompt</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-xl font-semibold mb-3 text-ghibli-cream">2. Write Editing Prompt</h3>
+              <p className="text-ghibli-cream/80">
                 Describe your edits. The AI handles character consistency and style reference.
               </p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Zap className="w-8 h-8 text-primary" />
+                <Zap className="w-8 h-8 text-ghibli-cream" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">3. Generate with AI Models</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-xl font-semibold mb-3 text-ghibli-cream">3. Generate with AI Models</h3>
+              <p className="text-ghibli-cream/80">
                 Choose Pro model (16 credits) or Max model (32 credits) for generation.
               </p>
             </div>
@@ -2698,7 +2698,7 @@ export function FluxKontextGenerator() {
       {/* 🔧 关键AI功能部分 */}
       <section className="mt-8 py-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-8">
+          <h2 className="text-3xl font-bold text-center mb-8 text-ghibli-cream">
             Key AI Features
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -2706,8 +2706,8 @@ export function FluxKontextGenerator() {
               <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Layers className="w-6 h-6 text-blue-500" />
               </div>
-              <h3 className="font-semibold mb-2">Character Consistency</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-semibold mb-2 text-ghibli-cream">Character Consistency</h3>
+              <p className="text-sm text-ghibli-cream/80">
                 Maintain character identity across different scenes and poses
               </p>
             </Card>
@@ -2715,8 +2715,8 @@ export function FluxKontextGenerator() {
               <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Settings className="w-6 h-6 text-green-500" />
               </div>
-              <h3 className="font-semibold mb-2">Smart Editing</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-semibold mb-2 text-ghibli-cream">Smart Editing</h3>
+              <p className="text-sm text-ghibli-cream/80">
                 Intelligent image modifications with AI-powered precision
               </p>
             </Card>
@@ -2724,8 +2724,8 @@ export function FluxKontextGenerator() {
               <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <ImageIcon className="w-6 h-6 text-purple-500" />
               </div>
-              <h3 className="font-semibold mb-2">Style Reference</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-semibold mb-2 text-ghibli-cream">Style Reference</h3>
+              <p className="text-sm text-ghibli-cream/80">
                 Generate new scenes in existing styles with consistency
               </p>
             </Card>
@@ -2733,8 +2733,8 @@ export function FluxKontextGenerator() {
               <div className="w-12 h-12 bg-orange-500/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Zap className="w-6 h-6 text-orange-500" />
               </div>
-              <h3 className="font-semibold mb-2">Interactive Speed</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-semibold mb-2 text-ghibli-cream">Interactive Speed</h3>
+              <p className="text-sm text-ghibli-cream/80">
                 Fast processing with minimal latency for quick iterations
               </p>
             </Card>
@@ -2745,53 +2745,53 @@ export function FluxKontextGenerator() {
       {/* 🔧 AI平台常见问题部分 */}
       <section className="mt-8 py-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-8">
+          <h2 className="text-3xl font-bold text-center mb-8 text-ghibli-cream">
             Frequently Asked Questions
           </h2>
           <div className="space-y-6">
             <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-3">What is Flux Kontext?</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-lg font-semibold mb-3 text-ghibli-cream">What is Flux Kontext?</h3>
+              <p className="text-ghibli-cream/80">
                 Our platform is a suite of generative flow matching models for image generation and editing. 
                 Unlike traditional text-to-image models, it understands both text and images as input for true in-context generation.
               </p>
             </Card>
             
             <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-3">What makes this platform special?</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-lg font-semibold mb-3 text-ghibli-cream">What makes this platform special?</h3>
+              <p className="text-ghibli-cream/80">
                 The system offers four key capabilities: character consistency across scenes, smart editing with AI precision, 
                 style reference for new scenes, and interactive speed with minimal latency.
               </p>
             </Card>
             
             <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-3">Which model should I choose?</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-lg font-semibold mb-3 text-ghibli-cream">Which model should I choose?</h3>
+              <p className="text-ghibli-cream/80">
                 Pro model (16 credits) excels at fast iterative editing while maintaining character consistency. 
                 Max model (32 credits) provides maximum performance with improved prompt adherence and typography.
               </p>
             </Card>
             
             <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-3">How does the platform achieve character consistency?</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-lg font-semibold mb-3 text-ghibli-cream">How does the platform achieve character consistency?</h3>
+              <p className="text-ghibli-cream/80">
                 The AI preserves elements across scenes by understanding visual context. 
                 It builds upon previous edits while maintaining characters, identities, styles, and features consistent.
               </p>
             </Card>
             
             <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-3">How does smart editing work?</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-lg font-semibold mb-3 text-ghibli-cream">How does smart editing work?</h3>
+              <p className="text-ghibli-cream/80">
                 Smart editing uses AI to make intelligent modifications while preserving image quality. 
                 This capability enables precise enhancements while maintaining overall composition.
               </p>
             </Card>
             
             <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-3">Can the platform handle style reference?</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-lg font-semibold mb-3 text-ghibli-cream">Can the platform handle style reference?</h3>
+              <p className="text-ghibli-cream/80">
                 Yes, the AI generates new scenes in existing styles. 
                 It analyzes style elements from reference images to create consistent visual aesthetics across generations.
               </p>
@@ -2803,30 +2803,30 @@ export function FluxKontextGenerator() {
       {/* 🔧 AI模型比较部分 */}
       <section className="mt-8 py-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-8">
+          <h2 className="text-3xl font-bold text-center mb-8 text-ghibli-cream">
             AI Model Comparison
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card className="p-6 border-2 border-primary/20">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-2xl font-bold">Pro Model</h3>
+                <h3 className="text-2xl font-bold text-ghibli-cream">Pro Model</h3>
                 <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">16 Credits</Badge>
               </div>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-ghibli-cream/80 mb-6">
                 Perfect for fast iterative editing and character consistency
               </p>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center">
                   <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                  <span className="text-sm">Fast processing speed</span>
+                  <span className="text-sm text-ghibli-cream">Fast processing speed</span>
                 </li>
                 <li className="flex items-center">
                   <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                  <span className="text-sm">Smart editing capabilities</span>
+                  <span className="text-sm text-ghibli-cream">Smart editing capabilities</span>
                 </li>
                 <li className="flex items-center">
                   <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                  <span className="text-sm">Style reference support</span>
+                  <span className="text-sm text-ghibli-cream">Style reference support</span>
                 </li>
               </ul>
               <Button 
@@ -2851,28 +2851,28 @@ export function FluxKontextGenerator() {
             
             <Card className="p-6 border-2 border-purple-500/20">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-2xl font-bold">Max Model</h3>
+                <h3 className="text-2xl font-bold text-ghibli-cream">Max Model</h3>
                 <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">32 Credits</Badge>
               </div>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-ghibli-cream/80 mb-6">
                 Maximum performance with enhanced prompt adherence
               </p>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center">
                   <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                  <span className="text-sm">Highest quality output</span>
+                  <span className="text-sm text-ghibli-cream">Highest quality output</span>
                 </li>
                 <li className="flex items-center">
                   <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                  <span className="text-sm">Advanced typography</span>
+                  <span className="text-sm text-ghibli-cream">Advanced typography</span>
                 </li>
                 <li className="flex items-center">
                   <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                  <span className="text-sm">Superior prompt adherence</span>
+                  <span className="text-sm text-ghibli-cream">Superior prompt adherence</span>
                 </li>
                 <li className="flex items-center">
                   <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                  <span className="text-sm">Professional-grade results</span>
+                  <span className="text-sm text-ghibli-cream">Professional-grade results</span>
                 </li>
               </ul>
               <Button 
