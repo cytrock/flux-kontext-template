@@ -184,7 +184,7 @@ export function SignUpContent() {
 
       <div className="max-w-md w-full space-y-6">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-ghibli-forest">
             Create Your Account
           </h2>
         </div>
@@ -195,13 +195,13 @@ export function SignUpContent() {
         <form className="space-y-4" onSubmit={handleSubmit}>
           {/* 用户名 */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-foreground">Full Name</label>
+            <label htmlFor="name" className="block text-sm font-medium text-ghibli-forest">Full Name</label>
             <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} required className="mt-1 block w-full px-3 py-2 border border-input bg-white text-black rounded-md shadow-sm" />
           </div>
 
           {/* 邮箱和发送验证码 */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-foreground">Email Address</label>
+            <label htmlFor="email" className="block text-sm font-medium text-ghibli-forest">Email Address</label>
             <div className="flex items-center space-x-2 mt-1">
               <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="flex-grow w-full px-3 py-2 border border-input bg-white text-black rounded-md shadow-sm" />
               <button type="button" onClick={handleSendCode} disabled={!/^\S+@\S+\.\S+$/.test(email) || isSendingCode || cooldown > 0} className="px-4 py-2 border rounded-md text-sm font-medium text-black bg-gray-200 hover:bg-gray-300 disabled:opacity-50 whitespace-nowrap">
@@ -212,7 +212,7 @@ export function SignUpContent() {
           
           {/* 验证码和验证按钮 */}
           <div>
-            <label htmlFor="otp" className="block text-sm font-medium text-foreground">Verification Code</label>
+            <label htmlFor="otp" className="block text-sm font-medium text-ghibli-forest">Verification Code</label>
             <div className="flex items-center space-x-2 mt-1">
               <input 
                 id="otp" 
@@ -238,7 +238,7 @@ export function SignUpContent() {
 
           {/* 密码 */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-foreground">Password</label>
+            <label htmlFor="password" className="block text-sm font-medium text-ghibli-forest">Password</label>
             <div className="relative mt-1">
               <input id="password" type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} required className="block w-full pr-10 px-3 py-2 border border-input bg-white text-black rounded-md shadow-sm" />
               <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -257,7 +257,7 @@ export function SignUpContent() {
           
           {/* 确认密码 */}
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-foreground">Confirm Password</label>
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-ghibli-forest">Confirm Password</label>
             <div className="relative mt-1">
               <input id="confirmPassword" type={showPassword ? "text" : "password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required className="block w-full pr-10 px-3 py-2 border border-input bg-white text-black rounded-md shadow-sm" />
               <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -287,7 +287,7 @@ export function SignUpContent() {
         </div>
 
         <div className="text-center text-sm">
-          <Link href="/auth/signin" className="text-ghibli-cream hover:text-ghibli-cream/80 underline">
+          <Link href="/auth/signin" className="text-ghibli-forest hover:text-ghibli-forest/80 underline font-medium">
             Already have an account? Sign In
           </Link>
         </div>

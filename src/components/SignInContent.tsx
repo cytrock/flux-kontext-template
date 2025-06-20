@@ -103,7 +103,7 @@ export function SignInContent() {
 
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-ghibli-cream">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-ghibli-forest">
             {auth.signIn.title}
           </h2>
           
@@ -111,24 +111,24 @@ export function SignInContent() {
           <div className="mt-4 mx-auto max-w-sm">
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 rounded-lg p-3 text-center">
               <div className="flex items-center justify-center space-x-2">
-                <svg className="w-5 h-5 text-ghibli-cream" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 text-ghibli-forest" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                <span className="text-sm font-medium text-ghibli-cream">
+                <span className="text-sm font-medium text-ghibli-forest">
                   Sign up and get 100 free credits!
                 </span>
-                <svg className="w-5 h-5 text-ghibli-cream" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 text-ghibli-forest" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               </div>
             </div>
           </div>
           
-          <p className="mt-2 text-center text-sm text-ghibli-cream">
+          <p className="mt-2 text-center text-sm text-ghibli-forest">
             {auth.signIn.noAccount}{" "}
             <Link
               href="/auth/signup"
-              className="font-bold text-ghibli-cream hover:text-ghibli-cream/80 transition-colors"
+              className="font-bold text-ghibli-forest hover:text-ghibli-forest/80 transition-colors underline"
             >
               {auth.signIn.createNewAccount}
             </Link>
@@ -191,7 +191,7 @@ export function SignInContent() {
                 <div className="w-full border-t border-border" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-background text-ghibli-cream">{auth.signIn.orContinueWith}</span>
+                <span className="px-2 bg-background text-ghibli-forest">{auth.signIn.orContinueWith}</span>
               </div>
             </div>
           )}
@@ -267,13 +267,13 @@ export function SignInContent() {
                     type="checkbox"
                     className="h-4 w-4 text-primary focus:ring-primary border-input rounded"
                   />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm text-ghibli-cream">
+                  <label htmlFor="remember-me" className="ml-2 block text-sm text-ghibli-forest">
                     Remember me
                   </label>
                 </div>
 
                 <div className="text-sm">
-                  <Link href="/auth/forgot-password" className="font-medium text-ghibli-cream hover:text-ghibli-cream/80 transition-colors">
+                  <Link href="/auth/forgot-password" className="font-medium text-ghibli-forest hover:text-ghibli-forest/80 transition-colors underline">
                     Forgot your password?
                   </Link>
                 </div>
@@ -306,7 +306,7 @@ export function SignInContent() {
                 <svg className="w-8 h-8 text-primary mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
-                <p className="text-sm text-ghibli-cream">
+                <p className="text-sm text-ghibli-forest">
                   Please use Google login above to sign in.
                 </p>
               </div>
@@ -319,7 +319,7 @@ export function SignInContent() {
               <div className="w-full border-t border-border" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-background text-ghibli-cream">
+              <span className="px-2 bg-background text-ghibli-forest">
                 {auth.signIn.noAccount}
               </span>
             </div>
