@@ -133,6 +133,15 @@ export function FluxKontextGenerator() {
   // 复制成功状态
   const [copySuccess, setCopySuccess] = useState("")
   
+  // 积分不足弹框状态
+  const [showInsufficientCreditsModal, setShowInsufficientCreditsModal] = useState(false)
+  const [creditInfo, setCreditInfo] = useState<{
+    currentCredits: number
+    requiredCredits: number
+    shortfall: number
+    action: string
+  } | null>(null)
+  
   // 生成图像的倒计时
   const [countdown, setCountdown] = useState(0)
   const [estimatedTime, setEstimatedTime] = useState(6) // 预估6秒
@@ -354,23 +363,26 @@ export function FluxKontextGenerator() {
     if (files.length === 0) return
 
     try {
-      // ?? 等待预览
-      const previewUrls = files.map(file => handleLocalFilePreview(file))
+      // 🔧 Professional Studio模式下只允许一张图片，取第一张并替换现有图片
+      const filesToProcess = files.slice(0, 1) // 只取第一张图片
       
-      // 设置图像状态，显示预览
-      setUploadedFiles(prev => [...prev, ...files])
-      setUploadedImages(prev => [...prev, ...previewUrls])
+      // ?? 等待预览
+      const previewUrls = filesToProcess.map(file => handleLocalFilePreview(file))
+      
+      // 🔧 设置图像状态，替换而不是追加（Professional Studio单图模式）
+      setUploadedFiles(filesToProcess)
+      setUploadedImages(previewUrls)
       setError("")
       
-      console.log(`?? Added ${files.length} files for local preview`)
+      console.log(`🔧 Professional Studio: Added ${filesToProcess.length} file for editing (single image mode)`)
       
       // ?? 开始立即上传到R2存储
       console.log(`?? Starting immediate upload to R2 storage...`)
       
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i]
+      for (let i = 0; i < filesToProcess.length; i++) {
+        const file = filesToProcess[i]
         try {
-          console.log(`?? Uploading file ${i + 1}/${files.length}: ${file.name}`)
+          console.log(`?? Uploading file ${i + 1}/${filesToProcess.length}: ${file.name}`)
           const r2Url = await handleFileUpload(file)
           console.log(`? R2 Upload successful for ${file.name}:`)
           console.log(`?? R2 URL: ${r2Url}`)
@@ -390,7 +402,7 @@ export function FluxKontextGenerator() {
               // 替换预览URL为R2 URL
               setUploadedImages(prev => {
                 const newImages = [...prev]
-                const targetIndex = prev.length - files.length + i
+                const targetIndex = i
                 if (targetIndex >= 0 && targetIndex < newImages.length) {
                   if (newImages[targetIndex].startsWith('blob:')) {
                     URL.revokeObjectURL(newImages[targetIndex])
@@ -1051,6 +1063,20 @@ export function FluxKontextGenerator() {
             }
           }
           
+          // 🔧 特殊处理积分不足错误（402状态码）
+          if (response.status === 402 && errorData.error === 'Insufficient credits') {
+            console.log('💳 检测到积分不足，显示积分不足弹框')
+            setCreditInfo({
+              currentCredits: errorData.currentCredits || 0,
+              requiredCredits: errorData.requiredCredits || 0,
+              shortfall: errorData.shortfall || 0,
+              action: errorData.message || 'This action'
+            })
+            setShowInsufficientCreditsModal(true)
+            setIsGenerating(false)
+            return
+          }
+
           // 统一处理Turnstile验证失败错误
           if (errorData.code === 'TURNSTILE_VERIFICATION_FAILED' || 
               errorData.code === 'TURNSTILE_RETRY_REQUIRED' ||
@@ -2073,7 +2099,10 @@ export function FluxKontextGenerator() {
                           step="0.5"
                           value={guidanceScale}
                           onChange={(e) => setGuidanceScale(parseFloat(e.target.value))}
-                          className="w-full h-1 bg-muted rounded-lg appearance-none cursor-pointer slider"
+                          className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-slider"
+                          style={{
+                            background: `linear-gradient(to right, #eab308 0%, #eab308 ${((guidanceScale - 1) / 9) * 100}%, #374151 ${((guidanceScale - 1) / 9) * 100}%, #374151 100%)`
+                          }}
                         />
                         <div className="flex justify-between text-xs text-yellow-300/60">
                           <span>Creative</span>
@@ -2095,7 +2124,10 @@ export function FluxKontextGenerator() {
                           step="1"
                           value={parseInt(safetyTolerance)}
                           onChange={(e) => setSafetyTolerance(e.target.value)}
-                          className="w-full h-1 bg-muted rounded-lg appearance-none cursor-pointer"
+                          className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-slider"
+                          style={{
+                            background: `linear-gradient(to right, #eab308 0%, #eab308 ${((parseInt(safetyTolerance) - 1) / 4) * 100}%, #374151 ${((parseInt(safetyTolerance) - 1) / 4) * 100}%, #374151 100%)`
+                          }}
                         />
                         <div className="flex justify-between text-xs text-yellow-300/60">
                           <span>Strict</span>
@@ -2249,7 +2281,6 @@ export function FluxKontextGenerator() {
                         ref={multiFileInputRef}
                         type="file"
                         accept="image/*"
-                        multiple
                         onChange={handleMultiImageUpload}
                         className="hidden"
                       />
@@ -2266,21 +2297,24 @@ export function FluxKontextGenerator() {
                               />
                             ))}
                           </div>
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              // 🔧 移除input的value，确保选择的是相同的文件
-                              if (multiFileInputRef.current) {
-                                multiFileInputRef.current.value = ''
-                              }
-                              multiFileInputRef.current?.click()
-                            }}
-                            className="h-6 text-xs"
-                          >
-                            Add More ({uploadedImages.length})
-                          </Button>
+                          {/* 🔧 Professional Studio模式下隐藏Add More按钮，只允许一张图片 */}
+                          {uploadedImages.length < 1 && (
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                // 🔧 移除input的value，确保选择的是相同的文件
+                                if (multiFileInputRef.current) {
+                                  multiFileInputRef.current.value = ''
+                                }
+                                multiFileInputRef.current?.click()
+                              }}
+                              className="h-6 text-xs"
+                            >
+                              Add More ({uploadedImages.length})
+                            </Button>
+                          )}
                         </div>
                       ) : (
                         <div>
@@ -2962,6 +2996,70 @@ export function FluxKontextGenerator() {
           </div>
         </div>
       </section>
+
+      {/* 🔧 积分不足弹框 */}
+      {showInsufficientCreditsModal && creditInfo && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-[#667B50] border-2 border-yellow-400 rounded-lg max-w-md w-full p-6 shadow-xl">
+            <div className="text-center">
+              {/* 图标 */}
+              <div className="w-16 h-16 mx-auto mb-4 bg-yellow-400/20 rounded-full flex items-center justify-center">
+                <Crown className="w-8 h-8 text-yellow-400" />
+              </div>
+              
+              {/* 标题 */}
+              <h3 className="text-xl font-bold text-yellow-400 mb-2">
+                Insufficient Credits
+              </h3>
+              
+              {/* 积分信息 */}
+              <div className="text-ghibli-cream/90 mb-4 space-y-2">
+                <p className="text-sm">
+                  {creditInfo.action}
+                </p>
+                <div className="bg-black/20 rounded-lg p-3">
+                  <div className="flex justify-between items-center mb-2">
+                    <span>Current Credits:</span>
+                    <span className="font-semibold">{creditInfo.currentCredits}</span>
+                  </div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span>Required Credits:</span>
+                    <span className="font-semibold">{creditInfo.requiredCredits}</span>
+                  </div>
+                  <div className="border-t border-ghibli-cream/20 pt-2">
+                    <div className="flex justify-between items-center">
+                      <span>Need Additional:</span>
+                      <span className="font-bold text-yellow-400">{creditInfo.shortfall}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* 按钮 */}
+              <div className="space-y-3">
+                <Button 
+                  onClick={() => router.push('/pricing')}
+                  className="w-full bg-yellow-400 text-[#667B50] hover:bg-yellow-300 font-semibold"
+                  size="lg"
+                >
+                  <Crown className="w-4 h-4 mr-2" />
+                  Get More Credits
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={() => {
+                    setShowInsufficientCreditsModal(false)
+                    setCreditInfo(null)
+                  }}
+                  className="w-full border-ghibli-cream/30 text-ghibli-cream hover:bg-ghibli-cream/10"
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -642,3 +642,43 @@ body {
 }
 
 /* 强制CSS刷新 - 深沉Ghibli配色完整版 2024 */
+
+/* 🎛️ 自定义Range Slider样式 */
+.range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Webkit浏览器的滑块样式 */
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #eab308;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Firefox浏览器的滑块样式 */
+.range-slider::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #eab308;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Firefox浏览器的轨道样式 */
+.range-slider::-moz-range-track {
+  height: 8px;
+  border-radius: 4px;
+  background: #374151;
+}

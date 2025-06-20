@@ -139,6 +139,11 @@ async function verifyTurnstileToken(token: string, clientIP: string): Promise<bo
 }
 
 export async function POST(request: NextRequest) {
+  console.log('🚀 ===== API /api/flux-kontext POST 请求开始 =====');
+  console.log('📅 请求时间:', new Date().toISOString());
+  console.log('🌐 请求URL:', request.url);
+  console.log('📋 请求头:', Object.fromEntries(request.headers.entries()));
+  
   const startTime = Date.now();
   
   try {
@@ -153,6 +158,7 @@ export async function POST(request: NextRequest) {
 
     // 包装主要逻辑在Promise中
     const mainLogic = async () => {
+      console.log('🚀 开始执行mainLogic函数');
       const body = await request.json();
       console.log('📝 Request body received:', {
         action: body.action,
@@ -267,23 +273,31 @@ export async function POST(request: NextRequest) {
       const requiredCredits = getRequiredCredits(body.action)
       console.log(`💰 Action ${body.action} requires ${requiredCredits} credits`)
       
+      console.log('💰 开始检查用户积分余额');
       const creditCheck = await checkUserCredits(user.id, requiredCredits);
+      console.log('💰 积分检查完成，结果:', {
+        hasEnoughCredits: creditCheck.hasEnoughCredits,
+        currentCredits: creditCheck.currentCredits,
+        shortfall: creditCheck.shortfall
+      });
+      
       if (!creditCheck.hasEnoughCredits) {
-        return NextResponse.json(
-          { 
-            error: 'Insufficient credits',
-            message: `${body.action} requires ${requiredCredits} credits, current balance: ${creditCheck.currentCredits} credits`,
-            currentCredits: creditCheck.currentCredits,
-            requiredCredits: requiredCredits,
-            shortfall: creditCheck.shortfall
-          },
-          { status: 402 } // 402 Payment Required
-        );
+        console.log('❌ 积分不足，返回402错误');
+        const insufficientCreditsResponse = {
+          error: 'Insufficient credits',
+          message: `${body.action} requires ${requiredCredits} credits, current balance: ${creditCheck.currentCredits} credits`,
+          currentCredits: creditCheck.currentCredits,
+          requiredCredits: requiredCredits,
+          shortfall: creditCheck.shortfall
+        };
+        console.log('💳 积分不足响应数据:', insufficientCreditsResponse);
+        return NextResponse.json(insufficientCreditsResponse, { status: 402 });
       }
 
       // Turnstile验证（如果启用）- 🔧 修复用户分层验证逻辑
       const isTurnstileEnabled = process.env.NEXT_PUBLIC_ENABLE_TURNSTILE === "true";
       console.log(`🔒 Turnstile status: ${isTurnstileEnabled ? 'enabled' : 'disabled'}`);
+      console.log('🔒 准备进行Turnstile验证检查');
       
       if (isTurnstileEnabled) {
         // 🔧 修复：根据用户类型判断是否需要验证
@@ -369,12 +383,19 @@ export async function POST(request: NextRequest) {
         console.log('ℹ️ Turnstile verification disabled, skipping human verification');
       }
 
+      console.log('✅ Turnstile验证部分完成，继续积分处理');
       // 🔥 消耗积分（在生图前扣除）
+      console.log('💰 开始扣除积分，调用 consumeCreditsForImageGeneration');
       const creditResult = await consumeCreditsForImageGeneration(
         user.id, 
         body.prompt, 
         body.action
       );
+      console.log('💰 积分扣除结果:', {
+        success: creditResult.success,
+        error: creditResult.error,
+        userCreditsAfter: creditResult.user?.creditsAfter
+      });
 
       if (!creditResult.success) {
         return NextResponse.json(
@@ -389,8 +410,10 @@ export async function POST(request: NextRequest) {
       console.log(`🎨 User ${user.email} starting image generation, consuming ${requiredCredits} credits, remaining credits: ${creditResult.user?.creditsAfter}`);
 
       let result: any;
+      console.log('🔧 准备调用FluxKontextService，action:', body.action);
 
       try {
+        console.log('🔧 进入try block，开始处理图像生成');
         // 🎯 Calling FluxKontextService.${body.action} with parameters:
         console.log(`🎯 Calling FluxKontextService.${body.action} with parameters:`, {
           action: body.action,
@@ -425,7 +448,8 @@ export async function POST(request: NextRequest) {
         switch (body.action) {
           case 'text-to-image-pro':
             console.log('🎨 调用 textToImagePro')
-            result = await FluxKontextService.textToImagePro({
+            try {
+              result = await FluxKontextService.textToImagePro({
               prompt: body.prompt,
               aspect_ratio: body.aspect_ratio,
               guidance_scale: body.guidance_scale,
@@ -434,6 +458,11 @@ export async function POST(request: NextRequest) {
               output_format: body.output_format,
               seed: body.seed
             });
+            console.log('✅ textToImagePro 调用成功');
+            } catch (textToImageError) {
+              console.error('❌ textToImagePro 调用失败:', textToImageError);
+              throw textToImageError;
+            }
             break;
           case 'text-to-image-max':
             console.log('🎨 调用 textToImageMax')
@@ -560,6 +589,14 @@ export async function POST(request: NextRequest) {
         }
 
         console.log('📨 ===== FAL API响应接收 =====')
+        console.log('🔍 result类型和内容:', {
+          resultType: typeof result,
+          isNull: result === null,
+          isUndefined: result === undefined,
+          hasData: !!result?.data,
+          resultKeys: result ? Object.keys(result) : 'N/A',
+          resultStringPreview: result ? JSON.stringify(result).substring(0, 200) : 'N/A'
+        })
         console.log('📊 FAL API原始响应分析:', {
           hasResult: !!result,
           resultType: typeof result,
@@ -935,6 +972,7 @@ export async function POST(request: NextRequest) {
           creditsRemaining: responseData.credits_remaining
         });
 
+        console.log('🏁 mainLogic函数执行完成，返回responseData');
         return responseData;
 
       } catch (error) {
@@ -973,15 +1011,15 @@ export async function POST(request: NextRequest) {
           timestamp: new Date().toISOString()
         });
 
-        // 🔧 修复：返回错误对象，让外层统一处理
-        throw new Error(JSON.stringify({
+        // 🔧 修复：直接返回错误响应对象
+        return {
           error: 'Image generation failed',
           message: errorMessage,
           details: process.env.NODE_ENV === 'development' ? errorDetails : undefined,
           credits_refunded: requiredCredits,
           duration: Date.now() - startTime,
           timestamp: new Date().toISOString()
-        }));
+        };
       }
     };
 
@@ -991,6 +1029,25 @@ export async function POST(request: NextRequest) {
       timeoutPromise
     ]);
 
+    console.log('🔍 Promise.race 结果类型:', {
+      resultType: typeof result,
+      isNextResponse: result instanceof NextResponse,
+      hasErrorField: result && typeof result === 'object' && 'error' in result,
+      resultConstructor: result?.constructor?.name
+    });
+
+    // 🔧 检查结果类型并正确处理
+    if (result instanceof NextResponse) {
+      console.log('✅ 返回NextResponse对象（可能是错误响应）');
+      return result;
+    }
+
+    if (result && typeof result === 'object' && 'error' in result) {
+      console.log('❌ 返回错误对象，包装为NextResponse');
+      return NextResponse.json(result, { status: 500 });
+    }
+
+    console.log('✅ 返回成功结果');
     return NextResponse.json(result);
 
   } catch (error) {
