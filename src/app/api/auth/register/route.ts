@@ -37,20 +37,43 @@ export async function POST(request: NextRequest) {
     }
 
     // 2. 创建用户
+    console.log('Attempting to create user with email:', email)
     const { data: userData, error: createError } = await supabase.auth.admin.createUser({
       email: email,
       password: password,
       email_confirm: true, // 因为我们已经通过OTP验证了，所以直接确认为已验证
       user_metadata: { name: name },
     })
+    
+    console.log('Create user result:', { userData: !!userData, error: createError })
 
     if (createError) {
-      // 更可靠地处理Supabase特定的错误
-      if ('code' in createError && createError.code === 'email_exists') {
+      console.error('Supabase user creation error:', createError)
+      
+      // 更详细地处理Supabase错误
+      if (createError.message && createError.message.includes('email_address_not_authorized')) {
+        return NextResponse.json({ error: 'Email address not authorized for registration.' }, { status: 400 })
+      }
+      
+      if (createError.message && createError.message.includes('already registered') || createError.message && createError.message.includes('already been registered')) {
         return NextResponse.json({ error: 'A user with this email already exists.', code: 'EMAIL_EXISTS' }, { status: 409 })
       }
-      console.error('Supabase user creation error:', createError)
-      return NextResponse.json({ error: 'Failed to create user.' }, { status: 500 })
+      
+      // 检查各种可能的邮箱已存在错误
+      if (createError.message && (
+        createError.message.toLowerCase().includes('user already registered') ||
+        createError.message.toLowerCase().includes('email already taken') ||
+        createError.message.toLowerCase().includes('email already exists') ||
+        createError.message.toLowerCase().includes('duplicate') ||
+        createError.code === 'email_address_invalid'
+      )) {
+        return NextResponse.json({ error: 'A user with this email already exists.', code: 'EMAIL_EXISTS' }, { status: 409 })
+      }
+      
+      return NextResponse.json({ 
+        error: 'Failed to create user.',
+        details: createError.message || 'Unknown error'
+      }, { status: 500 })
     }
 
     // 3. 标记OTP为已使用
