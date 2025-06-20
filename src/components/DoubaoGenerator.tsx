@@ -208,7 +208,7 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
           </h2>
           <Sparkles className="h-6 w-6 text-ghibli-warm animate-gentle-bounce" />
         </div>
-        <p className="text-ghibli-sage">
+        <p className="text-ghibli-cream/80">
           Create enchanting animated-style images with magical charm and warmth
         </p>
         <Badge variant="outline" className="bg-ghibli-warm/20 text-ghibli-warm border-ghibli-warm">
@@ -267,7 +267,7 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
                 className="input-ghibli mt-2 min-h-[100px]"
                 maxLength={1000}
               />
-              <div className="mt-1 text-xs text-ghibli-sage">
+              <div className="mt-1 text-xs text-ghibli-cream/80">
                 {textPrompt.length}/1000 characters - Auto-optimized for dreamy animation style
               </div>
             </div>
@@ -335,7 +335,7 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
                       alt="Uploaded image"
                       className="max-h-48 mx-auto rounded-lg"
                     />
-                    <p className="text-sm text-ghibli-sage">{uploadedFileName}</p>
+                    <p className="text-sm text-ghibli-cream/80">{uploadedFileName}</p>
                     <Button
                       variant="outline"
                       size="sm"
@@ -349,9 +349,9 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
                   </div>
                 ) : (
                   <div className="space-y-2">
-                    <Upload className="h-12 w-12 text-ghibli-sage mx-auto" />
+                    <Upload className="h-12 w-12 text-ghibli-cream/80 mx-auto" />
                     <p className="text-ghibli-cream">Click to upload image</p>
-                    <p className="text-sm text-ghibli-sage">
+                    <p className="text-sm text-ghibli-cream/80">
                       Supports JPEG, PNG, WebP formats, max 10MB
                     </p>
                   </div>
@@ -379,7 +379,7 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
                 className="input-ghibli mt-2"
                 maxLength={500}
               />
-              <div className="mt-1 text-xs text-ghibli-sage">
+              <div className="mt-1 text-xs text-ghibli-cream/80">
                 {stylePrompt.length}/500 characters - Auto-optimized for dreamy animation style
               </div>
             </div>

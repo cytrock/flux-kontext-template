@@ -23,7 +23,7 @@ export function EnhancedGenerator() {
           </h1>
           <Sparkles className="h-8 w-8 text-ghibli-warm animate-gentle-bounce" />
         </div>
-        <p className="text-xl text-ghibli-sage max-w-3xl mx-auto">
+        <p className="text-xl text-ghibli-cream/80 max-w-3xl mx-auto">
           Choose your preferred art style and create professional-quality images with our dual AI generator
         </p>
         <div className="flex flex-wrap justify-center gap-2">
@@ -88,7 +88,7 @@ export function EnhancedGenerator() {
               <Zap className="h-5 w-5 text-ghibli-warm" />
               <span className="font-medium text-ghibli-cream">Professional Studio Style</span>
             </div>
-            <p className="text-sm text-ghibli-sage">
+            <p className="text-sm text-ghibli-cream/80">
               Advanced AI technology delivers studio-quality imagery with exceptional detail and precision.
               Perfect for professional projects requiring high-resolution output and versatile artistic styles.
             </p>
@@ -107,7 +107,7 @@ export function EnhancedGenerator() {
               <Sparkles className="h-5 w-5 text-ghibli-warm" />
               <span className="font-medium text-ghibli-cream">Dreamy Animation Style</span>
             </div>
-            <p className="text-sm text-ghibli-sage">
+            <p className="text-sm text-ghibli-cream/80">
               Specialized in creating enchanting animated artwork with a focus on warmth and charm.
               Excels in style transfer and brings a magical, hand-drawn quality to every creation.
             </p>
@@ -143,7 +143,7 @@ export function EnhancedGenerator() {
           <Wand2 className="h-5 w-5 mr-2 text-ghibli-warm" />
           Style Recommendations
         </h3>
-        <div className="grid md:grid-cols-2 gap-4 text-sm text-ghibli-sage">
+        <div className="grid md:grid-cols-2 gap-4 text-sm text-ghibli-cream/80">
           <div>
             <h4 className="font-medium text-ghibli-cream mb-2">Professional Studio is perfect for:</h4>
             <ul className="space-y-1">

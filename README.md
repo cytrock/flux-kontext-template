@@ -4,6 +4,30 @@
 
 ## 🌟 最新更新 - 深牛油果绿配色方案
 
+### 2024-12-22 版本更新：修复/generate页面文字颜色对比度问题
+
+**文字可读性优化**
+- 修复了/generate页面中多处文字颜色过浅的问题
+- 将所有 `text-ghibli-sage` 颜色改为 `text-ghibli-cream/80`，显著提升文字在深绿色背景下的对比度
+- 确保所有重要信息都清晰可见
+
+**具体修复的文字区域**
+- **页面主描述**: "Choose your preferred art style and create professional-quality images with our dual AI generator"
+- **Professional Studio Style卡片**: 功能介绍和特色描述文字
+- **Dreamy Animation Style卡片**: 功能介绍和特色描述文字  
+- **Style Recommendations**: 使用建议区域的列表文字
+- **DoubaoGenerator组件**: 所有描述性文字和提示信息
+  - 服务描述: "Create enchanting animated-style images with magical charm and warmth"
+  - 字符计数提示文字
+  - 文件上传区域提示文字
+  - 文件格式支持说明
+
+**用户体验提升**
+- 所有文字现在在深牛油果绿背景下都有足够的对比度
+- 保持了Ghibli设计语言的一致性
+- 确保了良好的可访问性和可读性标准
+- 用户可以清楚地阅读所有功能说明和操作指导
+
 ### 2024-12-22 版本更新：/generate页面英文化与风格选择优化
 
 **功能重构与国际化**
