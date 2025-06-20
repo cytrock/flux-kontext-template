@@ -121,6 +121,7 @@ export function FluxKontextGenerator() {
   
   // 文本编辑状态
   const [editPrompt, setEditPrompt] = useState("")
+  const [editStyle, setEditStyle] = useState("ghibli") // 图像编辑风格选择
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]) // ?? 文本生成图像汾ļ
   
@@ -1325,7 +1326,20 @@ export function FluxKontextGenerator() {
         })
         
         console.log('🎉 ===== 图像生成完成 =====')
-        setGeneratedImages(prev => [...newImages, ...prev])
+        console.log('🔧 准备更新generatedImages状态:', {
+          newImagesCount: newImages.length,
+          currentImagesCount: generatedImages.length,
+          newImages: newImages.map(img => ({ url: img.url.substring(0, 50) + '...', prompt: img.prompt.substring(0, 30) + '...' }))
+        })
+        setGeneratedImages(prev => {
+          const updated = [...newImages, ...prev]
+          console.log('🔧 generatedImages状态已更新:', {
+            previousCount: prev.length,
+            newCount: updated.length,
+            totalImages: updated.length
+          })
+          return updated
+        })
         setRetryCount(0) // 重置重试计数
       } else {
         console.warn('⚠️ result中没有images:', result)
@@ -1461,8 +1475,35 @@ export function FluxKontextGenerator() {
       return
     }
 
-    // ?? ��������ʾ�ʣ�ʹ��Ĭ����ʾ��
-    const finalPrompt = editPrompt.trim() || "enhance this image, improve quality and details"
+    // 🔧 根据选择的风格构建默认提示词
+    const getStylePrompt = (style: string) => {
+      switch (style) {
+        case 'ghibli':
+          return "enhance this image with Studio Ghibli aesthetic, soft colors, magical atmosphere, hand-drawn animation style, improve quality and details"
+        case 'anime':
+          return "enhance this image in anime style, vibrant colors, dynamic composition, manga-inspired, improve quality and details"
+        case 'realistic':
+          return "enhance this image with photorealistic quality, natural lighting, sharp details, professional photography style"
+        case 'artistic':
+          return "enhance this image with artistic style, painterly effects, creative composition, unique aesthetic, improve quality and details"
+        case 'minimal':
+          return "enhance this image with minimal aesthetic, clean composition, simple colors, modern design, improve quality and details"
+        default:
+          return "enhance this image, improve quality and details"
+      }
+    }
+    
+    const defaultPrompt = getStylePrompt(editStyle)
+    const finalPrompt = editPrompt.trim() || defaultPrompt
+    
+    // 🔧 调试日志
+    console.log('🎨 图像编辑prompt构建:', {
+      editPrompt: editPrompt.trim(),
+      editStyle,
+      defaultPrompt,
+      finalPrompt,
+      hasEditPrompt: !!editPrompt.trim()
+    })
 
     // ?? ����Ƿ���blob URL��Ҫ�ȴ�ת��
     const hasBlobUrls = uploadedImages.some(url => url.startsWith('blob:'))
@@ -1506,7 +1547,7 @@ export function FluxKontextGenerator() {
       output_format: outputFormat,
       seed: seed
     })
-  }, [editPrompt, uploadedImages, selectedModel, guidanceScale, numImages, safetyTolerance, outputFormat, seed, generateImage, getActionForModel]) // ?? 🔧 处理图像编辑
+  }, [editPrompt, editStyle, uploadedImages, selectedModel, guidanceScale, numImages, safetyTolerance, outputFormat, seed, generateImage, getActionForModel]) // ?? 🔧 处理图像编辑
 
   // 🔧 移除上传的图像
   const removeUploadedImage = useCallback((index: number) => {
@@ -1987,6 +2028,29 @@ export function FluxKontextGenerator() {
                     </div>
                   )}
                 </div>
+
+                {/* 🔧 风格选择器 - 仅在图像编辑模式下显示 */}
+                {uploadedImages.length > 0 && (
+                  <div>
+                    <Label className="text-sm font-medium mb-1 block text-yellow-400">
+                      Enhancement Style
+                    </Label>
+                    <select
+                      value={editStyle}
+                      onChange={(e) => setEditStyle(e.target.value)}
+                      className="w-full p-2 border border-border rounded text-sm bg-background text-purple-300 h-8"
+                    >
+                      <option value="ghibli">🎨 Studio Ghibli - Magical animation style</option>
+                      <option value="anime">⚡ Anime - Vibrant manga style</option>
+                      <option value="realistic">📸 Realistic - Photographic quality</option>
+                      <option value="artistic">🖼️ Artistic - Painterly effects</option>
+                      <option value="minimal">✨ Minimal - Clean modern design</option>
+                    </select>
+                    <div className="mt-1 text-xs text-yellow-300/70">
+                      Choose the style for image enhancement when no custom prompt is provided
+                    </div>
+                  </div>
+                )}
 
                 {/* 🔧 高级设置 */}
                 <div>
@@ -2469,6 +2533,7 @@ export function FluxKontextGenerator() {
         </div>
 
         {/* 🔧 图片展示区域 */}
+        {console.log('🔧 UI渲染检查:', { generatedImagesLength: generatedImages.length, isGenerating })}
             {generatedImages.length === 0 ? (
               <Card className="h-96">
                 <CardContent className="h-full flex items-center justify-center">

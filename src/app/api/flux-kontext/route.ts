@@ -973,15 +973,15 @@ export async function POST(request: NextRequest) {
           timestamp: new Date().toISOString()
         });
 
-        // 🔧 修复：使用NextResponse.json()包装错误响应
-        return NextResponse.json({
+        // 🔧 修复：返回错误对象，让外层统一处理
+        throw new Error(JSON.stringify({
           error: 'Image generation failed',
           message: errorMessage,
           details: process.env.NODE_ENV === 'development' ? errorDetails : undefined,
           credits_refunded: requiredCredits,
           duration: Date.now() - startTime,
           timestamp: new Date().toISOString()
-        }, { status: 500 });
+        }));
       }
     };
 
