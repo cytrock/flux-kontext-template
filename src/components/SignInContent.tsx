@@ -191,7 +191,7 @@ export function SignInContent() {
                 <div className="w-full border-t border-border" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-background text-muted-foreground">{auth.signIn.orContinueWith}</span>
+                <span className="px-2 bg-background text-ghibli-cream">{auth.signIn.orContinueWith}</span>
               </div>
             </div>
           )}
@@ -267,7 +267,7 @@ export function SignInContent() {
                     type="checkbox"
                     className="h-4 w-4 text-primary focus:ring-primary border-input rounded"
                   />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm text-foreground">
+                  <label htmlFor="remember-me" className="ml-2 block text-sm text-ghibli-cream">
                     Remember me
                   </label>
                 </div>
@@ -319,7 +319,7 @@ export function SignInContent() {
               <div className="w-full border-t border-border" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-background text-ghibli-cream/80">
+              <span className="px-2 bg-background text-ghibli-cream">
                 {auth.signIn.noAccount}
               </span>
             </div>
