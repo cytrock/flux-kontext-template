@@ -92,7 +92,11 @@ export function HowToSteps() {
 
         <div className="text-center">
           <Link href="/generate">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg">
+            <Button 
+              variant="ghibli"
+              size="lg" 
+              className="px-8 py-4 text-lg"
+            >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2L2 7V10C2 16 6 20.5 12 22C18 20.5 22 16 22 10V7L12 2Z" fill="currentColor"/>
               </svg>
