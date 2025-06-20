@@ -59,6 +59,8 @@ const nextConfig = {
       // FAL AI 图片域名
       "fal.media",
       "v3.fal.media",
+      // 本地图片域名
+      "localhost",
       // R2存储域名
       process.env.NEXT_PUBLIC_DEMO_VIDEOS_URL?.replace('https://', '') || 
       "pub-49364ecf52e344d3a722a3c5bca11271.r2.dev",
