@@ -9,94 +9,111 @@ body {
 
 @layer base {
   :root {
-    /* 🥑 吉卜力牛油果绿配色方案 */
+    /* 🥑 深沉牛油果绿Ghibli配色方案 - 资深画家级和谐色彩系统 */
     
-    /* 主要背景色系 */
-    --background: 156 175 136; /* 牛油果绿 #9CAF88 */
-    --foreground: 44 62 45; /* 深棕绿文字 #2C3E2D */
+    /* 🌿 主要背景色系 - 深牛油果绿为核心，营造成熟自然感 */
+    --background: 102 123 80; /* 深牛油果绿 #667B50 - 主背景色，深沉而宁静 */
+    --foreground: 245 248 242;    /* 温润奶白 #F5F8F2 - 主要文字色，确保高对比度 */
     
-    /* 卡片和表面色系 */
-    --card: 250 247 240; /* 温暖米白 #FAF7F0 */
-    --card-foreground: 44 62 45; /* 深棕绿文字 #2C3E2D */
+    /* 🃏 卡片和表面色系 - 透明层次的温暖色调 */
+    --card: 102 123 80 / 0.05;       /* 透明牛油果绿 - 卡片背景，极淡透明 */
+    --card-foreground: 245 248 242; /* 温润奶白 #F5F8F2 - 卡片文字 */
     
-    /* 弹出层色系 */
-    --popover: 250 247 240; /* 温暖米白 #FAF7F0 */
-    --popover-foreground: 44 62 45; /* 深棕绿文字 #2C3E2D */
+    /* 🎈 弹出层色系 - 半透明的清新感 */
+    --popover: 245 248 242 / 0.95;    /* 半透明奶白 */
+    --popover-foreground: 40 55 35; /* 深森林绿 #283723 */
     
-    /* 主色调 - 深森林绿 */
-    --primary: 74 93 58; /* 深森林绿 #4A5D3A */
-    --primary-foreground: 250 247 240; /* 温暖米白文字 #FAF7F0 */
+    /* 🌲 主色调 - 深森林绿的专业感 */
+    --primary: 40 55 35;       /* 深森林绿 #283723 - 按钮主色，庄重专业 */
+    --primary-foreground: 245 248 242; /* 温润奶白 #F5F8F2 - 按钮文字 */
     
-    /* 次要色调 - 暖金黄 */
-    --secondary: 230 177 122; /* 暖金黄 #E6B17A */
-    --secondary-foreground: 44 62 45; /* 深棕绿文字 #2C3E2D */
+    /* ☀️ 次要色调 - 温暖琥珀的亲和力 */
+    --secondary: 180 150 110;  /* 温暖琥珀 #B4966E - 次要按钮，温暖友好 */
+    --secondary-foreground: 40 55 35; /* 深森林绿 #283723 - 次要按钮文字 */
     
-    /* 强调色 - 珊瑚粉 */
-    --accent: 244 166 136; /* 珊瑚粉 #F4A688 */
-    --accent-foreground: 44 62 45; /* 深棕绿文字 #2C3E2D */
+    /* 🌸 强调色 - 柔和赤陶的活力 */
+    --accent: 185 120 95;     /* 柔和赤陶 #B9785F - 强调元素，温暖活泼 */
+    --accent-foreground: 245 248 242; /* 温润奶白 #F5F8F2 - 强调文字 */
     
-    /* 边框和分割线 */
-    --border: 184 197 166; /* 柔和绿 #B8C5A6 */
-    --input: 184 197 166; /* 柔和绿 #B8C5A6 */
+    /* 🎋 边框和输入框 - 自然分界线 */
+    --border: 130 145 110;     /* 中性橄榄 #82916E - 边框色，自然过渡 */
+    --input: 102 123 80 / 0.1;      /* 淡牛油果绿 - 输入框背景 */
     
-    /* 圆角设置 */
+    /* 🎪 圆角设置 - 自然柔和的边角 */
     --radius: 0.75rem;
     
-    /* 成功状态 - 翠绿 */
-    --success: 90 166 149; /* 翠绿 #5AA695 */
-    --success-foreground: 250 247 240; /* 温暖米白 #FAF7F0 */
+    /* 🌟 状态色系 - 清晰的Ghibli风格功能区分 */
+    --success: 95 140 105;     /* 森林翠绿 #5F8C69 - 成功状态，生命力 */
+    --success-foreground: 245 248 242; /* 温润奶白 #F5F8F2 */
     
-    /* 警告状态 - 暖橙 */
-    --warning: 230 177 122; /* 暖金黄 #E6B17A */
-    --warning-foreground: 44 62 45; /* 深棕绿 #2C3E2D */
+    --warning: 180 150 110;    /* 温暖琥珀 #B4966E - 警告状态，温和提醒 */
+    --warning-foreground: 40 55 35; /* 深森林绿 #283723 */
     
-    /* 错误状态 - 柔和红 */
-    --error: 204 102 102; /* 柔和红 #CC6666 */
-    --error-foreground: 250 247 240; /* 温暖米白 #FAF7F0 */
+    --error: 165 85 75;        /* 深赤陶红 #A5554B - 错误状态，温和警示 */
+    --error-foreground: 245 248 242; /* 温润奶白 #F5F8F2 */
     
-    /* 信息状态 - 天空蓝 */
-    --info: 135 206 235; /* 天空蓝 #87CEEB */
-    --info-foreground: 44 62 45; /* 深棕绿 #2C3E2D */
+    --info: 110 140 160;       /* 宁静灰蓝 #6E8CA0 - 信息状态，平静智慧 */
+    --info-foreground: 245 248 242; /* 温润奶白 #F5F8F2 */
     
-    /* 次要文字色 */
-    --muted: 90 107 74; /* 橄榄绿 #5A6B4A */
-    --muted-foreground: 90 107 74; /* 橄榄绿 #5A6B4A */
+    /* 💫 次要文字和静态元素 */
+    --muted: 102 123 80 / 0.1;      /* 极淡牛油果绿 - 静态背景 */
+    --muted-foreground: 180 190 165; /* 中性灰绿 #B4BEA5 - 次要文字 */
     
-    /* 环形装饰色 */
-    --ring: 74 93 58; /* 深森林绿 #4A5D3A */
+    /* 💍 环形装饰和焦点 */
+    --ring: 40 55 35;          /* 深森林绿 #283723 - 焦点环形 */
     
-    /* 析构色 - 错误红 */
-    --destructive: 204 102 102; /* 柔和红 #CC6666 */
-    --destructive-foreground: 250 247 240; /* 温暖米白 #FAF7F0 */
+    /* ⚠️ 危险操作色 */
+    --destructive: 165 85 75;  /* 深赤陶红 #A5554B */
+    --destructive-foreground: 245 248 242; /* 温润奶白 #F5F8F2 */
+    
+    /* 🎨 深沉Ghibli扩展色彩变量 - 完整画家调色板 */
+    --ghibli-forest: 40 55 35;      /* 深森林绿 #283723 - 主要深色 */
+    --ghibli-moss: 85 100 70;       /* 深苔藓绿 #556446 - 中间调 */
+    --ghibli-sage: 130 145 110;     /* 中性鼠尾草 #82916E - 中性浅色 */
+    --ghibli-mint: 160 175 145;     /* 深薄荷绿 #A0AF91 - 清新浅色 */
+    --ghibli-olive: 102 123 80;     /* 牛油果绿 #667B50 - 主色调 */
+    --ghibli-warm: 180 150 110;     /* 温暖琥珀 #B4966E - 暖色调 */
+    --ghibli-earth: 140 115 90;     /* 大地棕 #8C735A - 沉稳土色 */
+    --ghibli-sky: 110 140 160;      /* 天空蓝 #6E8CA0 - 清新蓝调 */
+    --ghibli-sunset: 165 130 100;   /* 夕阳橙 #A58264 - 温暖橙调 */
+    --ghibli-cream: 245 248 242;    /* 温润奶白 #F5F8F2 - 主要浅色 */
+    --ghibli-coral: 185 120 95;     /* 赤陶珊瑚 #B9785F - 活力色 */
+    --ghibli-lavender: 145 130 155; /* 薰衣草紫 #91829B - 优雅紫调 */
+    
+    /* 🎭 特殊效果颜色 */
+    --ghibli-shadow: 25 35 20;      /* 阴影色 #192314 */
+    --ghibli-highlight: 250 252 248; /* 高亮色 #FAFCF8 */
+    --ghibli-accent-light: 210 185 165; /* 浅强调色 #D2B9A5 */
+    --ghibli-accent-dark: 120 90 70;  /* 深强调色 #785A46 */
   }
   
   .dark {
-    /* 暗色模式保持相同配色但调整对比度 */
-    --background: 44 62 45; /* 深棕绿背景 #2C3E2D */
-    --foreground: 250 247 240; /* 温暖米白文字 #FAF7F0 */
+    /* 🌙 暗色模式 - 保持Ghibli温暖感的深色变体 */
+    --background: 25 35 20;          /* 深夜森林 #19231*/
+    --foreground: 245 248 242;       /* 月光白 #F5F8F2 */
     
-    --card: 74 93 58; /* 深森林绿卡片 #4A5D3A */
-    --card-foreground: 250 247 240; /* 温暖米白文字 #FAF7F0 */
+    --card: 40 55 35 / 0.3;                /* 半透明深森林卡片 */
+    --card-foreground: 245 248 242;  /* 月光白文字 #F5F8F2 */
     
-    --popover: 74 93 58; /* 深森林绿 #4A5D3A */
-    --popover-foreground: 250 247 240; /* 温暖米白 #FAF7F0 */
+    --popover: 40 55 35;             /* 深森林 #283723 */
+    --popover-foreground: 245 248 242; /* 月光白 #F5F8F2 */
     
-    --primary: 156 175 136; /* 牛油果绿主色 #9CAF88 */
-    --primary-foreground: 44 62 45; /* 深棕绿文字 #2C3E2D */
+    --primary: 102 123 80;          /* 暗色模式下使用牛油果绿作为主色 */
+    --primary-foreground: 25 35 20;  /* 深夜森林文字 */
     
-    --secondary: 90 107 74; /* 橄榄绿 #5A6B4A */
-    --secondary-foreground: 250 247 240; /* 温暖米白 #FAF7F0 */
+    --secondary: 85 100 70;         /* 暗色苔藓绿 */
+    --secondary-foreground: 245 248 242; /* 月光白 */
     
-    --accent: 230 177 122; /* 暖金黄 #E6B17A */
-    --accent-foreground: 44 62 45; /* 深棕绿 #2C3E2D */
+    --accent: 180 150 110;           /* 暗色温暖琥珀 */
+    --accent-foreground: 25 35 20;   /* 深夜森林 */
     
-    --border: 90 107 74; /* 橄榄绿边框 #5A6B4A */
-    --input: 90 107 74; /* 橄榄绿输入框 #5A6B4A */
+    --border: 85 100 70;              /* 暗色边框 */
+    --input: 40 55 35;               /* 暗色输入框 */
     
-    --ring: 156 175 136; /* 牛油果绿环形 #9CAF88 */
+    --ring: 102 123 80;             /* 暗色环形 */
     
-    --muted: 90 107 74; /* 橄榄绿 #5A6B4A */
-    --muted-foreground: 184 197 166; /* 柔和绿文字 #B8C5A6 */
+    --muted: 40 55 35;               /* 暗色静态 */
+    --muted-foreground: 130 145 110; /* 暗色次要文字 */
   }
 }
 
@@ -105,105 +122,156 @@ body {
     @apply border-border;
   }
   
+  html {
+    /* 🌿 HTML根元素强制背景色 - 确保所有页面一致性 */
+    background-color: #667B50 !important;
+    background-attachment: fixed;
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    /* 🌿 强制身体元素使用深沉Ghibli风格的细腻纹理背景 */
+    background-color: #667B50 !important;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(160, 175, 145, 0.06) 0%, transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(40, 55, 35, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 90%, rgba(180, 150, 110, 0.04) 0%, transparent 60%);
+    background-attachment: fixed;
+    /* 最终保险 - 强制使用深牛油果绿背景 */
+    background-color: #667B50 !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+  }
+
+  /* 🌿 全局页面容器背景色强制设置 */
+  main, section, div[class*="min-h-screen"], div[class*="h-screen"], .page-container {
+    background-color: #667B50 !important;
+  }
+
+  /* 🌿 确保所有主要布局元素使用统一背景 */
+  #__next, .app-container, [data-radix-portal] {
+    background-color: #667B50 !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight;
-    /* 标题文字增强 - 深色阴影确保可读性 */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    /* 🎨 标题文字增强 - 深色阴影确保可读性 */
+    text-shadow: 0 2px 4px rgba(25, 35, 20, 0.3);
+    color: hsl(var(--ghibli-cream));
   }
 
-  .gradient-text {
-    /* 🌟 魔法般的吉卜力渐变文字 - 金黄到天空蓝的自然过渡 */
-    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
-    background-size: 300% 300%;
-    animation: ghibli-gradient-flow 6s ease-in-out infinite;
+  .text-ghibli-gradient {
+    /* 🌟 深沉Ghibli魔法渐变文字 */
+    background: linear-gradient(135deg, 
+      hsl(var(--ghibli-cream)) 0%, 
+      hsl(var(--ghibli-warm)) 25%, 
+      hsl(var(--ghibli-coral)) 50%, 
+      hsl(var(--ghibli-sunset)) 75%,
+      hsl(var(--ghibli-cream)) 100%);
+    background-size: 400% 400%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: ghibli-gradient-flow 8s ease-in-out infinite;
     font-weight: 700;
-    filter: brightness(1.2) contrast(1.3) saturate(1.4);
+    filter: brightness(1.2) contrast(1.3);
   }
 
   @keyframes ghibli-gradient-flow {
     0%, 100% { 
       background-position: 0% 50%;
-      filter: brightness(1.1) contrast(1.05) hue-rotate(0deg);
+      filter: brightness(1.2) contrast(1.2) saturate(1.1);
     }
-    33% { 
+    25% { 
       background-position: 100% 50%;
-      filter: brightness(1.2) contrast(1.1) hue-rotate(5deg);
+      filter: brightness(1.3) contrast(1.3) saturate(1.2);
     }
-    66% { 
+    50% { 
       background-position: 200% 50%;
-      filter: brightness(1.15) contrast(1.08) hue-rotate(-3deg);
+      filter: brightness(1.25) contrast(1.2) saturate(1.0);
+    }
+    75% { 
+      background-position: 300% 50%;
+      filter: brightness(1.2) contrast(1.3) saturate(1.1);
     }
   }
 
   .hero-gradient {
-    /* 🎭 英雄区域牛油果森林渐变 - 自然温暖的光芒 */
+    /* 🎭 英雄区域深沉Ghibli风格渐变背景 */
     background: 
-      radial-gradient(ellipse 120% 80% at 50% 20%, rgba(255, 193, 7, 0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 80% 60% at 30% 80%, rgba(255, 87, 34, 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse 100% 100% at 70% 30%, rgba(33, 150, 243, 0.06) 0%, transparent 70%);
+      radial-gradient(ellipse 140% 90% at 50% 10%, rgba(180, 150, 110, 0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 90% 70% at 20% 85%, rgba(185, 120, 95, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 110% 110% at 80% 20%, rgba(110, 140, 160, 0.06) 0%, transparent 65%),
+      radial-gradient(ellipse 80% 60% at 90% 90%, rgba(145, 130, 155, 0.04) 0%, transparent 40%);
     background-attachment: fixed;
   }
 
-  /* 🎨 按钮和卡片的吉卜力风格增强 */
+  /* 🎨 增强的深沉Ghibli风格组件样式 */
   .ghibli-button {
-    @apply bg-primary hover:bg-primary/90 text-primary-foreground;
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--ghibli-sunset)) 100%);
+    background: linear-gradient(135deg, 
+      hsl(var(--ghibli-forest)) 0%, 
+      hsl(var(--ghibli-moss)) 100%);
+    color: hsl(var(--ghibli-cream));
     box-shadow: 
-      0 4px 14px rgba(255, 193, 7, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2),
-      0 0 0 1px rgba(139, 172, 115, 0.2);
+      0 6px 20px rgba(40, 55, 35, 0.35),
+      inset 0 1px 0 rgba(245, 248, 242, 0.15),
+      0 0 0 1px rgba(130, 145, 110, 0.25);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(180, 202, 162, 0.3);
+    border: 1px solid rgba(130, 145, 110, 0.3);
   }
 
   .ghibli-button:hover {
-    transform: translateY(-1px);
+    transform: translateY(-3px) scale(1.02);
     box-shadow: 
-      0 6px 20px rgba(255, 193, 7, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3),
-      0 0 0 1px rgba(139, 172, 115, 0.3);
+      0 10px 30px rgba(40, 55, 35, 0.45),
+      inset 0 1px 0 rgba(245, 248, 242, 0.25),
+      0 0 0 1px rgba(130, 145, 110, 0.4);
+    background: linear-gradient(135deg, 
+      hsl(var(--ghibli-moss)) 0%, 
+      hsl(var(--ghibli-sage)) 100%);
   }
 
   .ghibli-card {
-    @apply bg-card border border-border;
-    background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(255 253 250) 100%);
+    background: rgba(245, 248, 242, 0.02);
+    border: 1px solid rgba(130, 145, 110, 0.2);
     box-shadow: 
-      0 2px 8px rgba(139, 172, 115, 0.12),
-      0 1px 3px rgba(255, 193, 7, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      0 8px 32px rgba(25, 35, 20, 0.15),
+      0 4px 12px rgba(102, 123, 80, 0.1),
+      inset 0 1px 0 rgba(245, 248, 242, 0.05);
     transition: all 0.3s ease;
-    border: 1px solid rgba(180, 202, 162, 0.4);
+    backdrop-filter: blur(12px);
   }
 
   .ghibli-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px) scale(1.01);
+    background: rgba(245, 248, 242, 0.04);
     box-shadow: 
-      0 4px 12px rgba(139, 172, 115, 0.18),
-      0 2px 6px rgba(255, 193, 7, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 193, 7, 0.4);
+      0 12px 40px rgba(25, 35, 20, 0.25),
+      0 6px 16px rgba(102, 123, 80, 0.15),
+      inset 0 1px 0 rgba(245, 248, 242, 0.08);
+    border-color: rgba(180, 150, 110, 0.3);
   }
 
-  /* 🌸 特殊效果和动画 */
+  /* 🌸 特殊魔法效果 */
   .magical-glow {
-    animation: magical-pulse 3s ease-in-out infinite;
+    animation: deep-magical-pulse 5s ease-in-out infinite;
   }
 
-  @keyframes magical-pulse {
+  @keyframes deep-magical-pulse {
     0%, 100% { 
-      box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+      box-shadow: 0 0 25px rgba(180, 150, 110, 0.4), 0 0 45px rgba(110, 140, 160, 0.2);
+      filter: brightness(1);
     }
     50% { 
-      box-shadow: 0 0 25px rgba(33, 150, 243, 0.4);
+      box-shadow: 0 0 35px rgba(185, 120, 95, 0.5), 0 0 65px rgba(145, 130, 155, 0.3);
+      filter: brightness(1.15);
     }
   }
 
-  /* Hide scrollbars */
+  /* 🎋 滚动条隐藏 */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -211,6 +279,176 @@ body {
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* 🌿 渐变动画 */
+  .animate-gradient-x {
+    animation: gradient-x 15s ease infinite;
+  }
+
+  @keyframes gradient-x {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    33% {
+      background-position: 100% 50%;
+    }
+    66% {
+      background-position: 200% 50%;
+    }
+  }
+
+  /* 🎪 导航栏深沉Ghibli风格 */
+  .nav-ghibli {
+    background: rgba(102, 123, 80, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(130, 145, 110, 0.3);
+    box-shadow: 
+      0 4px 12px rgba(25, 35, 20, 0.25),
+      0 2px 6px rgba(40, 55, 35, 0.15);
+  }
+
+  /* 🌸 输入框深沉Ghibli风格 */
+  .input-ghibli {
+    background: rgba(245, 248, 242, 0.08);
+    border: 2px solid rgba(130, 145, 110, 0.4);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    color: hsl(var(--ghibli-cream));
+  }
+
+  .input-ghibli:focus {
+    background: rgba(245, 248, 242, 0.12);
+    border-color: hsl(var(--ghibli-warm));
+    box-shadow: 
+      0 0 0 4px rgba(180, 150, 110, 0.2),
+      0 6px 16px rgba(102, 123, 80, 0.2);
+    transform: scale(1.02);
+  }
+
+  .input-ghibli::placeholder {
+    color: rgba(180, 190, 165, 0.6);
+  }
+
+  /* 🍃 卡片容器增强 - 透明底色 */
+  .card-ghibli {
+    background: rgba(245, 248, 242, 0.02);
+    border: 1px solid rgba(130, 145, 110, 0.2);
+    box-shadow: 
+      0 8px 32px rgba(25, 35, 20, 0.15),
+      0 4px 12px rgba(102, 123, 80, 0.08),
+      inset 0 1px 0 rgba(245, 248, 242, 0.05);
+    backdrop-filter: blur(16px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-ghibli:hover {
+    background: rgba(245, 248, 242, 0.05);
+    border-color: rgba(180, 150, 110, 0.35);
+    box-shadow: 
+      0 12px 40px rgba(25, 35, 20, 0.25),
+      0 6px 16px rgba(102, 123, 80, 0.12),
+      inset 0 1px 0 rgba(245, 248, 242, 0.08);
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  /* 🌟 按钮样式类集合 */
+  .btn-ghibli {
+    background: linear-gradient(135deg, 
+      hsl(var(--ghibli-forest)) 0%, 
+      hsl(var(--ghibli-moss)) 100%);
+    color: hsl(var(--ghibli-cream));
+    box-shadow: 
+      0 6px 20px rgba(40, 55, 35, 0.4),
+      inset 0 1px 0 rgba(245, 248, 242, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(130, 145, 110, 0.3);
+  }
+
+  .btn-ghibli:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+      0 10px 30px rgba(40, 55, 35, 0.5),
+      inset 0 1px 0 rgba(245, 248, 242, 0.25);
+  }
+
+  .btn-ghibli-secondary {
+    background: linear-gradient(135deg, 
+      hsl(var(--ghibli-warm)) 0%, 
+      hsl(var(--ghibli-sunset)) 100%);
+    color: hsl(var(--ghibli-forest));
+    box-shadow: 
+      0 6px 20px rgba(180, 150, 110, 0.4),
+      inset 0 1px 0 rgba(245, 248, 242, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(140, 115, 90, 0.3);
+  }
+
+  .btn-ghibli-secondary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+      0 10px 30px rgba(180, 150, 110, 0.5),
+      inset 0 1px 0 rgba(245, 248, 242, 0.3);
+  }
+
+  .btn-ghibli-accent {
+    background: hsl(var(--ghibli-coral));
+    color: hsl(var(--ghibli-cream));
+    box-shadow: 
+      0 6px 20px rgba(185, 120, 95, 0.4),
+      inset 0 1px 0 rgba(245, 248, 242, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(165, 100, 75, 0.3);
+  }
+
+  .btn-ghibli-accent:hover {
+    transform: translateY(-3px) scale(1.02);
+    background: rgba(185, 120, 95, 0.9);
+    box-shadow: 
+      0 10px 30px rgba(185, 120, 95, 0.5),
+      inset 0 1px 0 rgba(245, 248, 242, 0.3);
+  }
+
+  /* 🌈 色彩过渡效果 */
+  .color-transition {
+    transition: all 0.3s ease;
+  }
+
+  .color-transition:hover {
+    filter: brightness(1.2) saturate(1.1) contrast(1.05);
+  }
+
+  /* 🎨 文字颜色工具类 */
+  .text-ghibli-warm {
+    color: hsl(var(--ghibli-warm));
+  }
+
+  .text-ghibli-forest {
+    color: hsl(var(--ghibli-forest));
+  }
+
+  .text-ghibli-cream {
+    color: hsl(var(--ghibli-cream));
+  }
+
+  .text-ghibli-coral {
+    color: hsl(var(--ghibli-coral));
+  }
+
+  .text-ghibli-sky {
+    color: hsl(var(--ghibli-sky));
+  }
+
+  .text-ghibli-olive {
+    color: hsl(var(--ghibli-olive));
+  }
+
+  /* FAQ区域特殊背景色 */
+  .faq-section {
+    background-color: #667B50 !important;
+    background-image: 
+      radial-gradient(circle at 30% 40%, rgba(180, 150, 110, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 70% 60%, rgba(185, 120, 95, 0.06) 0%, transparent 45%);
   }
 
   /* 推特嵌入样式优化 */
@@ -227,52 +465,54 @@ body {
 
   .twitter-content blockquote.twitter-tweet:not(.twitter-tweet-rendered) {
     margin: 0;
-    padding: 16px;
-    border-left: 4px solid hsl(var(--primary));
-    background: rgba(123, 160, 91, 0.1);
-    border-radius: 8px;
+    padding: 20px;
+    border-left: 4px solid hsl(var(--ghibli-warm));
+    background: rgba(245, 248, 242, 0.08);
+    border-radius: 16px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(130, 145, 110, 0.2);
   }
 
   .twitter-content blockquote.twitter-tweet:not(.twitter-tweet-rendered) p {
-    margin: 0 0 8px 0;
-    color: hsl(var(--foreground));
-    line-height: 1.4;
-    font-size: 14px;
+    margin: 0 0 12px 0;
+    color: hsl(var(--ghibli-cream));
+    line-height: 1.6;
+    font-size: 15px;
   }
 
   .twitter-content blockquote.twitter-tweet:not(.twitter-tweet-rendered) a {
-    color: hsl(var(--primary));
+    color: hsl(var(--ghibli-warm));
     text-decoration: none;
+    font-weight: 500;
   }
 
   .twitter-content blockquote.twitter-tweet:not(.twitter-tweet-rendered) a:hover {
     text-decoration: underline;
+    color: hsl(var(--ghibli-coral));
   }
 
   .twitter-content iframe {
     max-width: 100% !important;
-    border-radius: 8px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(25, 35, 20, 0.3);
   }
 
   /* 📱 移动端优化 */
   @media (max-width: 768px) {
     .hero-gradient {
       background: 
-        radial-gradient(ellipse 150% 100% at 50% 20%, rgba(255, 193, 7, 0.10) 0%, transparent 60%),
-        radial-gradient(ellipse 100% 80% at 50% 80%, rgba(255, 87, 34, 0.06) 0%, transparent 50%);
+        radial-gradient(ellipse 120% 80% at 50% 20%, rgba(180, 150, 110, 0.1) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 60% at 30% 80%, rgba(185, 120, 95, 0.06) 0%, transparent 45%);
     }
     
-    body {
+    html, body {
       background-attachment: scroll; /* 移动端性能优化 */
+      background-color: #667B50 !important; /* 强制深牛油果绿背景 */
     }
   }
 
   /* 性能和可访问性优化 */
-  html {
-    scroll-behavior: smooth;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -284,241 +524,63 @@ body {
       scroll-behavior: auto;
     }
   }
-
-  body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeSpeed;
-  }
-
-  /* 滚动和容器优化 */
-  .scrollable-container {
-    -webkit-overflow-scrolling: touch;
-    will-change: scroll-position;
-  }
-
-  .video-container, .twitter-embed-container {
-    contain: layout style paint;
-    will-change: transform;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  img, video {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 1000px;
-  }
-
-  .video-hover-effect {
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    will-change: transform;
-  }
-
-  .video-hover-effect:hover {
-    transform: scale(1.01);
-  }
-
-  /* 文本截断样式 */
-  .line-clamp-1 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-  }
-
-  .line-clamp-2 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-  }
-
-  .line-clamp-3 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-  }
-
-  /* 模态框动画 */
-  .modal-enter {
-    animation: modalFadeIn 0.3s ease-out;
-  }
-
-  .modal-exit {
-    animation: modalFadeOut 0.3s ease-in;
-  }
-
-  @keyframes modalFadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes modalFadeOut {
-    from {
-      opacity: 1;
-      transform: scale(1);
-    }
-    to {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-  }
-
-  /* 轻量化视频卡片悬停效果 */
-  .video-card {
-    transition: transform 0.15s ease;
-    will-change: transform;
-  }
-
-  .video-card:hover {
-    transform: translateY(-2px);
-  }
-
-  /* 播放按钮脉冲动画 */
-  .play-button-pulse {
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scale(1.05);
-      opacity: 0.8;
-    }
-  }
-
-  /* 响应式视频容器 */
-  .responsive-video {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  }
-
-  .responsive-video video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* 按钮点击颤动动画效果 */
-  @keyframes button-click {
-    0% { transform: scale(1); }
-    50% { transform: scale(0.98); }
-    100% { transform: scale(1); }
-  }
-
-  .btn-feedback {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .btn-feedback:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
-  }
-
-  .btn-feedback:active {
-    animation: button-click 0.2s ease-out;
-  }
-
-  /* 增强主要按钮的效果 */
-  .btn-feedback.btn-primary {
-    background: linear-gradient(135deg, 
-      rgba(204, 175, 133, 0.9) 0%, 
-      rgba(204, 175, 133, 0.7) 50%, 
-      rgba(204, 175, 133, 0.9) 100%);
-    box-shadow: 
-      0 8px 32px rgba(204, 175, 133, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  }
-
-  .btn-feedback.btn-primary:hover {
-    background: linear-gradient(135deg, 
-      rgba(204, 175, 133, 1) 0%, 
-      rgba(204, 175, 133, 0.8) 50%, 
-      rgba(204, 175, 133, 1) 100%);
-    box-shadow: 
-      0 12px 40px rgba(204, 175, 133, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  }
-
-  /* 按钮加载状态 */
-  .btn-loading {
-    position: relative;
-    pointer-events: none;
-  }
-
-  .btn-loading::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 16px;
-    height: 16px;
-    margin: -8px 0 0 -8px;
-    border: 2px solid transparent;
-    border-top: 2px solid currentColor;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
 }
 
-/* 🎨 吉卜力风格自定义组件样式 */
+/* 🎨 深沉Ghibli风格组件样式层 */
 @layer components {
   /* 温暖按钮样式 */
   .btn-ghibli {
-    @apply bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-xl font-medium transition-all duration-300 shadow-lg hover:shadow-xl;
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-300 shadow-lg hover:shadow-xl;
+    background: linear-gradient(135deg, hsl(var(--ghibli-forest)) 0%, hsl(var(--ghibli-moss)) 100%);
+    color: hsl(var(--ghibli-cream));
+    border: 1px solid rgba(130, 145, 110, 0.3);
   }
   
   .btn-ghibli-secondary {
-    @apply bg-secondary hover:bg-secondary/90 text-secondary-foreground px-6 py-3 rounded-xl font-medium transition-all duration-300 shadow-md hover:shadow-lg;
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-300 shadow-md hover:shadow-lg;
+    background: linear-gradient(135deg, hsl(var(--ghibli-warm)) 0%, hsl(var(--ghibli-sunset)) 100%);
+    color: hsl(var(--ghibli-forest));
+    border: 1px solid rgba(140, 115, 90, 0.3);
   }
   
   .btn-ghibli-accent {
-    @apply bg-accent hover:bg-accent/90 text-accent-foreground px-6 py-3 rounded-xl font-medium transition-all duration-300 shadow-md hover:shadow-lg;
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-300 shadow-md hover:shadow-lg;
+    background: hsl(var(--ghibli-coral));
+    color: hsl(var(--ghibli-cream));
+    border: 1px solid rgba(165, 100, 75, 0.3);
   }
   
-  /* 卡片样式 */
+  /* 透明卡片样式 */
   .card-ghibli {
-    @apply bg-card border border-border rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300;
+    @apply rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300;
+    background: rgba(245, 248, 242, 0.02);
+    border: 1px solid rgba(130, 145, 110, 0.2);
+    backdrop-filter: blur(16px);
   }
   
   /* 导航样式 */
   .nav-ghibli {
-    @apply bg-primary/95 backdrop-blur-sm border-b border-border/50;
+    backdrop-filter: blur(20px);
+    background: rgba(102, 123, 80, 0.95);
+    border-bottom: 1px solid rgba(130, 145, 110, 0.3);
+    box-shadow: 0 4px 12px rgba(25, 35, 20, 0.25);
   }
   
   /* 输入框样式 */
   .input-ghibli {
-    @apply bg-card border border-input rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-200;
+    @apply rounded-xl px-4 py-3 transition-all duration-200;
+    background: rgba(245, 248, 242, 0.08);
+    border: 2px solid rgba(130, 145, 110, 0.4);
+    color: hsl(var(--ghibli-cream));
+    backdrop-filter: blur(8px);
+  }
+
+  .input-ghibli::placeholder {
+    color: rgba(180, 190, 165, 0.6);
   }
 }
 
-/* 🌿 自然流畅的动画效果 */
+/* 🌿 自然流畅动画 */
 @layer utilities {
   .animate-float {
     animation: float 6s ease-in-out infinite;
@@ -527,31 +589,56 @@ body {
   .animate-gentle-bounce {
     animation: gentleBounce 2s ease-in-out infinite;
   }
+  
+  .backdrop-blur-strong {
+    backdrop-filter: blur(24px);
+  }
+
+  .text-shadow {
+    text-shadow: 0 3px 6px rgba(25, 35, 20, 0.4);
+  }
+
+  .border-gradient {
+    border: 2px solid;
+    border-image: linear-gradient(45deg, rgba(180, 150, 110, 0.4), rgba(110, 140, 160, 0.3)) 1;
+  }
+
+  .shadow-ghibli-light {
+    box-shadow: 0 4px 12px rgba(102, 123, 80, 0.15);
+  }
+
+  .shadow-ghibli-medium {
+    box-shadow: 0 8px 24px rgba(25, 35, 20, 0.25);
+  }
+
+  .shadow-ghibli-strong {
+    box-shadow: 0 12px 36px rgba(25, 35, 20, 0.35);
+  }
+
+  /* 🌿 全局背景强制应用 */
+  .bg-ghibli-base {
+    background-color: #667B50 !important;
+  }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-15px); }
 }
 
 @keyframes gentleBounce {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+  50% { transform: translateY(-10px); }
 }
 
-@layer utilities {
-  /* 自定义工具类 */
-  .backdrop-blur-strong {
-    backdrop-filter: blur(20px);
-  }
-
-  .text-shadow {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-
-  .border-gradient {
-    border: 1px solid;
-    border-image: linear-gradient(45deg, rgba(204, 175, 133, 0.3), rgba(78, 154, 203, 0.3)) 1;
-  }
+/* 🌿 全站背景色最终保险设置 - 确保所有页面统一 */
+* {
+  box-sizing: border-box;
 }
-/* Force CSS refresh - 05/28/2025 18:43:11 */
+
+/* 强制所有主要页面元素使用统一背景 */
+.min-h-screen, .h-screen, main, .page-wrapper, .app-wrapper {
+  background-color: #667B50 !important;
+}
+
+/* 强制CSS刷新 - 深沉Ghibli配色完整版 2024 */

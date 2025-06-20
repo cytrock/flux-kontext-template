@@ -6,9 +6,44 @@ import { usePathname } from "next/navigation"
 import { useSession, signOut } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { LogoVariants } from "@/components/Logo"
-import { ChevronDown, User, LogOut, Code, BookOpen } from "lucide-react"
+import { ChevronDown, User, LogOut, Code, BookOpen, Menu, X, Home, Zap, CreditCard } from "lucide-react"
 // 导入文案系统
 import { common } from "@/lib/content"
+
+const navigationLinks = [
+  {
+    name: "Home",
+    href: "/",
+    icon: Home,
+  },
+  {
+    name: "Generate",
+    href: "/generate",
+    icon: Zap,
+  },
+  {
+    name: "Pricing",
+    href: "/pricing",
+    icon: CreditCard,
+  },
+  {
+    name: "Resources",
+    href: "#",
+    icon: BookOpen,
+    dropdown: [
+      {
+        name: "Resources Hub",
+        href: "/resources",
+        description: "Comprehensive guides and tutorials",
+      },
+      {
+        name: "API Documentation",
+        href: "/docs",
+        description: "Technical documentation for developers",
+      },
+    ],
+  },
+]
 
 export function Navigation() {
   const pathname = usePathname()
@@ -16,7 +51,7 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isResourcesMenuOpen, setIsResourcesMenuOpen] = useState(false)
-  
+
   // 点击外部关闭下拉菜单
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -31,20 +66,25 @@ export function Navigation() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const navLinks = [
-    { href: "/", label: common.navigation.home },
-    { href: "/generate", label: common.navigation.generate },
-    { href: "/pricing", label: common.navigation.pricing },
-    { 
-      href: "/resources", 
-      label: common.navigation.resources,
-      hasDropdown: true,
-      subItems: [
-        { href: "/resources", label: common.navigation.resourcesHub, icon: BookOpen },
-        { href: "/resources/api", label: common.navigation.apiDocs, icon: Code }
-      ]
+  // 关闭移动菜单当路由改变时
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setIsMobileMenuOpen(false)
+      setIsResourcesMenuOpen(false)
     }
-  ]
+
+    // 监听路由变化
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement
+      if (target.tagName === 'A') {
+        handleRouteChange()
+      }
+    })
+
+    return () => {
+      document.removeEventListener('click', handleRouteChange)
+    }
+  }, [])
 
   const handleSignOut = async () => {
     await signOut({ callbackUrl: "/" })
@@ -55,45 +95,59 @@ export function Navigation() {
       <div className="container mx-auto px-4 h-16 flex items-center">
         {/* 左侧：Logo */}
         <div className="flex-shrink-0">
-          <LogoVariants.Navigation />
+          <Link href="/" className="flex items-center space-x-2 group transition-all duration-300 hover:scale-105">
+            <div className="relative">
+              <div className="w-8 h-8 bg-gradient-to-br from-ghibli-cream to-ghibli-mint rounded-lg shadow-ghibli-medium group-hover:shadow-ghibli-magical transition-all duration-300"></div>
+              <div className="absolute inset-0 w-8 h-8 bg-gradient-to-tr from-ghibli-warm/60 to-transparent rounded-lg group-hover:animate-pulse"></div>
+            </div>
+            <span className="text-xl font-bold text-ghibli-cream group-hover:text-white transition-all duration-300">
+              Mori Studio
+            </span>
+          </Link>
         </div>
         
         {/* 中间：桌面端导航菜单 - 居中显示 */}
         <nav className="hidden md:flex items-center justify-center flex-1 space-x-8">
-          {navLinks.map((link) => (
-            <div key={link.href} className="relative">
-              {link.hasDropdown ? (
+          {navigationLinks.map((link) => (
+            <div key={link.name} className="relative">
+              {link.dropdown ? (
                 // Resources下拉菜单
                 <div className="relative resources-dropdown">
                   <button
                     onClick={() => setIsResourcesMenuOpen(!isResourcesMenuOpen)}
                     className={`flex items-center space-x-1 relative transition-all duration-200 hover:font-semibold active:scale-95 ${
                       pathname.startsWith('/resources') 
-                        ? 'text-secondary font-semibold' 
-                        : 'text-primary-foreground hover:text-secondary'
+                        ? 'text-ghibli-warm font-semibold' 
+                        : 'text-ghibli-cream hover:text-ghibli-warm'
                     }`}
                   >
-                    <span>{link.label}</span>
+                    <span>{link.name}</span>
                     <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isResourcesMenuOpen ? 'rotate-180' : ''}`} />
                     {pathname.startsWith('/resources') && (
-                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-secondary rounded-full" />
+                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-ghibli-warm rounded-full" />
                     )}
                   </button>
                   
                   {/* Resources下拉菜单内容 */}
                   {isResourcesMenuOpen && (
-                    <div className="absolute top-full left-0 mt-2 w-56 bg-card border border-border rounded-lg shadow-ghibli-medium py-2 z-[9999]">
-                      {link.subItems?.map((subItem) => (
-                        <Link
-                          key={subItem.href}
-                          href={subItem.href}
-                          className="flex items-center space-x-3 px-4 py-2 text-sm text-card-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                          onClick={() => setIsResourcesMenuOpen(false)}
-                        >
-                          <subItem.icon className="w-4 h-4 text-primary" />
-                          <span>{subItem.label}</span>
-                        </Link>
-                      ))}
+                    <div className="absolute top-full left-0 mt-2 w-56 bg-ghibli-olive/98 backdrop-blur-xl border border-ghibli-forest/30 rounded-xl shadow-ghibli-strong z-[9999]">
+                      <div className="p-2">
+                        {link.dropdown.map((item) => (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            className="block p-3 rounded-lg hover:bg-ghibli-forest/20 transition-all duration-200 group"
+                            onClick={() => setIsResourcesMenuOpen(false)}
+                          >
+                            <div className="text-sm font-medium text-ghibli-cream group-hover:text-ghibli-warm transition-colors duration-200">
+                              {item.name}
+                            </div>
+                            <div className="text-xs text-ghibli-sage mt-1 group-hover:text-ghibli-mint transition-colors duration-200">
+                              {item.description}
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -103,13 +157,13 @@ export function Navigation() {
                   href={link.href} 
                   className={`relative transition-all duration-200 hover:font-semibold active:scale-95 ${
                     pathname === link.href 
-                      ? 'text-secondary font-semibold' 
-                      : 'text-primary-foreground hover:text-secondary'
+                      ? 'text-ghibli-warm font-semibold' 
+                      : 'text-ghibli-cream hover:text-ghibli-warm'
                   }`}
                 >
-                  {link.label}
+                  {link.name}
                   {pathname === link.href && (
-                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-secondary rounded-full" />
+                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-ghibli-warm rounded-full" />
                   )}
                 </Link>
               )}
@@ -120,66 +174,69 @@ export function Navigation() {
         {/* 右侧：桌面端用户状态和按钮 */}
         <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
           {status === "loading" ? (
-            <div className="w-8 h-8 animate-spin rounded-full border-2 border-secondary border-t-transparent" />
+            <div className="w-8 h-8 animate-spin rounded-full border-2 border-ghibli-warm border-t-transparent" />
           ) : session ? (
             // 已登录状态
             <div className="relative user-dropdown">
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="flex items-center space-x-2 p-2 rounded-lg hover:bg-accent transition-colors"
+                className="flex items-center space-x-2 p-2 rounded-lg hover:bg-ghibli-forest/20 transition-colors"
               >
                 {session.user?.image ? (
                   <img 
                     src={session.user.image} 
                     alt={session.user.name || "User"} 
-                    className="w-8 h-8 rounded-full border-2 border-secondary"
+                    className="w-8 h-8 rounded-full border-2 border-ghibli-warm"
                   />
                 ) : (
-                  <div className="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center">
-                    <User className="w-4 h-4 text-secondary" />
+                  <div className="w-8 h-8 rounded-full bg-ghibli-warm/20 flex items-center justify-center">
+                    <User className="w-4 h-4 text-ghibli-warm" />
                   </div>
                 )}
-                <span className="text-sm font-medium text-primary-foreground">{session.user?.name || session.user?.email}</span>
-                <ChevronDown className={`w-4 h-4 text-primary-foreground transition-transform duration-200 ${isUserMenuOpen ? 'rotate-180' : ''}`} />
+                <span className="text-sm font-medium text-ghibli-cream">{session.user?.name || session.user?.email}</span>
+                <ChevronDown className={`w-4 h-4 text-ghibli-cream transition-transform duration-200 ${isUserMenuOpen ? 'rotate-180' : ''}`} />
               </button>
               
               {/* 用户下拉菜单 */}
               {isUserMenuOpen && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-ghibli-medium py-2 z-[9999]">
-                  <Link
-                    href="/dashboard"
-                    className="block px-4 py-2 text-sm text-card-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                    onClick={() => setIsUserMenuOpen(false)}
-                  >
-                    {common.navigation.dashboard}
-                  </Link>
-                  <hr className="my-2 border-border" />
-                  <button
-                    onClick={handleSignOut}
-                    className="w-full text-left px-4 py-2 text-sm text-card-foreground transition-colors hover:bg-accent hover:text-accent-foreground flex items-center space-x-2"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    <span>{common.buttons.signOut}</span>
-                  </button>
+                <div className="absolute top-full right-0 mt-2 w-48 bg-ghibli-olive/98 backdrop-blur-xl border border-ghibli-forest/30 rounded-xl shadow-ghibli-strong z-[9999]">
+                  <div className="p-2">
+                    <Link
+                      href="/dashboard"
+                      className="block px-3 py-2 text-sm text-ghibli-cream hover:text-ghibli-warm hover:bg-ghibli-forest/20 rounded-lg transition-all duration-200"
+                      onClick={() => setIsUserMenuOpen(false)}
+                    >
+                      {common.navigation.dashboard}
+                    </Link>
+                    <hr className="my-2 border-ghibli-forest/20" />
+                    <button
+                      onClick={handleSignOut}
+                      className="w-full text-left px-3 py-2 text-sm text-ghibli-cream hover:text-ghibli-warm hover:bg-ghibli-forest/20 rounded-lg transition-all duration-200 flex items-center space-x-2"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>{common.buttons.signOut}</span>
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
           ) : (
-            // 未登录状态 - 使用新的吉卜力按钮样式
+            // 未登录状态
             <>
               <Link href={`/auth/signin?callbackUrl=${pathname}`}>
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="text-primary-foreground hover:text-secondary hover:bg-secondary/10 hover:font-semibold active:scale-95 transition-all duration-200"
+                  className="text-ghibli-cream hover:text-ghibli-warm hover:bg-ghibli-forest/20 hover:font-semibold active:scale-95 transition-all duration-200"
                 >
                   {common.navigation.login}
                 </Button>
               </Link>
               <Link href={`/auth/signup?callbackUrl=${pathname}`}>
                 <Button 
+                  variant="ghibli"
                   size="sm" 
-                  className="btn-ghibli-secondary hover:scale-105 active:scale-95"
+                  className="font-medium shadow-ghibli-button hover:shadow-ghibli-magical transition-all duration-300"
                 >
                   {common.buttons.signUp}
                 </Button>
@@ -191,14 +248,14 @@ export function Navigation() {
         {/* 移动端汉堡菜单按钮 */}
         <div className="md:hidden flex-shrink-0">
           <button
-            className="p-2 hover:bg-accent/10 rounded-md active:scale-95 transition-all duration-200"
+            className="p-2 hover:bg-ghibli-forest/20 rounded-md active:scale-95 transition-all duration-200"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
             <div className="w-6 h-6 flex flex-col justify-center items-center">
-              <span className={`block w-5 h-0.5 bg-primary-foreground transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1' : ''}`} />
-              <span className={`block w-5 h-0.5 bg-primary-foreground transition-all duration-300 mt-1 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
-              <span className={`block w-5 h-0.5 bg-primary-foreground transition-all duration-300 mt-1 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1' : ''}`} />
+              <span className={`block w-5 h-0.5 bg-ghibli-cream transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1' : ''}`} />
+              <span className={`block w-5 h-0.5 bg-ghibli-cream transition-all duration-300 mt-1 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
+              <span className={`block w-5 h-0.5 bg-ghibli-cream transition-all duration-300 mt-1 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1' : ''}`} />
             </div>
           </button>
         </div>
@@ -206,41 +263,40 @@ export function Navigation() {
 
       {/* 移动端菜单 */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-card/95 backdrop-blur-sm border-b border-border">
+        <div className="md:hidden bg-ghibli-olive/98 backdrop-blur-xl border-t border-ghibli-forest/20">
           <div className="container mx-auto px-4 py-4 space-y-4">
             {/* 移动端导航链接 */}
-            {navLinks.map((link) => (
-              <div key={link.href}>
-                {link.hasDropdown ? (
+            {navigationLinks.map((link) => (
+              <div key={link.name}>
+                {link.dropdown ? (
                   // 移动端Resources下拉菜单
                   <div>
                     <button
                       onClick={() => setIsResourcesMenuOpen(!isResourcesMenuOpen)}
-                      className={`flex items-center justify-between w-full py-2 px-3 rounded-md transition-all duration-200 hover:bg-accent hover:font-semibold active:scale-95 ${
+                      className={`flex items-center justify-between w-full py-2 px-3 rounded-md transition-all duration-200 hover:bg-ghibli-forest/20 hover:font-semibold active:scale-95 ${
                         pathname.startsWith('/resources') 
-                          ? 'text-primary font-semibold bg-accent' 
-                          : 'text-card-foreground'
+                          ? 'text-ghibli-warm font-semibold bg-ghibli-forest/20' 
+                        : 'text-ghibli-cream'
                       }`}
                     >
-                      <span>{link.label}</span>
+                      <span>{link.name}</span>
                       <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isResourcesMenuOpen ? 'rotate-180' : ''}`} />
                     </button>
                     
                     {/* 移动端Resources子菜单 */}
                     {isResourcesMenuOpen && (
                       <div className="ml-4 mt-2 space-y-1">
-                        {link.subItems?.map((subItem) => (
+                        {link.dropdown.map((item) => (
                           <Link
-                            key={subItem.href}
-                            href={subItem.href}
-                            className="flex items-center space-x-3 py-2 px-3 rounded-md text-sm text-card-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                            key={item.name}
+                            href={item.href}
+                            className="block px-3 py-2 text-sm text-ghibli-sage hover:text-ghibli-mint hover:bg-ghibli-forest/10 rounded-lg transition-all duration-200"
                             onClick={() => {
                               setIsResourcesMenuOpen(false)
                               setIsMobileMenuOpen(false)
                             }}
                           >
-                            <subItem.icon className="w-4 h-4 text-primary" />
-                            <span>{subItem.label}</span>
+                            {item.name}
                           </Link>
                         ))}
                       </div>
@@ -250,31 +306,31 @@ export function Navigation() {
                   // 普通移动端导航链接
                   <Link
                     href={link.href}
-                    className={`block py-2 px-3 rounded-md transition-all duration-200 hover:bg-accent hover:font-semibold active:scale-95 ${
+                    className={`block py-2 px-3 rounded-md transition-all duration-200 hover:bg-ghibli-forest/20 hover:font-semibold active:scale-95 ${
                       pathname === link.href 
-                        ? 'text-primary font-semibold bg-accent' 
-                        : 'text-card-foreground'
+                        ? 'text-ghibli-warm font-semibold bg-ghibli-forest/20' 
+                        : 'text-ghibli-cream'
                     }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    {link.label}
+                    {link.name}
                   </Link>
                 )}
               </div>
             ))}
             
             {/* 移动端用户状态按钮 */}
-            <div className="border-t border-border pt-4">
+            <div className="border-t border-ghibli-forest/20 pt-4">
               {status === 'loading' ? (
                 <div className="flex justify-center">
-                  <div className="w-8 h-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                  <div className="w-8 h-8 animate-spin rounded-full border-2 border-ghibli-warm border-t-transparent" />
                 </div>
               ) : session ? (
                 // 移动端已登录状态
                 <div className="space-y-2">
                   <Link
                     href="/dashboard"
-                    className="flex items-center space-x-3 py-2 px-3 rounded-md text-card-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                    className="flex items-center space-x-3 py-2 px-3 rounded-md text-ghibli-cream hover:text-ghibli-warm hover:bg-ghibli-forest/20 transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <User className="w-5 h-5" />
@@ -285,19 +341,19 @@ export function Navigation() {
                       handleSignOut()
                       setIsMobileMenuOpen(false)
                     }}
-                    className="w-full text-left flex items-center space-x-3 py-2 px-3 rounded-md text-card-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                    className="w-full text-left flex items-center space-x-3 py-2 px-3 rounded-md text-ghibli-cream hover:text-ghibli-warm hover:bg-ghibli-forest/20 transition-colors"
                   >
                     <LogOut className="w-5 h-5" />
                     <span>{common.buttons.signOut}</span>
                   </button>
                 </div>
               ) : (
-                // 移动端未登录状态 - 使用新的吉卜力按钮样式
+                // 移动端未登录状态
                 <div className="space-y-2">
                   <Link href={`/auth/signin?callbackUrl=${pathname}`}>
                     <Button
-                      variant="outline"
-                      className="w-full border-border text-card-foreground hover:bg-accent hover:text-accent-foreground"
+                      variant="ghibliOutline"
+                      className="w-full"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {common.navigation.login}
@@ -305,7 +361,8 @@ export function Navigation() {
                   </Link>
                   <Link href={`/auth/signup?callbackUrl=${pathname}`}>
                     <Button
-                      className="w-full btn-ghibli-secondary"
+                      variant="ghibli"
+                      className="w-full font-medium shadow-ghibli-button"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {common.buttons.signUp}

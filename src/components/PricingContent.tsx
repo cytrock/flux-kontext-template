@@ -387,17 +387,11 @@ function PricingMainContent() {
 // 主导出组件，包含Suspense边界
 export function PricingContent() {
   return (
-    <div className="min-h-screen bg-background">
-      <Suspense fallback={
-        <div className="min-h-screen bg-background flex items-center justify-center">
-          <div className="text-center">
-            <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
-            <p className="text-muted-foreground">Loading pricing...</p>
-          </div>
-        </div>
-      }>
-        <PricingMainContent />
+    <div className="min-h-screen bg-ghibli-olive text-ghibli-cream">
+      <Suspense fallback={<div>Loading...</div>}>
+        <PricingTabHandler setActiveTab={(tab) => {}} />
       </Suspense>
+      <PricingMainContent />
     </div>
   )
 } 

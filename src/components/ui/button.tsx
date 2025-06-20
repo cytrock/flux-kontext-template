@@ -21,17 +21,39 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        ghibli: "bg-gradient-to-r from-primary to-ghibli-moss text-white shadow-lg hover:shadow-xl hover:from-ghibli-moss hover:to-ghibli-sage transform transition-all duration-300 hover:shadow-ghibli-warm/30",
-        ghibliOutline: "border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-white shadow-md hover:shadow-lg hover:shadow-primary/20",
-        ghibliSoft: "bg-ghibli-mint/30 text-foreground border border-ghibli-sage/40 hover:bg-ghibli-mint/50 hover:border-ghibli-sage/60 hover:shadow-md",
-        ghibliWarm: "bg-gradient-to-r from-secondary to-ghibli-earth text-white shadow-lg hover:shadow-xl hover:from-ghibli-earth hover:to-secondary transform transition-all duration-300",
-        ghibliSky: "bg-accent text-accent-foreground shadow-lg hover:shadow-xl hover:bg-accent/90 hover:shadow-accent/30",
+        
+        /* 🎨 Ghibli风格按钮变体 - 优化颜色对比度确保文字清晰可见 */
+        ghibli: "bg-gradient-to-br from-ghibli-forest to-ghibli-moss text-ghibli-cream shadow-lg hover:shadow-xl hover:from-ghibli-moss hover:to-ghibli-sage transform transition-all duration-300 hover:shadow-ghibli-forest/40 border border-ghibli-sage/40 backdrop-blur-sm font-medium",
+        
+        ghibliOutline: "border-2 border-ghibli-forest text-ghibli-cream bg-ghibli-forest/10 hover:bg-ghibli-forest hover:text-ghibli-cream shadow-md hover:shadow-lg hover:shadow-ghibli-forest/30 backdrop-blur-sm transition-all duration-300 font-medium",
+        
+        ghibliSoft: "bg-ghibli-mint/50 text-ghibli-forest border border-ghibli-sage/60 hover:bg-ghibli-mint/70 hover:border-ghibli-sage/80 hover:shadow-md hover:text-ghibli-forest backdrop-blur-sm transition-all duration-300 font-medium",
+        
+        ghibliWarm: "bg-gradient-to-br from-ghibli-warm to-ghibli-sunset text-ghibli-forest shadow-lg hover:shadow-xl hover:from-ghibli-sunset hover:to-ghibli-coral transform transition-all duration-300 hover:shadow-ghibli-warm/40 border border-ghibli-warm/30 font-medium",
+        
+        ghibliSky: "bg-ghibli-sky text-ghibli-cream shadow-lg hover:shadow-xl hover:bg-ghibli-sky/90 hover:shadow-ghibli-sky/40 border border-ghibli-sky/40 transition-all duration-300 font-medium",
+        
+        ghibliEarth: "bg-gradient-to-br from-ghibli-earth to-ghibli-warm text-ghibli-cream shadow-lg hover:shadow-xl hover:from-ghibli-warm hover:to-ghibli-earth transform transition-all duration-300 hover:shadow-ghibli-earth/40 font-medium",
+        
+        ghibliMagic: "bg-gradient-to-br from-ghibli-lavender via-ghibli-sky to-ghibli-coral text-ghibli-cream shadow-lg hover:shadow-xl hover:shadow-ghibli-lavender/50 animate-gradient-x bg-[length:400%_400%] backdrop-blur-sm font-medium",
+        
+        ghibliPrimary: "bg-ghibli-forest text-ghibli-cream hover:bg-ghibli-moss shadow-lg hover:shadow-xl hover:shadow-ghibli-forest/40 border border-ghibli-forest/30 transition-all duration-300 font-medium",
+        
+        ghibliSecondary: "bg-ghibli-warm text-ghibli-forest hover:bg-ghibli-sunset shadow-lg hover:shadow-xl hover:shadow-ghibli-warm/40 border border-ghibli-warm/30 transition-all duration-300 font-medium",
+        
+        ghibliAccent: "bg-ghibli-coral text-ghibli-cream shadow-lg hover:shadow-xl hover:bg-ghibli-coral/90 hover:shadow-ghibli-coral/40 border border-ghibli-coral/30 transition-all duration-300 font-medium",
+        
+        ghibliNature: "bg-gradient-to-br from-ghibli-sage to-ghibli-mint text-ghibli-forest shadow-md hover:shadow-lg hover:from-ghibli-mint hover:to-ghibli-sage transform transition-all duration-300 border border-ghibli-sage/50 font-medium",
+        
+        ghibliDream: "bg-gradient-to-br from-ghibli-lavender/80 to-ghibli-sky/80 text-ghibli-cream shadow-md hover:shadow-lg backdrop-blur-md hover:backdrop-blur-lg transform transition-all duration-300 border border-ghibli-lavender/40 font-medium",
       },
       size: {
         default: "h-10 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-12 rounded-lg px-8 text-base",
         icon: "h-10 w-10",
+        xl: "h-14 rounded-xl px-10 text-lg font-semibold",
+        xxl: "h-16 rounded-2xl px-12 text-xl font-bold",
       },
     },
     defaultVariants: {
