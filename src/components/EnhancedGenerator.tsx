@@ -14,32 +14,32 @@ export function EnhancedGenerator() {
 
   return (
     <div className="space-y-8">
-      {/* 页面标题和描述 */}
+      {/* Page title and description */}
       <div className="text-center space-y-4">
         <div className="flex items-center justify-center space-x-2">
           <Sparkles className="h-8 w-8 text-ghibli-warm animate-gentle-bounce" />
           <h1 className="text-4xl font-bold text-ghibli-cream">
-            AI 图像生成工作室
+            AI Style Generator Studio
           </h1>
           <Sparkles className="h-8 w-8 text-ghibli-warm animate-gentle-bounce" />
         </div>
         <p className="text-xl text-ghibli-sage max-w-3xl mx-auto">
-          选择您喜欢的 AI 模型，创作专业级的吉卜力风格图像
+          Choose your preferred art style and create professional-quality images with our dual AI generator
         </p>
         <div className="flex flex-wrap justify-center gap-2">
           <Badge variant="outline" className="bg-ghibli-warm/20 text-ghibli-warm border-ghibli-warm">
-            🎨 双模型支持
+            🎨 Dual Style Support
           </Badge>
           <Badge variant="outline" className="bg-ghibli-coral/20 text-ghibli-coral border-ghibli-coral">
-            🌟 吉卜力风格特化
+            🌟 Animation Specialized
           </Badge>
           <Badge variant="outline" className="bg-ghibli-sky/20 text-ghibli-sky border-ghibli-sky">
-            ⚡ 高质量生成
+            ⚡ High Quality Output
           </Badge>
         </div>
       </div>
 
-      {/* 模型选择器 */}
+      {/* Style selector */}
       <div className="flex justify-center space-x-4">
         <Button
           variant={activeGenerator === 'flux-kontext' ? 'default' : 'outline'}
@@ -52,8 +52,8 @@ export function EnhancedGenerator() {
         >
           <Zap className="h-5 w-5" />
           <div className="text-left">
-            <div className="font-medium">Flux Kontext</div>
-            <div className="text-xs opacity-75">专业图像生成</div>
+            <div className="font-medium">Professional Studio</div>
+            <div className="text-xs opacity-75">High-precision imagery</div>
           </div>
           {activeGenerator === 'flux-kontext' && (
             <Crown className="h-4 w-4 text-ghibli-warm" />
@@ -71,8 +71,8 @@ export function EnhancedGenerator() {
         >
           <Sparkles className="h-5 w-5" />
           <div className="text-left">
-            <div className="font-medium">豆包 AI</div>
-            <div className="text-xs opacity-75">吉卜力风格专精</div>
+            <div className="font-medium">Dreamy Animation</div>
+            <div className="text-xs opacity-75">Charming animated art</div>
           </div>
           {activeGenerator === 'doubao' && (
             <Crown className="h-4 w-4 text-ghibli-warm" />
@@ -80,23 +80,23 @@ export function EnhancedGenerator() {
         </Button>
       </div>
 
-      {/* 模型特色说明 */}
+      {/* Style feature description */}
       <div className="max-w-4xl mx-auto">
         {activeGenerator === 'flux-kontext' && (
           <div className="bg-ghibli-forest/20 border border-ghibli-sage/30 rounded-lg p-4 text-center">
             <div className="flex items-center justify-center space-x-2 mb-2">
               <Zap className="h-5 w-5 text-ghibli-warm" />
-              <span className="font-medium text-ghibli-cream">Flux Kontext AI</span>
+              <span className="font-medium text-ghibli-cream">Professional Studio Style</span>
             </div>
             <p className="text-sm text-ghibli-sage">
-              基于 FAL AI 的高性能图像生成模型，支持多种风格和高分辨率输出，
-              拥有强大的文本理解能力和细节表现力。
+              Advanced AI technology delivers studio-quality imagery with exceptional detail and precision.
+              Perfect for professional projects requiring high-resolution output and versatile artistic styles.
             </p>
             <div className="flex flex-wrap justify-center gap-2 mt-3">
-              <Badge variant="secondary" className="text-xs">高分辨率</Badge>
-              <Badge variant="secondary" className="text-xs">多样化风格</Badge>
-              <Badge variant="secondary" className="text-xs">精细控制</Badge>
-              <Badge variant="secondary" className="text-xs">批量生成</Badge>
+              <Badge variant="secondary" className="text-xs">High Resolution</Badge>
+              <Badge variant="secondary" className="text-xs">Versatile Styles</Badge>
+              <Badge variant="secondary" className="text-xs">Fine Control</Badge>
+              <Badge variant="secondary" className="text-xs">Batch Generation</Badge>
             </div>
           </div>
         )}
@@ -105,25 +105,25 @@ export function EnhancedGenerator() {
           <div className="bg-ghibli-warm/20 border border-ghibli-warm/30 rounded-lg p-4 text-center">
             <div className="flex items-center justify-center space-x-2 mb-2">
               <Sparkles className="h-5 w-5 text-ghibli-warm" />
-              <span className="font-medium text-ghibli-cream">豆包 (Doubao) AI</span>
+              <span className="font-medium text-ghibli-cream">Dreamy Animation Style</span>
             </div>
             <p className="text-sm text-ghibli-sage">
-              字节跳动推出的多模态大模型，特别擅长吉卜力风格图像生成和风格转换，
-              支持中英文双语描述，在动画风格表现上有独特优势。
+              Specialized in creating enchanting animated artwork with a focus on warmth and charm.
+              Excels in style transfer and brings a magical, hand-drawn quality to every creation.
             </p>
             <div className="flex flex-wrap justify-center gap-2 mt-3">
-              <Badge variant="secondary" className="text-xs">吉卜力专精</Badge>
-              <Badge variant="secondary" className="text-xs">风格转换</Badge>
-              <Badge variant="secondary" className="text-xs">中英双语</Badge>
-              <Badge variant="secondary" className="text-xs">动画风格</Badge>
+              <Badge variant="secondary" className="text-xs">Animation Focus</Badge>
+              <Badge variant="secondary" className="text-xs">Style Transfer</Badge>
+              <Badge variant="secondary" className="text-xs">Multilingual</Badge>
+              <Badge variant="secondary" className="text-xs">Artistic Charm</Badge>
             </div>
           </div>
         )}
       </div>
 
-      {/* 生成器内容 */}
+      {/* Generator content */}
       <div className="relative">
-        {/* 切换动画容器 */}
+        {/* Animation transition container */}
         <div className={`transition-opacity duration-300 ${
           activeGenerator === 'flux-kontext' ? 'opacity-100' : 'opacity-0 absolute inset-0 pointer-events-none'
         }`}>
@@ -137,29 +137,29 @@ export function EnhancedGenerator() {
         </div>
       </div>
 
-      {/* 使用提示 */}
+      {/* Usage tips */}
       <div className="max-w-4xl mx-auto bg-ghibli-sage/10 border border-ghibli-sage/20 rounded-lg p-6">
         <h3 className="text-lg font-medium text-ghibli-cream mb-3 flex items-center">
           <Wand2 className="h-5 w-5 mr-2 text-ghibli-warm" />
-          使用建议
+          Style Recommendations
         </h3>
         <div className="grid md:grid-cols-2 gap-4 text-sm text-ghibli-sage">
           <div>
-            <h4 className="font-medium text-ghibli-cream mb-2">Flux Kontext 适合：</h4>
+            <h4 className="font-medium text-ghibli-cream mb-2">Professional Studio is perfect for:</h4>
             <ul className="space-y-1">
-              <li>• 需要高精度和细节的专业图像</li>
-              <li>• 批量生成多张图片</li>
-              <li>• 复杂场景和人物描述</li>
-              <li>• 多种艺术风格探索</li>
+              <li>• High-precision professional imagery</li>
+              <li>• Batch generation of multiple images</li>
+              <li>• Complex scenes and character details</li>
+              <li>• Diverse artistic style exploration</li>
             </ul>
           </div>
           <div>
-            <h4 className="font-medium text-ghibli-cream mb-2">豆包 AI 适合：</h4>
+            <h4 className="font-medium text-ghibli-cream mb-2">Dreamy Animation works best for:</h4>
             <ul className="space-y-1">
-              <li>• 吉卜力动画风格图像生成</li>
-              <li>• 已有图片的风格转换</li>
-              <li>• 中文描述的精准理解</li>
-              <li>• 温馨治愈系画面创作</li>
+              <li>• Enchanting animated-style images</li>
+              <li>• Style transfer from existing photos</li>
+              <li>• Warm, charming, and cozy artwork</li>
+              <li>• Hand-drawn artistic aesthetics</li>
             </ul>
           </div>
         </div>

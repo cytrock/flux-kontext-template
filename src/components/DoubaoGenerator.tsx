@@ -50,7 +50,7 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
   // 文字生成图片
   const handleTextToImage = async () => {
     if (!textPrompt.trim()) {
-      setError("请输入图像描述文字")
+      setError("Please enter image description text")
       return
     }
 
@@ -73,21 +73,21 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || '图像生成失败')
+        throw new Error(data.error || 'Image generation failed')
       }
 
       if (data.success && data.data && data.data.length > 0) {
         const imageUrl = data.data[0].url
         setGeneratedImage(imageUrl)
-        setSuccess("吉卜力风格图像生成成功！")
+        setSuccess("Dreamy Animation image generated successfully!")
         onImageGenerated?.(imageUrl)
       } else {
-        throw new Error('没有收到有效的图像数据')
+        throw new Error('No valid image data received')
       }
 
     } catch (error) {
-      console.error('豆包文字生成图片错误:', error)
-      setError(error instanceof Error ? error.message : '图像生成失败，请稍后重试')
+      console.error('Dreamy Animation text-to-image error:', error)
+      setError(error instanceof Error ? error.message : 'Image generation failed, please try again later')
     } finally {
       setIsLoading(false)
     }
@@ -100,13 +100,13 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
 
     // 验证文件类型
     if (!file.type.startsWith('image/')) {
-      setError('请选择图片文件')
+      setError('Please select an image file')
       return
     }
 
     // 验证文件大小 (10MB)
     if (file.size > 10 * 1024 * 1024) {
-      setError('图片文件不能超过10MB')
+      setError('Image file cannot exceed 10MB')
       return
     }
 
@@ -120,7 +120,7 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
       setUploadedImage(result)
     }
     reader.onerror = () => {
-      setError('图片读取失败')
+      setError('Image reading failed')
     }
     reader.readAsDataURL(file)
   }
@@ -128,12 +128,12 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
   // 图片风格转换
   const handleStyleTransfer = async () => {
     if (!uploadedImage) {
-      setError("请先上传图片")
+      setError("Please upload an image first")
       return
     }
 
     if (!stylePrompt.trim()) {
-      setError("请输入风格转换描述")
+      setError("Please enter style transfer description")
       return
     }
 
@@ -157,21 +157,21 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || '风格转换失败')
+        throw new Error(data.error || 'Style transfer failed')
       }
 
       if (data.success && data.data && data.data.length > 0) {
         const imageUrl = data.data[0].url
         setConvertedImage(imageUrl)
-        setSuccess("吉卜力风格转换成功！")
+        setSuccess("Dreamy Animation style transferred successfully!")
         onImageGenerated?.(imageUrl)
       } else {
-        throw new Error('没有收到有效的转换结果')
+        throw new Error('No valid transfer result received')
       }
 
     } catch (error) {
-      console.error('豆包图片风格转换错误:', error)
-      setError(error instanceof Error ? error.message : '风格转换失败，请稍后重试')
+      console.error('Dreamy Animation style transfer error:', error)
+      setError(error instanceof Error ? error.message : 'Style transfer failed, please try again later')
     } finally {
       setIsLoading(false)
     }
@@ -193,30 +193,30 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
       
       window.URL.revokeObjectURL(url)
     } catch (error) {
-      setError('图片下载失败')
+      setError('Image download failed')
     }
   }
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6">
-      {/* 豆包AI服务标题 */}
+      {/* Dreamy Animation service title */}
       <div className="text-center space-y-2">
         <div className="flex items-center justify-center space-x-2">
           <Sparkles className="h-6 w-6 text-ghibli-warm animate-gentle-bounce" />
           <h2 className="text-2xl font-bold text-ghibli-cream">
-            豆包 AI 吉卜力风格图像生成
+            Dreamy Animation Style Generator
           </h2>
           <Sparkles className="h-6 w-6 text-ghibli-warm animate-gentle-bounce" />
         </div>
         <p className="text-ghibli-sage">
-          使用豆包大模型创建梦幻的吉卜力风格图像，支持文字生成和风格转换
+          Create enchanting animated-style images with magical charm and warmth
         </p>
         <Badge variant="outline" className="bg-ghibli-warm/20 text-ghibli-warm border-ghibli-warm">
-          ByteDance Doubao AI
+          Animation Specialist
         </Badge>
       </div>
 
-      {/* 功能选项卡 */}
+      {/* Function tabs */}
       <div className="flex justify-center space-x-4">
         <Button
           variant={activeTab === 'text-to-image' ? 'default' : 'outline'}
@@ -224,7 +224,7 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
           className="flex items-center space-x-2"
         >
           <ImageIcon className="h-4 w-4" />
-          <span>文字生成图片</span>
+          <span>Text to Image</span>
         </Button>
         <Button
           variant={activeTab === 'style-transfer' ? 'default' : 'outline'}
@@ -232,11 +232,11 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
           className="flex items-center space-x-2"
         >
           <Wand2 className="h-4 w-4" />
-          <span>图片风格转换</span>
+          <span>Style Transfer</span>
         </Button>
       </div>
 
-      {/* 错误和成功消息 */}
+      {/* Error and success messages */}
       {error && (
         <div className="flex items-center space-x-2 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
           <AlertCircle className="h-5 w-5 text-destructive" />
@@ -251,24 +251,24 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
         </div>
       )}
 
-      {/* 文字生成图片 */}
+      {/* Text to image */}
       {activeTab === 'text-to-image' && (
         <Card className="card-ghibli p-6">
           <div className="space-y-4">
             <div>
               <Label htmlFor="text-prompt" className="text-ghibli-cream font-medium">
-                图像描述 (支持中英文)
+                Image Description (Multilingual Support)
               </Label>
               <Textarea
                 id="text-prompt"
-                placeholder="例如：在宁静的森林中，一只白色的龙猫坐在大树下，周围飘着蒲公英..."
+                placeholder="Example: In a peaceful forest, a white totoro sits under a large tree with dandelions floating around..."
                 value={textPrompt}
                 onChange={(e) => setTextPrompt(e.target.value)}
                 className="input-ghibli mt-2 min-h-[100px]"
                 maxLength={1000}
               />
               <div className="mt-1 text-xs text-ghibli-sage">
-                {textPrompt.length}/1000 字符 - 自动优化为吉卜力风格
+                {textPrompt.length}/1000 characters - Auto-optimized for dreamy animation style
               </div>
             </div>
 
@@ -280,32 +280,32 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  生成中...
+                  Generating...
                 </>
               ) : (
                 <>
                   <Sparkles className="mr-2 h-4 w-4" />
-                  生成吉卜力风格图像
+                  Generate Dreamy Animation
                 </>
               )}
             </Button>
 
-            {/* 生成的图片 */}
+            {/* Generated image */}
             {generatedImage && (
               <div className="space-y-4">
                 <div className="relative group">
                   <img
                     src={generatedImage}
-                    alt="生成的图像"
+                    alt="Generated image"
                     className="w-full rounded-lg shadow-ghibli-medium"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100">
                     <Button
-                      onClick={() => downloadImage(generatedImage, `doubao-generated-${Date.now()}.png`)}
+                      onClick={() => downloadImage(generatedImage, `dreamy-animation-${Date.now()}.png`)}
                       className="btn-ghibli-secondary"
                     >
                       <Download className="mr-2 h-4 w-4" />
-                      下载图片
+                      Download Image
                     </Button>
                   </div>
                 </div>
@@ -315,14 +315,14 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
         </Card>
       )}
 
-      {/* 图片风格转换 */}
+      {/* Image style transfer */}
       {activeTab === 'style-transfer' && (
         <Card className="card-ghibli p-6">
           <div className="space-y-4">
-            {/* 图片上传区域 */}
+            {/* Image upload area */}
             <div>
               <Label className="text-ghibli-cream font-medium">
-                上传原始图片
+                Upload Original Image
               </Label>
               <div
                 className="mt-2 border-2 border-dashed border-ghibli-sage/40 rounded-lg p-6 text-center hover:border-ghibli-warm/60 transition-colors cursor-pointer"
@@ -332,7 +332,7 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
                   <div className="space-y-2">
                     <img
                       src={uploadedImage}
-                      alt="上传的图片"
+                      alt="Uploaded image"
                       className="max-h-48 mx-auto rounded-lg"
                     />
                     <p className="text-sm text-ghibli-sage">{uploadedFileName}</p>
@@ -344,15 +344,15 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
                         fileInputRef.current?.click()
                       }}
                     >
-                      更换图片
+                      Change Image
                     </Button>
                   </div>
                 ) : (
                   <div className="space-y-2">
                     <Upload className="h-12 w-12 text-ghibli-sage mx-auto" />
-                    <p className="text-ghibli-cream">点击上传图片</p>
+                    <p className="text-ghibli-cream">Click to upload image</p>
                     <p className="text-sm text-ghibli-sage">
-                      支持 JPEG、PNG、WebP 格式，最大 10MB
+                      Supports JPEG, PNG, WebP formats, max 10MB
                     </p>
                   </div>
                 )}
@@ -366,21 +366,21 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
               />
             </div>
 
-            {/* 风格描述 */}
+            {/* Style description */}
             <div>
               <Label htmlFor="style-prompt" className="text-ghibli-cream font-medium">
-                风格转换描述
+                Style Transfer Description
               </Label>
               <Textarea
                 id="style-prompt"
-                placeholder="例如：转换为吉卜力动画风格，温暖的色调，手绘质感，梦幻氛围..."
+                placeholder="Example: Transform to dreamy animation style, warm tones, hand-drawn texture, magical atmosphere..."
                 value={stylePrompt}
                 onChange={(e) => setStylePrompt(e.target.value)}
                 className="input-ghibli mt-2"
                 maxLength={500}
               />
               <div className="mt-1 text-xs text-ghibli-sage">
-                {stylePrompt.length}/500 字符 - 自动优化为吉卜力风格
+                {stylePrompt.length}/500 characters - Auto-optimized for dreamy animation style
               </div>
             </div>
 
@@ -392,46 +392,46 @@ export function DoubaoGenerator({ onImageGenerated }: DoubaoGeneratorProps) {
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  转换中...
+                  Converting...
                 </>
               ) : (
                 <>
                   <Wand2 className="mr-2 h-4 w-4" />
-                  开始风格转换
+                  Apply Dreamy Style
                 </>
               )}
             </Button>
 
-            {/* 转换后的图片 */}
+            {/* Converted image */}
             {convertedImage && (
               <div className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
-                  {/* 原图 */}
+                  {/* Original image */}
                   <div>
-                    <h4 className="text-sm font-medium text-ghibli-cream mb-2">原始图片</h4>
+                    <h4 className="text-sm font-medium text-ghibli-cream mb-2">Original Image</h4>
                     <img
                       src={uploadedImage || ''}
-                      alt="原始图片"
+                      alt="Original image"
                       className="w-full rounded-lg shadow-ghibli-light"
                     />
                   </div>
                   
-                  {/* 转换后 */}
+                  {/* Converted image */}
                   <div>
-                    <h4 className="text-sm font-medium text-ghibli-cream mb-2">转换后</h4>
+                    <h4 className="text-sm font-medium text-ghibli-cream mb-2">Converted Image</h4>
                     <div className="relative group">
                       <img
                         src={convertedImage}
-                        alt="转换后的图片"
+                        alt="Converted image"
                         className="w-full rounded-lg shadow-ghibli-medium"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100">
                         <Button
-                          onClick={() => downloadImage(convertedImage, `doubao-converted-${Date.now()}.png`)}
+                          onClick={() => downloadImage(convertedImage, `dreamy-animation-${Date.now()}.png`)}
                           className="btn-ghibli-secondary"
                         >
                           <Download className="mr-2 h-4 w-4" />
-                          下载转换图片
+                          Download Converted Image
                         </Button>
                       </div>
                     </div>

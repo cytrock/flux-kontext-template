@@ -1869,7 +1869,7 @@ export function FluxKontextGenerator() {
                 {/* 🔧 生成图像标题 */}
                 <div className="text-center mb-4">
                   <h1 className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-1">
-                    Flux Kontext AI Generator
+                    Professional Studio Generator
                   </h1>
                   <p className="text-base text-yellow-300/80 mb-2">
                     Create and edit professional images with advanced AI technology
@@ -2750,7 +2750,7 @@ export function FluxKontextGenerator() {
           </h2>
           <div className="space-y-6">
             <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-3 text-ghibli-cream">What is Flux Kontext?</h3>
+              <h3 className="text-lg font-semibold mb-3 text-ghibli-cream">What is Professional Studio?</h3>
               <p className="text-ghibli-cream/80">
                 Our platform is a suite of generative flow matching models for image generation and editing. 
                 Unlike traditional text-to-image models, it understands both text and images as input for true in-context generation.

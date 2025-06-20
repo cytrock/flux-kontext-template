@@ -5,26 +5,26 @@ import { EnhancedGenerator } from '@/components/EnhancedGenerator'
 import { generateMultilingualMetadata } from '@/lib/seo/metadata-generator'
 
 export const metadata: Metadata = generateMultilingualMetadata({
-  title: 'AI Image Generator - Flux Kontext & Doubao | Create Professional Ghibli Images',
-  description: 'Generate and edit professional images with Flux Kontext and Doubao AI. Text-to-image generation, Ghibli style conversion, and multi-model image processing.',
+  title: 'AI Style Generator - Professional & Dreamy Art Creation | Create Beautiful Images',
+  description: 'Generate professional and dreamy style images with our dual AI style generator. Professional studio quality and charming animation styles for all your creative needs.',
   keywords: [
     'AI image generator',
-    'Flux Kontext',
-    'Doubao AI',
+    'professional style',
+    'dreamy animation',
     'text to image',
     'image editing',
-    'Ghibli style',
-    'Studio Ghibli art',
+    'animation style',
+    'studio quality art',
     'professional images',
     'image generation ai',
     'ai art creator',
-    'flux ai generator',
-    'doubao image generation',
+    'style generator',
+    'animation image generation',
     'ai image creation',
     'professional ai images',
     'ai powered imaging',
     'style transfer',
-    'ByteDance AI'
+    'creative AI'
   ],
   path: '/generate',
   images: ['/og-generate.png'],
