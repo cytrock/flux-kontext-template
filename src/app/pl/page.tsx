@@ -2,69 +2,97 @@ import type { Metadata } from 'next'
 import { HomeContentSimple } from '@/components/HomeContentSimple'
 
 export const metadata: Metadata = {
-  title: 'Flux Kontext AI - Profesjonalna Platforma Generowania Obrazów AI | Twórz Oszałamiające Obrazy',
-  description: 'Przekształć swoje pomysły w profesjonalne obrazy dzięki naszej najnowocześniejszej technologii AI. Generuj obrazy z tekstu, edytuj istniejące obrazy i przetwarzaj wiele obrazów z mocą Flux Kontext AI.',
+  title: 'Mori Studio AI - Platforma Transformacji AI w Stylu Ghibli | Przekształć Obrazy w Magiczną Sztukę Ghibli',
+  description: 'Użyj Mori Studio AI, aby przekształcić każde zdjęcie w urzekające dzieła sztuki w stylu Ghibli. Twórz nowe sceny Ghibli z opisów tekstowych lub przekształcaj istniejące obrazy w autentyczny styl artystyczny Ghibli.',
+  keywords: 'ghibli styl ai, miyazaki styl artystyczny, anime transformacja stylu, generator obrazów ghibli, mori studio, styl totoro, styl spirited away',
   openGraph: {
-    title: 'Flux Kontext AI - Profesjonalna Platforma Generowania Obrazów AI',
-    url: 'https://fluxkontext.space/pl',
+    title: 'Mori Studio AI - Platforma Transformacji AI w Stylu Ghibli',
+    description: 'Użyj Mori Studio AI, aby przekształcić każde zdjęcie w urzekające dzieła sztuki w stylu Ghibli.',
+    url: 'https://moristudio.space/pl',
+    siteName: 'Mori Studio',
     locale: 'pl_PL',
     type: 'website',
+  },
+  alternates: {
+    canonical: 'https://moristudio.space/pl',
+    languages: {
+      'en': 'https://moristudio.space',
+      'de': 'https://moristudio.space/de',
+      'es': 'https://moristudio.space/es',
+      'fr': 'https://moristudio.space/fr',
+      'it': 'https://moristudio.space/it',
+      'ja': 'https://moristudio.space/ja',
+      'ko': 'https://moristudio.space/ko',
+      'nl': 'https://moristudio.space/nl',
+      'pl': 'https://moristudio.space/pl',
+      'pt': 'https://moristudio.space/pt',
+      'ru': 'https://moristudio.space/ru',
+      'tr': 'https://moristudio.space/tr',
+      'ar': 'https://moristudio.space/ar',
+      'hi': 'https://moristudio.space/hi',
+      'bn': 'https://moristudio.space/bn',
+      'zh': 'https://moristudio.space/zh'
+    }
   }
 }
 
 const plDictionary = {
   hero: {
-    badge: "Profesjonalna Platforma Generowania Obrazów AI",
-    title: "Twórz Oszałamiające Obrazy z",
-    subtitle: "Flux Kontext AI",
-    description: "Przekształć swoje pomysły w profesjonalne obrazy dzięki naszej najnowocześniejszej technologii AI. Generuj obrazy z tekstu, edytuj istniejące obrazy i przetwarzaj wiele obrazów z mocą Flux Kontext AI.",
+    badge: "Profesjonalna Platforma AI w Stylu Ghibli",
+    title: "Przekształć Każdy Obraz w Magiczny Styl Ghibli",
+    subtitle: "Mori Studio AI",
+    description: "Wprowadź magię Studio Ghibli do swoich obrazów z Mori Studio AI. Przekształć istniejące zdjęcia w urzekające dzieła sztuki w stylu Ghibli lub twórz nowe magiczne sceny z opisów tekstowych.",
     cta: {
-      primary: "Zacznij Tworzyć",
+      primary: "Zacznij Tworzyć Magię",
       secondary: "Zobacz Ceny"
     }
   },
   features: {
-    title: "Główne Funkcje Platformy Flux Kontext AI",
-    subtitle: "Nasza Flux Kontext AI łączy najnowocześniejszą technologię, aby dostarczyć profesjonalne generowanie i edycję obrazów w jednej płynnej platformie.",
+    title: "Główne Funkcje Platformy Mori Studio AI",
+    subtitle: "Nasze Mori Studio AI łączy najnowocześniejszą technologię z artystyczną magią Studio Ghibli, aby dostarczyć profesjonalną transformację i generowanie obrazów w jednej płynnej platformie.",
     items: [
       {
-        title: "Generowanie Tekst-Obraz",
-        description: "Przekształć swoje opisy tekstowe w oszałamiające, wysokiej jakości obrazy dzięki zaawansowanej technologii AI."
+        title: "Transformacja Stylu Ghibli",
+        description: "Przekształć każde zdjęcie w piękne dzieła sztuki w stylu Ghibli z autentycznymi projektami postaci i magiczną atmosferą."
       },
       {
-        title: "Profesjonalna Edycja Obrazów",
-        description: "Edytuj istniejące obrazy za pomocą instrukcji w języku naturalnym dla precyzyjnych modyfikacji."
+        title: "Generowanie Tekst-Ghibli",
+        description: "Twórz nowe obrazy w stylu Ghibli z opisów tekstowych z autentyczną estetyką Studio Ghibli i elementami narracyjnymi."
       },
       {
-        title: "Przetwarzanie Wielu Obrazów",
-        description: "Przetwarzaj wiele obrazów jednocześnie z konsekwentnym stylem i jakością."
+        title: "Spójność Postaci",
+        description: "Zachowaj spójne projekty postaci w wielu obrazach dla spójnych narracji w stylu Ghibli."
       }
     ]
   },
   faq: {
     title: "Często Zadawane Pytania",
-    subtitle: "Znajdź odpowiedzi na często zadawane pytania dotyczące naszej platformy Flux Kontext AI i jej potężnych funkcji generowania obrazów.",
+    subtitle: "Znajdź odpowiedzi na często zadawane pytania dotyczące naszej platformy Mori Studio AI i jej magicznych funkcji transformacji obrazów w stylu Ghibli.",
     items: [
       {
-        question: "Czym jest Flux Kontext AI?",
-        answer: "Flux Kontext AI to zaawansowana platforma generowania obrazów, która wykorzystuje najnowocześniejszą sztuczną inteligencję do tworzenia oszałamiających obrazów z opisów tekstowych, edycji istniejących obrazów i przetwarzania wielu obrazów jednocześnie."
+        question: "Czym jest Mori Studio AI?",
+        answer: "Mori Studio AI to profesjonalna platforma transformacji obrazów, która wykorzystuje zaawansowaną sztuczną inteligencję do przekształcania każdego zdjęcia w autentyczne dzieła sztuki w stylu Studio Ghibli lub tworzenia nowych obrazów w stylu Ghibli z opisów tekstowych."
+      },
+      {
+        question: "Jak działa transformacja stylu Ghibli?",
+        answer: "Nasza AI analizuje obraz wejściowy i stosuje ikoniczne elementy artystyczne Studio Ghibli: miękkie tekstury, magiczne oświetlenie, zasady projektowania postaci i naturalne efekty atmosferyczne, aby tworzyć autentyczne dzieła sztuki w stylu Ghibli."
       }
     ]
   },
   cta: {
-    title: "Gotowy na Tworzenie Niesamowitych Obrazów?",
-    subtitle: "Dołącz do tysięcy twórców, którzy używają Flux Kontext AI, aby ożywić swoje pomysły.",
+    title: "Gotowy na Tworzenie Magii Ghibli?",
+    subtitle: "Dołącz do tysięcy fanów Ghibli, którzy używają Mori Studio AI do ożywienia swoich kreatywnych pomysłów.",
     button: "Zacznij Teraz"
   },
   footer: {
     brand: {
-      name: "Flux Kontext",
-      description: "Profesjonalna platforma generowania obrazów AI.",
-      copyright: "© 2025 Flux Kontext. Wszelkie prawa zastrzeżone."
+      name: "Mori Studio",
+      description: "Profesjonalna platforma transformacji AI w stylu Ghibli. Przekształcaj zdjęcia w magiczne dzieła sztuki Ghibli, twórz nowe urzekające sceny i wprowadzaj magię Studio Ghibli do swoich kreatywnych projektów.",
+      copyright: "© 2025 Mori Studio. Wszelkie prawa zastrzeżone."
     },
     contact: {
       title: "Kontakt",
-      email: "support@fluxkontext.space"
+      email: "support@moristudio.space"
     },
     legal: {
       title: "Prawne",
@@ -76,7 +104,7 @@ const plDictionary = {
       title: "Języki"
     },
     social: {
-      builtWith: "Zbudowane z ❤️ dla twórców na całym świecie",
+      builtWith: "Zbudowane z ❤️ dla fanów Ghibli na całym świecie",
       followUs: "Śledź nas na"
     }
   }
