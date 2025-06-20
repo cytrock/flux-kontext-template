@@ -2,21 +2,21 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Refund Policy | Flux Kontext',
-  description: 'Refund Policy for Flux Kontext AI image generation platform. Learn about our refund terms for subscription plans and credit purchases.',
-  keywords: ['refund policy', 'flux kontext refund', 'ai image generation refund', 'flux ai refund'],
+  title: 'Refund Policy | Mori Studio',
+  description: 'Refund Policy for Mori Studio AI Ghibli-style transformation platform. Learn about our refund conditions and process for our professional Ghibli-style AI transformation service.',
+  keywords: ['refund policy', 'mori studio refund', 'ghibli ai refund', 'ghibli style transformation refund'],
   alternates: {
     canonical: '/refund',
   },
   openGraph: {
-    title: 'Refund Policy | Flux Kontext',
-    description: 'Refund Policy for Flux Kontext AI image generation platform.',
+    title: 'Refund Policy | Mori Studio',
+    description: 'Refund Policy for Mori Studio AI Ghibli-style transformation platform.',
     url: '/refund',
   },
   twitter: {
     card: 'summary',
-    title: 'Refund Policy | Flux Kontext',
-    description: 'Refund Policy for Flux Kontext AI image generation platform',
+    title: 'Refund Policy | Mori Studio',
+    description: 'Refund Policy for Mori Studio AI Ghibli-style transformation platform',
   },
 }
 
@@ -28,11 +28,11 @@ export default function RefundPage() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-8">
             <Link href="/" className="text-xl md:text-2xl font-bold text-primary">
-              Flux Kontext
+              Mori Studio
             </Link>
             <nav className="hidden md:flex items-center space-x-6">
               <Link href="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
-              <Link href="/generate" className="text-foreground hover:text-primary transition-colors">Generate</Link>
+              <Link href="/generate" className="text-foreground hover:text-primary transition-colors">Transform</Link>
               <Link href="/pricing" className="text-foreground hover:text-primary transition-colors">Pricing</Link>
             </nav>
           </div>
@@ -51,84 +51,101 @@ export default function RefundPage() {
             </div>
 
             <p className="mb-8">
-              At Flux Kontext, we aim to ensure complete satisfaction with our AI image generation services. This policy outlines our terms and conditions for subscription plan changes and refunds.
+              At Mori Studio, we strive to provide exceptional Ghibli-style AI transformation services to all our users. We understand that circumstances may arise where a refund is necessary. This refund policy outlines the conditions under which refunds may be issued for our Ghibli-style image transformation services.
             </p>
+
+            <section className="mb-8">
+              <h2 className="text-2xl font-semibold mb-4">General Refund Conditions</h2>
+              <p className="mb-4">
+                Refunds may be issued under the following circumstances:
+              </p>
+              <ul className="list-disc pl-6 mb-4">
+                <li className="mb-2">
+                  <strong>Technical Issues:</strong> If our Ghibli-style AI transformation platform experiences prolonged technical issues that prevent you from using the service.
+                </li>
+                <li className="mb-2">
+                  <strong>Service Unavailability:</strong> If our Ghibli-style transformation service becomes unavailable for an extended period due to circumstances within our control.
+                </li>
+                <li className="mb-2">
+                  <strong>Billing Errors:</strong> If you have been charged incorrectly for our Ghibli-style AI transformation services.
+                </li>
+                <li className="mb-2">
+                  <strong>Unsatisfactory Service:</strong> If you are genuinely unsatisfied with the quality of our Ghibli-style transformations within the first 7 days of purchase.
+                </li>
+              </ul>
+            </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold mb-4">Subscription Refunds</h2>
               <p className="mb-4">
-                We offer full refunds for AI image generation subscription purchases under the following conditions:
+                For monthly or annual subscriptions to our Ghibli-style AI transformation platform:
               </p>
               <ul className="list-disc pl-6 mb-4">
-                <li className="mb-2">Request must be made within 3 days of purchase</li>
-                <li className="mb-2">Usage must be limited to 200 credits or fewer for AI image generation</li>
-                <li className="mb-2">Processing fees will be deducted from the refund amount</li>
+                <li className="mb-2">Refunds are prorated based on the unused portion of your subscription period.</li>
+                <li className="mb-2">Subscription refunds must be requested within 7 days of the billing date.</li>
+                <li className="mb-2">Once a refund is processed, your access to premium Ghibli-style transformation features will be immediately revoked.</li>
+                <li className="mb-2">Refunds for annual subscriptions are available within the first 30 days of purchase.</li>
               </ul>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Credit Purchases</h2>
+              <h2 className="text-2xl font-semibold mb-4">Credit Purchase Refunds</h2>
               <p className="mb-4">
-                Credit purchases for our AI image generation platform are non-refundable. Please carefully consider your credit needs before making a purchase, as we cannot provide refunds for any credits once purchased, regardless of usage status.
-              </p>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Subscription Plan Changes</h2>
-              <p className="mb-4">
-                If you have accidentally purchased an annual subscription plan instead of a monthly plan for our AI image generation service, we offer the following accommodation:
+                For credit purchases used for individual Ghibli-style transformations:
               </p>
               <ul className="list-disc pl-6 mb-4">
-                <li className="mb-2">We will convert your annual plan to a monthly plan</li>
-                <li className="mb-2">One month of subscription fee plus processing fees will be deducted</li>
-                <li className="mb-2">The remaining balance will be refunded to your original payment method</li>
+                <li className="mb-2">Unused credits may be refunded within 30 days of purchase.</li>
+                <li className="mb-2">Partially used credit packages may be refunded for the unused portion only.</li>
+                <li className="mb-2">Credits that have been fully consumed cannot be refunded unless there were technical issues with the Ghibli-style transformations.</li>
               </ul>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Non-Refundable Items</h2>
+              <h2 className="text-2xl font-semibold mb-4">Non-Refundable Circumstances</h2>
               <p className="mb-4">
-                The following items are not eligible for refunds under any circumstances:
+                Refunds will not be issued in the following circumstances:
               </p>
               <ul className="list-disc pl-6 mb-4">
-                <li className="mb-2">Credit purchases for AI image generation</li>
-                <li className="mb-2">Subscription time that has already passed</li>
-                <li className="mb-2">Processing fees</li>
-                <li className="mb-2">Subscriptions beyond the 3-day window</li>
-                <li className="mb-2">Subscriptions with more than 200 credits used for AI image generation</li>
+                <li className="mb-2">You have violated our terms of service while using the Ghibli-style transformation platform.</li>
+                <li className="mb-2">You have used the majority of your credits or subscription benefits for Ghibli-style transformations.</li>
+                <li className="mb-2">You request a refund after the specified refund period has expired.</li>
+                <li className="mb-2">You are unsatisfied with results that meet our stated quality standards for Ghibli-style transformations.</li>
+                <li className="mb-2">Technical issues on your end prevent you from using our Ghibli-style AI transformation service.</li>
               </ul>
             </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold mb-4">Refund Process</h2>
               <p className="mb-4">
-                To request a refund for eligible AI image generation subscription items, please contact our support team with the following information:
+                To request a refund for our Ghibli-style AI transformation services:
+              </p>
+              <ol className="list-decimal pl-6 mb-4">
+                <li className="mb-2">Contact our support team at support@moristudio.space with your refund request.</li>
+                <li className="mb-2">Provide your account information and the reason for the refund request.</li>
+                <li className="mb-2">Include any relevant documentation or screenshots related to your Ghibli-style transformation experience.</li>
+                <li className="mb-2">Our team will review your request within 3-5 business days.</li>
+                <li className="mb-2">If approved, refunds will be processed within 7-10 business days to your original payment method.</li>
+              </ol>
+              <p className="mb-4">
+                Please note that processing times may vary depending on your payment provider and bank.
+              </p>
+            </section>
+
+            <section className="mb-8">
+              <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
+              <p className="mb-4">
+                If you have any questions about our refund policy or need to request a refund for our Ghibli-style AI transformation services, please contact us:
               </p>
               <ul className="list-disc pl-6 mb-4">
-                <li className="mb-2">Your account email</li>
-                <li className="mb-2">Order number or transaction ID</li>
-                <li className="mb-2">Reason for the refund request</li>
-                <li className="mb-2">Date of purchase</li>
+                <li className="mb-2">Email: support@moristudio.space</li>
+                <li className="mb-2">Response time: Within 24 hours during business days</li>
               </ul>
-              <p className="mb-4">
-                Refund requests are typically processed within 5-7 business days. The actual time for the refund to appear in your account may vary depending on your payment method and financial institution.
-              </p>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Changes to This Refund Policy</h2>
+              <h2 className="text-2xl font-semibold mb-4">Policy Updates</h2>
               <p className="mb-4">
-                We reserve the right to update our Refund Policy to reflect changes in our practices or for other operational, legal, or regulatory reasons. We encourage you to review this policy periodically for any updates.
-              </p>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
-              <p className="mb-4">
-                If you have any questions about our refund policy or need to request a refund for our AI image generation services, please contact our support team at support@fluxkontext.space.
-              </p>
-              <p className="mb-4">
-                By using our AI image generation services, you acknowledge that you have read and understand this Refund Policy.
+                We reserve the right to update this refund policy at any time. Any changes will be posted on this page with an updated revision date. Continued use of our Ghibli-style AI transformation service after any changes constitutes acceptance of the new policy.
               </p>
             </section>
           </div>
@@ -139,12 +156,12 @@ export default function RefundPage() {
       <footer className="bg-card border-t border-border">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
-            <div className="text-xl font-bold text-primary mb-4">Flux Kontext</div>
+            <div className="text-xl font-bold text-primary mb-4">Mori Studio</div>
             <p className="text-muted-foreground text-sm mb-4">
-              Professional AI image generation platform. Create stunning images with advanced AI technology.
+              Professional Ghibli-style AI transformation platform. Transform photos into magical Ghibli artwork and create enchanting scenes.
             </p>
             <div className="text-sm text-muted-foreground">
-              © 2025 Flux Kontext. All rights reserved.
+              © 2025 Mori Studio. All rights reserved.
             </div>
           </div>
         </div>
