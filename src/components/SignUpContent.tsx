@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { CheckCircle2, XCircle, Eye, EyeOff } from 'lucide-react'
+import { CheckCircle2, XCircle, Eye, EyeOff, Home } from 'lucide-react'
 
 export function SignUpContent() {
   const [name, setName] = useState("")
@@ -171,6 +171,17 @@ export function SignUpContent() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
+      {/* 返回首页按钮 */}
+      <div className="absolute top-4 left-4">
+        <Link
+          href="/"
+          className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-ghibli-cream bg-ghibli-green hover:bg-ghibli-green/80 transition-all duration-200"
+        >
+          <Home className="w-4 h-4 mr-2" />
+          Back to Home
+        </Link>
+      </div>
+
       <div className="max-w-md w-full space-y-6">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
@@ -276,7 +287,7 @@ export function SignUpContent() {
         </div>
 
         <div className="text-center text-sm">
-          <Link href="/auth/signin" className="text-primary hover:underline">
+          <Link href="/auth/signin" className="text-ghibli-cream hover:text-ghibli-cream/80 underline">
             Already have an account? Sign In
           </Link>
         </div>

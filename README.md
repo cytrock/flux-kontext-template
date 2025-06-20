@@ -108,3 +108,21 @@
 
 #### 🎨 全新配色方案实施
 - **主背景色**: 深牛油果绿 `
+
+# Flux Kontext Template
+
+## 最新更新 (Latest Updates)
+
+### 2024-12-22
+
+#### 用户界面优化 - 登录/注册页面文本颜色修复
+- **修复问题**: Sign in 和 Sign up 页面文本颜色过浅，用户难以阅读
+- **具体改进**:
+  - SignInContent: "Sign up and get 100 free credits!" 文本颜色改为白色
+  - SignInContent: "Forgot your password?" 链接颜色改为白色
+  - SignUpContent: "Already have an account? Sign In" 链接颜色改为白色
+  - 两个页面都添加了返回首页按钮（左上角）
+- **技术实现**: 统一使用 `text-ghibli-cream` 类确保白色文本的清晰可见性
+- **用户体验**: 大幅提升登录注册页面的可读性和导航便利性
+
+#### 视觉优化修复 - `/generate` 页面文本对比度
