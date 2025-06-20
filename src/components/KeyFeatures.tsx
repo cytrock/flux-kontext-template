@@ -45,10 +45,10 @@ export function KeyFeatures() {
     <section className="py-16 px-4">
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-ghibli-cream">
             {home.features.title}
           </h2>
-          <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+          <p className="text-ghibli-cream/90 text-lg max-w-3xl mx-auto">
             {home.features.description}
           </p>
         </div>
@@ -71,10 +71,10 @@ export function KeyFeatures() {
                       height="24"
                     />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">
+                  <h3 className="text-xl font-semibold mb-3 text-ghibli-cream group-hover:text-primary transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-ghibli-cream/80 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>

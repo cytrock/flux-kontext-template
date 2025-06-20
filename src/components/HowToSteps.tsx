@@ -45,7 +45,7 @@ export function HowToSteps() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
             {home.howTo.alternativeTitle}
           </h2>
-          <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+          <p className="text-ghibli-cream/90 text-lg max-w-3xl mx-auto">
             {home.howTo.alternativeDescription}
           </p>
         </div>
@@ -80,10 +80,10 @@ export function HowToSteps() {
                 )}
               </div>
 
-              <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">
+              <h3 className="text-xl font-semibold mb-3 text-ghibli-cream group-hover:text-primary transition-colors">
                 {step.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-ghibli-cream/80 leading-relaxed">
                 {step.description}
               </p>
             </div>
