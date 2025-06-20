@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Heart, Download, Eye, Calendar, Clock, Palette, Sparkles, Filter, Grid, List, Star, Image as ImageIcon, Zap } from 'lucide-react'
+import { Heart, Download, Eye, Calendar, Clock, Palette, Sparkles, Filter, Grid, List, Star, Image as ImageIcon, Zap, ExternalLink } from 'lucide-react'
 
 interface Generation {
   id: string
@@ -16,6 +16,7 @@ interface Generation {
   generation_type: string
   studio_type: string
   input_image_count: number
+  input_image_url?: string
   image_urls: string[]
   style_tags: string[]
   content_tags: string[]
@@ -103,6 +104,26 @@ export function MemoryGardenContent() {
     }
   }
 
+  const downloadImage = async (imageUrl: string, prompt: string) => {
+    try {
+      const response = await fetch(imageUrl)
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.style.display = 'none'
+      a.href = url
+      // Generate filename from prompt (first 30 chars) + timestamp
+      const filename = `${prompt.substring(0, 30).replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}.png`
+      a.download = filename
+      document.body.appendChild(a)
+      a.click()
+      window.URL.revokeObjectURL(url)
+      document.body.removeChild(a)
+    } catch (error) {
+      console.error('Failed to download image:', error)
+    }
+  }
+
   const filteredGenerations = generations.filter(gen => {
     const matchesFilter = !filter || 
       gen.prompt.toLowerCase().includes(filter.toLowerCase()) ||
@@ -161,6 +182,11 @@ export function MemoryGardenContent() {
     return <Zap className="w-4 h-4" />
   }
 
+  const getGenerationTypeText = (type: string) => {
+    if (type === 'image-to-image') return 'Image to Image'
+    return 'Text to Image'
+  }
+
   const allStyleTags = Array.from(new Set(generations.flatMap(gen => gen.style_tags)))
 
   if (loading) {
@@ -189,31 +215,23 @@ export function MemoryGardenContent() {
 
       {/* Statistics Overview */}
       {stats && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card className="bg-white/10 border-white/20">
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-white">{stats.total_generations}</div>
-              <div className="text-sm text-white font-medium">Total Creations</div>
+            <CardContent className="p-6 text-center">
+              <div className="text-3xl font-bold text-white">{stats.total_generations}</div>
+              <div className="text-base text-white font-medium">Total Creations</div>
             </CardContent>
           </Card>
           <Card className="bg-white/10 border-white/20">
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-white">{stats.total_credits_consumed}</div>
-              <div className="text-sm text-white font-medium">Credits Used</div>
+            <CardContent className="p-6 text-center">
+              <div className="text-3xl font-bold text-white">{stats.total_credits_consumed}</div>
+              <div className="text-base text-white font-medium">Credits Used</div>
             </CardContent>
           </Card>
           <Card className="bg-white/10 border-white/20">
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-white">{stats.favorite_count}</div>
-              <div className="text-sm text-white font-medium">Favorites</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/10 border-white/20">
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-white">
-                {Object.keys(stats.models_used || {}).length}
-              </div>
-              <div className="text-sm text-white font-medium">Models Used</div>
+            <CardContent className="p-6 text-center">
+              <div className="text-3xl font-bold text-white">{stats.favorite_count}</div>
+              <div className="text-base text-white font-medium">Favorites</div>
             </CardContent>
           </Card>
         </div>
@@ -335,6 +353,20 @@ export function MemoryGardenContent() {
                         className="object-cover"
                       />
                     )}
+                    {/* Show input image for image-to-image generations */}
+                    {generation.generation_type === 'image-to-image' && generation.input_image_url && (
+                      <div className="absolute bottom-2 right-2 w-16 h-16 rounded border-2 border-white/80 overflow-hidden bg-white/10 backdrop-blur-sm">
+                        <Image
+                          src={generation.input_image_url}
+                          alt="Input image"
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+                          <span className="text-xs text-white/80 bg-black/40 px-1 py-0.5 rounded">Input</span>
+                        </div>
+                      </div>
+                    )}
                     <button
                       onClick={() => toggleFavorite(generation.id)}
                       className="absolute top-2 right-2 p-2 bg-white/90 hover:bg-white rounded-full transition-colors shadow-sm"
@@ -344,10 +376,10 @@ export function MemoryGardenContent() {
                       />
                     </button>
                     <div className="absolute top-2 left-2 flex gap-1">
-                      <Badge className="bg-white/90 text-gray-800 border-0">
+                      <Badge className="bg-white/90 text-gray-800 border-0 text-xs">
                         {getGenerationTypeIcon(generation.generation_type)}
-                        <span className="ml-1 text-xs">
-                          {generation.generation_type === 'image-to-image' ? 'I2I' : 'T2I'}
+                        <span className="ml-1">
+                          {getGenerationTypeText(generation.generation_type)}
                         </span>
                       </Badge>
                       {generation.input_image_count > 0 && (
@@ -383,7 +415,13 @@ export function MemoryGardenContent() {
                     </div>
                     <div className="flex items-center justify-between text-xs text-white/80">
                       <span>{formatDate(generation.created_at)}</span>
-                      <span>{formatDuration(generation.generation_time_ms)}</span>
+                      <button
+                        onClick={() => downloadImage(generation.image_urls[0], generation.prompt)}
+                        className="p-2 hover:bg-white/20 rounded transition-colors"
+                        title="Download image"
+                      >
+                        <Download className="w-4 h-4" />
+                      </button>
                     </div>
                   </CardContent>
                 </>
@@ -409,9 +447,25 @@ export function MemoryGardenContent() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between mb-2">
-                          <p className="text-sm text-white font-medium line-clamp-2 flex-1">
-                            {generation.prompt}
-                          </p>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm text-white font-medium line-clamp-2">
+                              {generation.prompt}
+                            </p>
+                            {/* Show input image info for image-to-image generations */}
+                            {generation.generation_type === 'image-to-image' && generation.input_image_url && (
+                              <div className="flex items-center gap-2 mt-1">
+                                <div className="w-8 h-8 relative rounded overflow-hidden border border-white/30">
+                                  <Image
+                                    src={generation.input_image_url}
+                                    alt="Input image"
+                                    fill
+                                    className="object-cover"
+                                  />
+                                </div>
+                                <span className="text-xs text-white/60">Input image used</span>
+                              </div>
+                            )}
+                          </div>
                           <button
                             onClick={() => toggleFavorite(generation.id)}
                             className="ml-2 p-1"
@@ -425,11 +479,11 @@ export function MemoryGardenContent() {
                           <Badge className={getModelColor(generation.model)}>
                             {generation.model}
                           </Badge>
+                          <Badge className="bg-white/20 text-white border-white/30 text-xs">
+                            {getGenerationTypeText(generation.generation_type)}
+                          </Badge>
                           <span className="text-xs text-white font-medium">
                             {generation.credits_used} credits
-                          </span>
-                          <span className="text-xs text-white/80">
-                            {formatDuration(generation.generation_time_ms)}
                           </span>
                           {generation.input_image_count > 0 && (
                             <Badge className="text-xs text-white border-white/30 bg-white/20">
@@ -450,9 +504,18 @@ export function MemoryGardenContent() {
                               </span>
                             )}
                           </div>
-                          <span className="text-xs text-white/80">
-                            {formatDate(generation.created_at)}
-                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs text-white/80">
+                              {formatDate(generation.created_at)}
+                            </span>
+                            <button
+                              onClick={() => downloadImage(generation.image_urls[0], generation.prompt)}
+                              className="p-2 hover:bg-white/20 rounded transition-colors"
+                              title="Download image"
+                            >
+                              <Download className="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>

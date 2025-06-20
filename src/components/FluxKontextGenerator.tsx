@@ -142,6 +142,10 @@ export function FluxKontextGenerator() {
     action: string
   } | null>(null)
   
+  // 错误弹框状态
+  const [showErrorModal, setShowErrorModal] = useState(false)
+  const [errorModalMessage, setErrorModalMessage] = useState('')
+  
   // 生成图像的倒计时
   const [countdown, setCountdown] = useState(0)
   const [estimatedTime, setEstimatedTime] = useState(6) // 预估6秒
@@ -373,6 +377,8 @@ export function FluxKontextGenerator() {
       setUploadedFiles(filesToProcess)
       setUploadedImages(previewUrls)
       setError("")
+      setShowErrorModal(false)
+      setErrorModalMessage('')
       
       console.log(`🔧 Professional Studio: Added ${filesToProcess.length} file for editing (single image mode)`)
       
@@ -461,6 +467,8 @@ export function FluxKontextGenerator() {
         return newImages
       })
       setError("")
+      setShowErrorModal(false)
+      setErrorModalMessage('')
       
       console.log(`?? Dropped ${files.length} files for local preview`)
       
@@ -556,6 +564,8 @@ export function FluxKontextGenerator() {
       setUploadedFiles(prev => [...prev, ...files])
       setUploadedImages(prev => [...prev, ...previewUrls])
       setError("")
+      setShowErrorModal(false)
+      setErrorModalMessage('')
       
       console.log(`?? Pasted ${files.length} files for local preview`)
       
@@ -739,7 +749,8 @@ export function FluxKontextGenerator() {
     // 如果需要验证但没有token或未验证，需要完成验证
     if (!isTurnstileVerified || !turnstileToken) {
       console.log('❌ Turnstile verification required but not completed')
-      setError("Please complete human verification to continue")
+      setErrorModalMessage("Please complete human verification to continue")
+      setShowErrorModal(true)
       return false
     }
 
@@ -801,7 +812,8 @@ export function FluxKontextGenerator() {
               (turnstileRef.current as any).reset()
             }
             
-            setError("Human verification failed, please complete verification again and try")
+            setErrorModalMessage("Human verification failed, please complete verification again and try")
+            setShowErrorModal(true)
             return
           }
           
@@ -901,6 +913,8 @@ export function FluxKontextGenerator() {
     try {
       setIsGenerating(true)
       setError("")
+      setShowErrorModal(false)
+      setErrorModalMessage('')
       setLastRequest(request) // 保存请求
 
       // 🔧 添加详细的请求开始日志
@@ -1091,7 +1105,8 @@ export function FluxKontextGenerator() {
               (turnstileRef.current as any).reset()
             }
             
-            setError("Human verification failed, please complete verification again and try")
+            setErrorModalMessage("Human verification failed, please complete verification again and try")
+            setShowErrorModal(true)
             return
           }
           
@@ -1404,7 +1419,13 @@ export function FluxKontextGenerator() {
       }
       
       console.log('📝 用户友好错误信息:', userFriendlyError)
-      setError(userFriendlyError)
+      if (userFriendlyError.includes('Insufficient credits')) {
+        // Use the existing credit modal for credit errors
+        // This is already handled in the 402 response section
+      } else {
+        setErrorModalMessage(userFriendlyError)
+        setShowErrorModal(true)
+      }
       
       // 🔧 记录重试次数
       if (error.message.includes('verification') || error.message.includes('Verification')) {
@@ -1476,7 +1497,8 @@ export function FluxKontextGenerator() {
   // 🔧 处理文本生成图像
   const handleTextToImage = useCallback(async () => {
     if (!textPrompt.trim()) {
-      setError("Please enter a prompt")
+      setErrorModalMessage("Please enter a prompt")
+      setShowErrorModal(true)
       return
     }
 
@@ -1535,7 +1557,8 @@ export function FluxKontextGenerator() {
     const hasBlobUrls = uploadedImages.some(url => url.startsWith('blob:'))
     if (hasBlobUrls) {
       console.log('? Detected blob URLs, waiting for R2 conversion...')
-      setError("Please wait for image upload to complete before editing")
+      setErrorModalMessage("Please wait for image upload to complete before editing")
+      setShowErrorModal(true)
       return
     }
 
@@ -1543,7 +1566,8 @@ export function FluxKontextGenerator() {
     const invalidUrls = uploadedImages.filter(url => !url.startsWith('http'))
     if (invalidUrls.length > 0) {
       console.error('? Invalid URLs detected:', invalidUrls)
-      setError("Some images are not properly uploaded. Please re-upload and try again.")
+      setErrorModalMessage("Some images are not properly uploaded. Please re-upload and try again.")
+      setShowErrorModal(true)
       return
     }
 
@@ -1744,7 +1768,7 @@ export function FluxKontextGenerator() {
       const editingModels = [
         {
           value: 'pro',
-          label: '⚡ Kontext [pro] -- Editing',
+          label: '⚡ Mori Studio [pro] -- Editing',
           description: 'Fast iterative editing, maintains character consistency',
           credits: 16, // 🔧 ¼ƷѣPROϵ16
           speed: 'Fast (6-10s)',
@@ -1755,7 +1779,7 @@ export function FluxKontextGenerator() {
         },
         {
           value: 'max',
-          label: '🚀 Kontext [max] -- Editing',
+          label: '🚀 Mori Studio [max] -- Editing',
           description: 'Maximum performance with improved prompt adherence',
           credits: 32, // 🔧 ¼ƷѣMAXϵ32
           speed: 'Slower (10-15s)',
@@ -1770,7 +1794,7 @@ export function FluxKontextGenerator() {
       if (isMultiImage) {
         editingModels.push({
           value: 'max-multi',
-          label: '🔥 Kontext [max] -- Multi-Image Editing (Experimental)',
+          label: '🔥 Mori Studio [max] -- Multi-Image Editing (Experimental)',
           description: 'Experimental multi-image editing with character consistency',
           credits: 48, // 🔧 ͼ༭48֣32+16⣩
           speed: 'Slow (15-25s)',
@@ -1787,7 +1811,7 @@ export function FluxKontextGenerator() {
       return [
         {
           value: 'pro',
-          label: '⚡ Kontext [pro] -- Text to Image',
+          label: '⚡ Mori Studio [pro] -- Text to Image',
           description: 'Fast generation with good quality',
           credits: 16, // 🔧 ¼ƷѣPROϵ16
           speed: 'Fast (6-10s)',
@@ -1798,7 +1822,7 @@ export function FluxKontextGenerator() {
         },
         {
           value: 'max',
-          label: '🚀 Kontext [max] -- Text to Image',
+          label: '🚀 Mori Studio [max] -- Text to Image',
           description: 'Best quality with enhanced prompt adherence and typography',
           credits: 32, // 🔧 ¼ƷѣMAXϵ32
           speed: 'Slower (10-15s)',
@@ -1809,7 +1833,7 @@ export function FluxKontextGenerator() {
         },
         {
           value: 'schnell',
-          label: '⚡ Flux Schnell -- Ultra Fast',
+          label: '⚡ Mori -- Ultra Fast',
           description: 'Ultra-fast generation in 1-4 steps',
           credits: 8,
           speed: 'Ultra Fast (2-4s)',
@@ -1880,44 +1904,6 @@ export function FluxKontextGenerator() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      {/* 🔧 错误提示 */}
-      {error && (
-        <div className="mb-6 p-4 bg-destructive/10 border border-destructive/20 rounded-lg flex items-center gap-2">
-          <AlertCircle className="h-5 w-5 text-destructive flex-shrink-0" />
-          <span className="text-destructive flex-1">{error}</span>
-          <div className="flex gap-2">
-            {error.includes("Upgrade required") && (
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => router.push('/pricing')}
-                className="ml-2"
-              >
-                <Crown className="h-3 w-3 mr-1" />
-                Upgrade Now
-              </Button>
-            )}
-            {lastRequest && retryCount > 0 && (
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={handleRetry}
-                disabled={isGenerating}
-              >
-                <RefreshCw className="h-4 w-4 mr-1" />
-                Retry
-              </Button>
-            )}
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={() => setError("")}
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      )}
 
       {/* 🔧 生成图像部分 */}
       <section className="flex flex-col py-2">
@@ -2286,15 +2272,16 @@ export function FluxKontextGenerator() {
                       />
                       {uploadedImages.length > 0 ? (
                         <div className="space-y-2">
-                          <div className="grid grid-cols-2 gap-1">
-                            {uploadedImages.slice(0, 4).map((url, index) => (
-                              <SmartImagePreview
-                                key={index}
-                                url={url}
-                                alt={`Reference ${index + 1}`}
-                                index={index}
-                                onRemove={() => removeUploadedImage(index)}
-                              />
+                          <div className="space-y-2">
+                            {uploadedImages.slice(0, 1).map((url, index) => (
+                              <div key={index} className="w-full">
+                                <SmartImagePreview
+                                  url={url}
+                                  alt={`Reference ${index + 1}`}
+                                  index={index}
+                                  onRemove={() => removeUploadedImage(index)}
+                                />
+                              </div>
                             ))}
                           </div>
                           {/* 🔧 Professional Studio模式下隐藏Add More按钮，只允许一张图片 */}
@@ -3056,6 +3043,53 @@ export function FluxKontextGenerator() {
                   Close
                 </Button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* 错误弹框 */}
+      {showErrorModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-[#667B50] border border-ghibli-cream/20 rounded-lg p-6 max-w-md w-full mx-auto shadow-xl">
+            {/* 标题 */}
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center">
+                <AlertCircle className="w-4 h-4 text-red-400" />
+              </div>
+              <h3 className="text-lg font-semibold text-ghibli-cream">Error</h3>
+            </div>
+            
+            {/* 内容 */}
+            <div className="text-ghibli-cream/90 mb-6">
+              <p>{errorModalMessage}</p>
+            </div>
+            
+            {/* 按钮 */}
+            <div className="flex gap-3">
+              {lastRequest && retryCount > 0 && (
+                <Button 
+                  variant="outline" 
+                  onClick={() => {
+                    setShowErrorModal(false)
+                    handleRetry()
+                  }}
+                  disabled={isGenerating}
+                  className="flex-1 border-ghibli-cream/30 text-ghibli-cream hover:bg-ghibli-cream/10"
+                >
+                  <RefreshCw className="w-4 h-4 mr-2" />
+                  Retry
+                </Button>
+              )}
+              <Button 
+                onClick={() => {
+                  setShowErrorModal(false)
+                  setErrorModalMessage('')
+                }}
+                className="flex-1 bg-yellow-400 text-[#667B50] hover:bg-yellow-300 font-semibold"
+              >
+                OK
+              </Button>
             </div>
           </div>
         </div>

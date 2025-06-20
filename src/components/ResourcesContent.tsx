@@ -23,11 +23,11 @@ const resourceCategories = [
   {
     id: "tutorials",
     title: "Tutorials & Guides",
-    description: "Learn how to master Flux Kontext AI image generation",
+    description: "Learn how to master Mori Studio AI image generation",
     icon: BookOpen,
     resources: [
       {
-        title: "Getting Started with Flux Kontext",
+        title: "Getting Started with Mori Studio",
         description: "Complete beginner's guide to AI image generation",
         type: "Tutorial",
         link: "#",
@@ -57,14 +57,14 @@ const resourceCategories = [
     resources: [
       {
         title: "Python SDK",
-        description: "Official Python library for Flux Kontext",
+        description: "Official Python library for Mori Studio",
         type: "SDK",
         link: "#",
         difficulty: "Developer"
       },
       {
         title: "ComfyUI Integration",
-        description: "Use Flux Kontext with ComfyUI workflows",
+        description: "Use Mori Studio with ComfyUI workflows",
         type: "Integration",
         link: "#",
         difficulty: "Intermediate"
@@ -104,7 +104,7 @@ const resourceCategories = [
 
 const featuredResources = [
   {
-    title: "Flux Kontext Masterclass",
+    title: "Mori Studio Masterclass",
     description: "Comprehensive video course covering all aspects of AI image generation",
     image: "/placeholder-tutorial.jpg",
     duration: "4 hours",
@@ -140,11 +140,11 @@ export function ResourcesContent() {
           <div className="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-600 text-sm mb-6">
             Free AI Image Generation Resources
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
-            Flux Kontext Resources Hub
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 gradient-text text-white">
+            Mori Studio Resources Hub
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Everything you need to master AI image generation with Flux Kontext. 
+            Everything you need to master AI image generation with Mori Studio. 
             From beginner tutorials to advanced techniques and developer tools.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -172,7 +172,7 @@ export function ResourcesContent() {
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
+                    <span className="text-xs bg-primary/10 text-white px-2 py-1 rounded-full">
                       {resource.level}
                     </span>
                     <span className="text-xs text-muted-foreground">
@@ -219,7 +219,7 @@ export function ResourcesContent() {
                         <span className="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded-full">
                           {resource.type}
                         </span>
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-xs text-white">
                           {resource.difficulty}
                         </span>
                       </div>
@@ -255,7 +255,7 @@ export function ResourcesContent() {
               </div>
               <h3 className="font-semibold mb-2">Sign Up</h3>
               <p className="text-sm text-muted-foreground">
-                Create your free Flux Kontext account
+                Create your free Mori Studio account
               </p>
             </div>
             <div className="text-center">
@@ -345,7 +345,7 @@ export function ResourcesContent() {
             Ready to Start Creating?
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Join thousands of creators using Flux Kontext to bring their imagination to life.
+            Join thousands of creators using Mori Studio to bring their imagination to life.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/generate">

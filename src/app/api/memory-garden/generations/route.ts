@@ -82,6 +82,7 @@ export async function GET(request: NextRequest) {
       generation_type: gen.generation_type || 'text-to-image',
       studio_type: gen.studio_type || 'professional-studio',
       input_image_count: gen.input_image_count || 0,
+      input_image_url: gen.input_image_url || null,
       image_urls: gen.image_urls || [],
       style_tags: gen.style_tags || [],
       content_tags: gen.content_tags || [],

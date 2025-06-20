@@ -159,7 +159,7 @@ export function SmartImagePreview({ url, alt, index, onRemove }: SmartImagePrevi
 
   return (
     <div className="relative">
-      <div className="w-full h-20 rounded border overflow-hidden bg-muted/20">
+      <div className="w-full h-48 rounded border overflow-hidden bg-muted/20">
         {!hasError ? (
           <>
             <img 
