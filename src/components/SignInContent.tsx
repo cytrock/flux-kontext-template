@@ -45,14 +45,28 @@ export function SignInContent() {
       if (result?.error) {
         // Handle different error types from NextAuth and Supabase
         console.log('Login error:', result.error)
-        setError(result.error === "CredentialsSignin" ? "Invalid email or password. Please try again." : result.error)
+        
+        // 根据错误信息提供具体的中文提示
+        if (result.error === "CredentialsSignin") {
+          setError("Invalid email or password. Please try again.")
+        } else if (result.error.includes("Invalid email or password")) {
+          setError("Invalid email or password. Please try again.")
+        } else if (result.error.includes("Email not confirmed") || result.error.includes("Email not verified")) {
+          setError("Your email has not been verified. Please check your inbox.")
+        } else if (result.error.includes("User not found")) {
+          setError("No account found with this email. Please sign up first.")
+        } else if (result.error.includes("Invalid login credentials")) {
+          setError("Invalid email or password. Please try again.")
+        } else {
+          setError("Invalid email or password. Please try again.")
+        }
       } else {
         // 获取回调URL或默认跳转到dashboard页面
         const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
         router.push(callbackUrl)
       }
     } catch (error) {
-      setError(common.messages.loginFailed)
+      setError("Invalid email or password. Please try again.")
     } finally {
       setIsLoading(false)
     }
