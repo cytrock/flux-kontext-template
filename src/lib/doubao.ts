@@ -36,11 +36,11 @@ class DoubaoService {
   constructor() {
     this.apiKey = process.env.DOUBAO_API_KEY || ''
     this.apiUrl = process.env.DOUBAO_API_URL || 'https://ark.cn-beijing.volces.com/api/v3'
-    this.textToImageModel = process.env.DOUBAO_MODEL_TEXT_TO_IMAGE || 'doubao-seedream-3-0-t2i-250415'
-    this.imageEditModel = process.env.DOUBAO_MODEL_IMAGE_EDIT || 'doubao-seededit-2-0'
+    this.textToImageModel = process.env.DOUBAO_MODEL_TEXT_TO_IMAGE || 'doubao-pro-128k-240515'
+    this.imageEditModel = process.env.DOUBAO_MODEL_IMAGE_EDIT || 'doubao-pro-128k-240515'
 
     if (!this.apiKey) {
-      throw new Error('豆包 API Key 未配置，请在环境变量中设置 DOUBAO_API_KEY')
+      console.warn('⚠️ 豆包 API Key 未配置，豆包服务将被禁用')
     }
   }
 
@@ -100,6 +100,17 @@ organic flowing shapes, gentle character expressions.
     prompt: string, 
     options: Partial<DoubaoTextToImageRequest> = {}
   ): Promise<DoubaoImageResponse> {
+    // 如果API key未配置，返回模拟响应
+    if (!this.apiKey || this.apiKey === 'e955e4b3-fe0c-46e8-b852-98cc7a01e7f9') {
+      console.log('⚠️ 豆包 API Key 未配置或无效，返回演示图片');
+      return {
+        data: [{
+          url: 'https://pub-49364ecf52e344d3a722a3c5bca11271.r2.dev/demo-image.png',
+          revised_prompt: prompt
+        }]
+      };
+    }
+
     try {
       // 增强提示词以生成吉卜力风格
       const enhancedPrompt = this.enhanceGhibliPrompt(prompt)
@@ -157,6 +168,17 @@ organic flowing shapes, gentle character expressions.
     stylePrompt: string,
     options: Partial<DoubaoImageEditRequest> = {}
   ): Promise<DoubaoImageResponse> {
+    // 如果API key未配置，返回模拟响应
+    if (!this.apiKey || this.apiKey === 'e955e4b3-fe0c-46e8-b852-98cc7a01e7f9') {
+      console.log('⚠️ 豆包 API Key 未配置或无效，返回演示图片');
+      return {
+        data: [{
+          url: 'https://pub-49364ecf52e344d3a722a3c5bca11271.r2.dev/demo-image.png',
+          revised_prompt: stylePrompt
+        }]
+      };
+    }
+
     try {
       // 增强风格转换提示词
       const enhancedPrompt = this.enhanceGhibliPrompt(
@@ -208,6 +230,12 @@ organic flowing shapes, gentle character expressions.
    */
   async checkHealth(): Promise<boolean> {
     try {
+      // 如果API key未配置，返回false
+      if (!this.apiKey || this.apiKey === 'e955e4b3-fe0c-46e8-b852-98cc7a01e7f9') {
+        console.log('⚠️ 豆包服务健康检查：API Key未配置');
+        return false;
+      }
+      
       // 尝试生成一个简单的测试图片
       const testResponse = await this.generateImage("test image", { n: 1 })
       return testResponse && testResponse.data && testResponse.data.length > 0
@@ -229,7 +257,7 @@ organic flowing shapes, gentle character expressions.
         imageEdit: this.imageEditModel
       },
       apiUrl: this.apiUrl,
-      isConfigured: !!this.apiKey
+      isConfigured: !!this.apiKey && this.apiKey !== 'e955e4b3-fe0c-46e8-b852-98cc7a01e7f9'
     }
   }
 }
