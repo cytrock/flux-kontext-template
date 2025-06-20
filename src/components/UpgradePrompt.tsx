@@ -1,8 +1,13 @@
+"use client"
+
+import { useState, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Crown, Zap, Star, ArrowRight } from "lucide-react"
+import { Crown, Zap, Star, ArrowRight, X, Sparkles } from "lucide-react"
 import { UserType, getUpgradeSuggestion, pricingPlans } from "@/lib/user-tiers"
+import Link from 'next/link'
 
 interface UpgradePromptProps {
   userType: UserType
@@ -20,13 +25,13 @@ export function UpgradePrompt({ userType, feature, className = "", compact = fal
 
   if (compact) {
     return (
-      <div className={`bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-lg text-white ${className}`}>
+      <div className={`bg-gradient-to-r from-primary to-accent p-3 rounded-lg text-primary-foreground ${className}`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Crown className="h-4 w-4" />
             <span className="text-sm font-medium">{suggestion.title}</span>
           </div>
-          <Button variant="secondary" size="sm" className="text-purple-600">
+          <Button variant="secondary" size="sm" className="text-primary">
             {suggestion.action}
           </Button>
         </div>
@@ -35,48 +40,48 @@ export function UpgradePrompt({ userType, feature, className = "", compact = fal
   }
 
   return (
-    <Card className={`border-2 border-purple-200 bg-gradient-to-br from-purple-50 to-pink-50 ${className}`}>
+    <Card className={`border-2 border-border bg-card ${className}`}>
       <CardContent className="p-6">
         <div className="flex items-start gap-4">
-          <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-full">
-            <Crown className="h-6 w-6 text-white" />
+          <div className="bg-gradient-to-r from-primary to-accent p-3 rounded-full">
+            <Crown className="h-6 w-6 text-primary-foreground" />
           </div>
           
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
-              <h3 className="text-lg font-semibold text-gray-900">{suggestion.title}</h3>
+              <h3 className="text-lg font-semibold text-foreground">{suggestion.title}</h3>
               {userType === UserType.ANONYMOUS && (
-                <Badge variant="secondary" className="bg-green-100 text-green-700">
+                <Badge variant="secondary" className="bg-success/10 text-success">
                   免费
                 </Badge>
               )}
               {suggestion.nextTier === UserType.PREMIUM && (
-                <Badge variant="secondary" className="bg-purple-100 text-purple-700">
+                <Badge variant="secondary" className="bg-accent/10 text-accent-foreground">
                   $29/月
                 </Badge>
               )}
             </div>
             
-            <p className="text-gray-600 mb-4">{suggestion.description}</p>
+            <p className="text-muted-foreground mb-4">{suggestion.description}</p>
             
             {/* 功能列表 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
               {userType === UserType.ANONYMOUS && (
                 <>
-                  <div className="flex items-center gap-2 text-sm text-gray-700">
-                    <Zap className="h-4 w-4 text-purple-500" />
+                  <div className="flex items-center gap-2 text-sm text-foreground">
+                    <Zap className="h-4 w-4 text-primary" />
                     <span>Flux Kontext Max模型</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-700">
-                    <Star className="h-4 w-4 text-purple-500" />
+                  <div className="flex items-center gap-2 text-sm text-foreground">
+                    <Star className="h-4 w-4 text-primary" />
                     <span>生成1-4张图片</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-700">
-                    <Crown className="h-4 w-4 text-purple-500" />
+                  <div className="flex items-center gap-2 text-sm text-foreground">
+                    <Crown className="h-4 w-4 text-primary" />
                     <span>历史记录同步</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-700">
-                    <ArrowRight className="h-4 w-4 text-purple-500" />
+                  <div className="flex items-center gap-2 text-sm text-foreground">
+                    <ArrowRight className="h-4 w-4 text-primary" />
                     <span>更多宽高比选项</span>
                   </div>
                 </>
@@ -84,20 +89,20 @@ export function UpgradePrompt({ userType, feature, className = "", compact = fal
               
               {userType === UserType.REGISTERED && (
                 <>
-                  <div className="flex items-center gap-2 text-sm text-gray-700">
-                    <Crown className="h-4 w-4 text-purple-500" />
+                  <div className="flex items-center gap-2 text-sm text-foreground">
+                    <Crown className="h-4 w-4 text-primary" />
                     <span>批量生成1-12张</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-700">
-                    <Zap className="h-4 w-4 text-purple-500" />
+                  <div className="flex items-center gap-2 text-sm text-foreground">
+                    <Zap className="h-4 w-4 text-primary" />
                     <span>Private Mode私人模式</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-700">
-                    <Star className="h-4 w-4 text-purple-500" />
+                  <div className="flex items-center gap-2 text-sm text-foreground">
+                    <Star className="h-4 w-4 text-primary" />
                     <span>优先队列快速生成</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-700">
-                    <ArrowRight className="h-4 w-4 text-purple-500" />
+                  <div className="flex items-center gap-2 text-sm text-foreground">
+                    <ArrowRight className="h-4 w-4 text-primary" />
                     <span>无限制使用频率</span>
                   </div>
                 </>
@@ -106,8 +111,8 @@ export function UpgradePrompt({ userType, feature, className = "", compact = fal
             
             {/* 特殊优惠 */}
             {suggestion.nextTier === UserType.PREMIUM && (
-              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
-                <div className="flex items-center gap-2 text-yellow-800">
+              <div className="bg-warning/10 border border-warning rounded-lg p-3 mb-4">
+                <div className="flex items-center gap-2 text-warning-foreground">
                   <Star className="h-4 w-4" />
                   <span className="text-sm font-medium">
                     年付方案节省20% - 仅需$290/年
@@ -123,7 +128,7 @@ export function UpgradePrompt({ userType, feature, className = "", compact = fal
                 </Button>
               )}
               <Button 
-                className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                className="flex-1 btn-ghibli"
               >
                 {suggestion.action}
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -152,10 +157,10 @@ export function FeatureLocked({ userType, feature, requiredTier, className = "" 
   }
   
   return (
-    <div className={`bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-4 text-center ${className}`}>
-      <Crown className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-      <h4 className="font-medium text-gray-700 mb-1">{feature}</h4>
-      <p className="text-sm text-gray-500 mb-3">
+    <div className={`bg-muted/20 border-2 border-dashed border-border rounded-lg p-4 text-center ${className}`}>
+      <Crown className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+      <h4 className="font-medium text-foreground mb-1">{feature}</h4>
+      <p className="text-sm text-muted-foreground mb-3">
         此功能需要{tierNames[requiredTier]}权限
       </p>
       <UpgradePrompt userType={userType} feature={feature} compact />
@@ -177,44 +182,114 @@ export function UsageLimit({ current, limit, period, userType }: UsageLimitProps
   const isOverLimit = current >= limit
   
   return (
-    <div className="bg-white border rounded-lg p-4">
+    <div className="bg-card border border-border rounded-lg p-4">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-sm font-medium text-gray-700">
+        <span className="text-sm font-medium text-foreground">
           使用量 ({period})
         </span>
-        <span className="text-sm text-gray-500">
+        <span className="text-sm text-muted-foreground">
           {current} / {limit === Infinity ? '∞' : limit}
         </span>
       </div>
       
       {limit !== Infinity && (
-        <div className="w-full bg-gray-200 rounded-full h-2 mb-3">
+        <div className="w-full bg-muted/20 rounded-full h-2 mb-3">
           <div 
             className={`h-2 rounded-full transition-all ${
-              isOverLimit ? 'bg-red-500' : 
-              isNearLimit ? 'bg-yellow-500' : 
-              'bg-green-500'
+              isOverLimit ? 'bg-error' : 
+              isNearLimit ? 'bg-warning' : 
+              'bg-success'
             }`}
             style={{ width: `${Math.min(percentage, 100)}%` }}
           />
         </div>
       )}
       
-      {isOverLimit && (
-        <div className="text-sm text-red-600 mb-2">
-          已达到使用限制，请升级账户继续使用
-        </div>
-      )}
-      
       {isNearLimit && !isOverLimit && (
-        <div className="text-sm text-yellow-600 mb-2">
-          即将达到使用限制，建议升级账户
-        </div>
+        <p className="text-sm text-warning-foreground mb-3">
+          使用量即将达到上限，考虑升级以获得更多配额
+        </p>
       )}
       
-      {(isNearLimit || isOverLimit) && userType !== UserType.PREMIUM && (
-        <UpgradePrompt userType={userType} compact />
+      {isOverLimit && (
+        <p className="text-sm text-error-foreground mb-3">
+          已达到使用上限，请升级以继续使用
+        </p>
       )}
+      
+      <UpgradePrompt userType={userType} compact />
+    </div>
+  )
+}
+
+export function UpgradePromptNotification() {
+  const { data: session } = useSession()
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    // 检查用户是否需要看到升级提示
+    if (session?.user?.email) {
+      const lastDismissed = localStorage.getItem('upgrade-prompt-dismissed')
+      if (!lastDismissed || Date.now() - parseInt(lastDismissed) > 24 * 60 * 60 * 1000) {
+        setIsVisible(true)
+      }
+    }
+  }, [session])
+
+  const handleDismiss = () => {
+    setIsVisible(false)
+    localStorage.setItem('upgrade-prompt-dismissed', Date.now().toString())
+  }
+
+  if (!isVisible || !session?.user) return null
+
+  return (
+    <div className="fixed bottom-4 right-4 z-50 max-w-sm">
+      <div className="card-ghibli animate-scale-in">
+        <button
+          onClick={handleDismiss}
+          className="absolute top-2 right-2 p-1 hover:bg-accent rounded-full transition-colors"
+          aria-label="Dismiss upgrade prompt"
+        >
+          <X className="w-4 h-4 text-muted-foreground" />
+        </button>
+
+        <div className="pr-8">
+          <div className="flex items-center space-x-2 mb-2">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-secondary to-accent flex items-center justify-center">
+              <Crown className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-foreground">Upgrade to Pro</h3>
+              <Badge variant="secondary" className="text-xs">
+                <Sparkles className="w-3 h-3 mr-1" />
+                Limited Time
+              </Badge>
+            </div>
+          </div>
+
+          <p className="text-sm text-muted-foreground mb-3">
+            Unlock unlimited generations, priority processing, and exclusive Ghibli-style filters.
+          </p>
+
+          <div className="flex flex-col space-y-2">
+            <Link 
+              href="/pricing" 
+              className="btn-ghibli-accent text-center text-sm py-2"
+              onClick={() => setIsVisible(false)}
+            >
+              <Zap className="w-4 h-4 mr-1 inline" />
+              Upgrade Now
+            </Link>
+            <button
+              onClick={handleDismiss}
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Maybe later
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   )
 } 
