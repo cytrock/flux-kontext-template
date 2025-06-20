@@ -124,7 +124,7 @@ export function SignInContent() {
             </div>
           </div>
           
-          <p className="mt-2 text-center text-sm text-ghibli-cream/80">
+          <p className="mt-2 text-center text-sm text-ghibli-cream">
             {auth.signIn.noAccount}{" "}
             <Link
               href="/auth/signup"
