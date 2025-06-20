@@ -231,5 +231,3 @@ CREATE TABLE IF NOT EXISTS turnstile_tokens (
 );
 COMMENT ON TABLE turnstile_tokens IS '存储Turnstile验证令牌，防止重放攻击和机器人访问。';
 
--- 完成提示
-SELECT 'Database setup completed successfully!' as message; 
