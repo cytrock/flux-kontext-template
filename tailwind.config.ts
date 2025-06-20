@@ -56,6 +56,8 @@ export default {
   			'ghibli-mint': 'hsl(var(--ghibli-mint))',
   			'ghibli-warm': 'hsl(var(--ghibli-warm))',
   			'ghibli-earth': 'hsl(var(--ghibli-earth))',
+  			'ghibli-sky': 'hsl(var(--ghibli-sky))',
+  			'ghibli-sunset': 'hsl(var(--ghibli-sunset))',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
