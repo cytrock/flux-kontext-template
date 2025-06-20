@@ -124,11 +124,11 @@ export function SignInContent() {
             </div>
           </div>
           
-          <p className="mt-2 text-center text-sm text-muted-foreground">
+          <p className="mt-2 text-center text-sm text-ghibli-cream/80">
             {auth.signIn.noAccount}{" "}
             <Link
               href="/auth/signup"
-              className="font-medium text-primary hover:text-primary/80 transition-colors"
+              className="font-medium text-ghibli-cream hover:text-ghibli-cream/80 transition-colors"
             >
               {auth.signIn.createNewAccount}
             </Link>
@@ -319,7 +319,7 @@ export function SignInContent() {
               <div className="w-full border-t border-border" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-background text-muted-foreground">
+              <span className="px-2 bg-background text-ghibli-cream/80">
                 {auth.signIn.noAccount}
               </span>
             </div>
@@ -330,7 +330,7 @@ export function SignInContent() {
             <Link href="/auth/signup" passHref>
               <button
                 type="button"
-                className="group relative w-full flex justify-center py-2 px-4 border border-input text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                className="group relative w-full flex justify-center py-2 px-4 border border-input text-sm font-medium rounded-md text-ghibli-cream bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
               >
                 {auth.signIn.createNewAccount}
               </button>
