@@ -181,5 +181,28 @@ CREATE POLICY "Users can view own subscriptions" ON public.subscriptions FOR SEL
 CREATE POLICY "Users can view own generations" ON public.generations FOR SELECT USING (auth.uid()::text = user_id::text);
 CREATE POLICY "Users can insert own generations" ON public.generations FOR INSERT WITH CHECK (auth.uid()::text = user_id::text);
 
+-- =============================================================================
+-- 🔐 辅助表 (安全、认证等)
+-- =============================================================================
+
+-- 用于存储邮件验证、密码重置等的OTP（一次性密码）
+CREATE TABLE IF NOT EXISTS otp_codes (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email TEXT NOT NULL,
+  code TEXT NOT NULL,
+  expires_at TIMESTAMPTZ NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  used_at TIMESTAMPTZ,
+  CONSTRAINT otp_codes_email_check CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$')
+);
+COMMENT ON TABLE otp_codes IS '存储一次性验证码，用于邮箱验证和密码重置等功能。';
+
+
+-- 存储用于验证的Turnstile令牌，防止重放攻击
+CREATE TABLE IF NOT EXISTS turnstile_tokens (
+  id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  token TEXT NOT NULL UNIQUE,
+  -- ... existing code ...
+
 -- 完成提示
 SELECT 'Database setup completed successfully!' as message; 

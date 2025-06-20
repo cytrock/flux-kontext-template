@@ -4,17 +4,22 @@ import { useState, useEffect } from "react"
 import { signIn, getProviders } from "next-auth/react"
 import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
+import { Eye, EyeOff } from "lucide-react"
 // 导入认证文案模块
 import { auth, common } from "@/lib/content"
 
 export function SignInContent() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [providers, setProviders] = useState<any>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
+
+  // 检查凭据登录是否启用
+  const isCredentialsEnabled = process.env.NEXT_PUBLIC_AUTH_CREDENTIALS_ENABLED === "true"
 
   // 获取可用的认证提供商
   useEffect(() => {
@@ -24,44 +29,6 @@ export function SignInContent() {
     }
     fetchProviders()
   }, [])
-
-  // 检查URL中的错误参数 - 使用auth模块的错误文案
-  useEffect(() => {
-    const error = searchParams.get('error')
-    if (error) {
-      switch (error) {
-        case 'OAuthSignin':
-          setError(auth.errors.oauthSignin)
-          break
-        case 'OAuthCallback':
-          setError(auth.errors.oauthCallback)
-          break
-        case 'OAuthCreateAccount':
-          setError(auth.errors.oauthCreateAccount)
-          break
-        case 'EmailCreateAccount':
-          setError(auth.errors.emailCreateAccount)
-          break
-        case 'Callback':
-          setError(auth.errors.callback)
-          break
-        case 'OAuthAccountNotLinked':
-          setError(auth.errors.oauthAccountNotLinked)
-          break
-        case 'EmailSignin':
-          setError(auth.errors.emailSignin)
-          break
-        case 'CredentialsSignin':
-          setError(auth.errors.credentialsSignin)
-          break
-        case 'SessionRequired':
-          setError(auth.errors.sessionRequired)
-          break
-        default:
-          setError(auth.errors.unknown)
-      }
-    }
-  }, [searchParams])
 
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -76,10 +43,12 @@ export function SignInContent() {
       })
 
       if (result?.error) {
-        setError(auth.errors.credentialsSignin)
+        // Handle different error types from NextAuth and Supabase
+        console.log('Login error:', result.error)
+        setError(result.error === "CredentialsSignin" ? "Invalid email or password. Please try again." : result.error)
       } else {
-        // 获取回调URL或默认跳转到generate页面
-        const callbackUrl = searchParams.get('callbackUrl') || '/generate'
+        // 获取回调URL或默认跳转到dashboard页面
+        const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
         router.push(callbackUrl)
       }
     } catch (error) {
@@ -94,7 +63,7 @@ export function SignInContent() {
     setError("")
     
     try {
-      const callbackUrl = searchParams.get('callbackUrl') || '/generate'
+      const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
       await signIn(provider, { 
         callbackUrl,
         redirect: true 
@@ -190,8 +159,8 @@ export function SignInContent() {
             </div>
           )}
 
-          {/* 分隔线 - 只有在有OAuth提供商时才显示 */}
-          {providers && ((providers.google && process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED === "true") || (providers.github && process.env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED === "true")) && (
+          {/* 分隔线 - 只有在有OAuth提供商且凭据登录启用时才显示 */}
+          {providers && ((providers.google && process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED === "true") || (providers.github && process.env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED === "true")) && isCredentialsEnabled && (
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-border" />
@@ -202,100 +171,150 @@ export function SignInContent() {
             </div>
           )}
 
-          {/* 邮箱密码登录表单 */}
-          <form className="mt-8 space-y-6" onSubmit={handleEmailSignIn}>
-            {error && (
-              <div className="rounded-md bg-destructive/10 p-4 border border-destructive/20">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-destructive" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div className="ml-3">
-                    <div className="text-sm text-destructive">{error}</div>
+          {/* 邮箱密码登录表单 - 只有在启用凭据登录时才显示 */}
+          {isCredentialsEnabled ? (
+            <form className="mt-8 space-y-6" onSubmit={handleEmailSignIn}>
+              {error && (
+                <div className="rounded-md bg-destructive/10 p-4 border border-destructive/20">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <svg className="h-5 w-5 text-destructive" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div className="ml-3">
+                      <div className="text-sm text-destructive">{error}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            <div className="rounded-md shadow-sm -space-y-px">
+              <div className="rounded-md shadow-sm -space-y-px">
+                <div>
+                  <label htmlFor="email" className="sr-only">
+                    Email address
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-input placeholder-muted-foreground text-black bg-white rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                    placeholder="Email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="relative">
+                  <label htmlFor="password" className="sr-only">
+                    Password
+                  </label>
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    autoComplete="current-password"
+                    required
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-input placeholder-muted-foreground text-black bg-white rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm pr-10"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    disabled={isLoading}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 flex items-center justify-center h-full w-10 text-gray-900"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <input
+                    id="remember-me"
+                    name="remember-me"
+                    type="checkbox"
+                    className="h-4 w-4 text-primary focus:ring-primary border-input rounded"
+                  />
+                  <label htmlFor="remember-me" className="ml-2 block text-sm text-foreground">
+                    Remember me
+                  </label>
+                </div>
+
+                <div className="text-sm">
+                  <Link href="/auth/forgot-password" className="font-medium text-primary hover:text-primary/80 transition-colors">
+                    Forgot your password?
+                  </Link>
+                </div>
+              </div>
+
               <div>
-                <label htmlFor="email" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-input placeholder-muted-foreground text-foreground bg-background rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                  placeholder="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                <button
+                  type="submit"
                   disabled={isLoading}
-                />
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                >
+                  {isLoading ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Signing in...
+                    </>
+                  ) : (
+                    "Sign In"
+                  )}
+                </button>
               </div>
-              <div>
-                <label htmlFor="password" className="sr-only">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-input placeholder-muted-foreground text-foreground bg-background rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  disabled={isLoading}
-                />
+            </form>
+          ) : (
+            // 凭据登录禁用时显示的提示信息
+            <div className="mt-8 p-6 bg-accent/50 border border-border rounded-lg">
+              <div className="flex items-center justify-center space-x-2 mb-4">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <h3 className="text-lg font-semibold text-foreground">Email/Password Login Temporarily Disabled</h3>
               </div>
+              <p className="text-sm text-muted-foreground text-center mb-4">
+                For enhanced security, email and password login is currently disabled. Please use Google authentication to sign in.
+              </p>
+              <p className="text-xs text-muted-foreground text-center">
+                💡 If you don't have an account yet, you can <Link href="/auth/signup" className="text-primary hover:text-primary/80 font-medium">create one here</Link> using email registration, then return to login with Google.
+              </p>
             </div>
+          )}
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-primary focus:ring-primary border-input rounded"
-                />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-foreground">
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <Link href="/auth/forgot-password" className="font-medium text-primary hover:text-primary/80 transition-colors">
-                  Forgot your password?
-                </Link>
-              </div>
+          {/* 分隔线 */}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-border" />
             </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-background text-muted-foreground">
+                {auth.signIn.noAccount}
+              </span>
+            </div>
+          </div>
 
-            <div>
+          {/* 注册按钮 */}
+          <div>
+            <Link href="/auth/signup" passHref>
               <button
-                type="submit"
-                disabled={isLoading}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                type="button"
+                className="group relative w-full flex justify-center py-2 px-4 border border-input text-sm font-medium rounded-md text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
               >
-                {isLoading ? (
-                  <>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Signing in...
-                  </>
-                ) : (
-                  "Sign In"
-                )}
+                {auth.signIn.createNewAccount}
               </button>
-            </div>
-          </form>
+            </Link>
+          </div>
 
           {/* 快捷键提示 */}
           <div className="text-center">

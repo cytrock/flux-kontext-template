@@ -51,7 +51,7 @@ if (process.env.NEXT_PUBLIC_AUTH_CREDENTIALS_ENABLED === "true") {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null
+          throw new Error("Please enter your email and password.")
         }
 
         // 🎯 开发环境测试账户（无需数据库）
@@ -79,22 +79,29 @@ if (process.env.NEXT_PUBLIC_AUTH_CREDENTIALS_ENABLED === "true") {
           })
 
           if (error) {
-            console.log('登录失败:', error.message)
-            return null
+            console.log('Login failed:', error.message)
+            // Return more specific messages based on Supabase error
+            if (error.message.includes('Invalid login credentials')) {
+              throw new Error('Invalid email or password. Please try again.')
+            }
+            if (error.message.includes('Email not confirmed')) {
+              throw new Error('Your email has not been verified. Please check your inbox.')
+            }
+            throw new Error('An unknown error occurred during login.')
           }
 
           if (!data.user) {
-            console.log('用户不存在')
-            return null
+            console.log('User does not exist')
+            throw new Error('User not found or password incorrect.')
           }
 
-          // ✅ 检查邮箱验证状态
+          // ✅ Double-check email verification status for safety
           if (!data.user.email_confirmed_at) {
-            console.log('邮箱未验证')
-            return null
+            console.log('Email not verified')
+            throw new Error('Your email has not been verified. Please check your inbox.')
           }
 
-          // 🎉 登录成功
+          // 🎉 Login successful
           return {
             id: data.user.id,
             email: data.user.email!,
@@ -103,7 +110,8 @@ if (process.env.NEXT_PUBLIC_AUTH_CREDENTIALS_ENABLED === "true") {
 
         } catch (error) {
           console.error('Supabase认证错误:', error)
-          return null
+          // 重新抛出错误，以便NextAuth可以捕获它
+          throw error
         }
       },
     })
@@ -201,7 +209,27 @@ export const authOptions: NextAuthOptions = {
           
           const supabase = createAdminClient()
           
-          // 检查用户是否已存在
+          // 🔐 CRITICAL SECURITY CHECK: 对于凭据登录，确保用户确实存在于Supabase Auth中
+          if (account?.provider === 'credentials') {
+            console.log('🔍 凭据登录 - 验证用户是否真实存在于Supabase Auth中...')
+            
+            // 验证用户是否真的在Supabase Auth系统中存在且已验证
+            const { data: authUser, error: authError } = await supabase.auth.admin.getUserById(user.id)
+            
+            if (authError || !authUser.user) {
+              console.error('🚨 安全风险：凭据登录用户在Supabase Auth中不存在:', authError)
+              return false // 拒绝登录
+            }
+            
+            if (!authUser.user.email_confirmed_at) {
+              console.error('🚨 安全风险：用户邮箱未验证')
+              return false // 拒绝登录
+            }
+            
+            console.log('✅ 凭据登录用户验证通过')
+          }
+          
+          // 检查用户是否已存在于users表中
           console.log('🔍 查询现有用户...')
           const { data: existingUser, error: findError } = await supabase
             .from('users')
@@ -213,7 +241,7 @@ export const authOptions: NextAuthOptions = {
           console.log('🔍 查询结果:', existingUser ? '用户已存在' : '用户不存在')
 
           if (findError && findError.code === 'PGRST116') {
-            // 用户不存在，创建新用户
+            // 用户不存在，创建新用户 - 但只对OAuth用户或已验证的凭据用户
             console.log('🎁 开始创建新用户...')
             
             const newUserData = {
@@ -241,7 +269,11 @@ export const authOptions: NextAuthOptions = {
 
             if (createError) {
               console.error('🚨 新用户创建失败:', createError)
-              // 即使创建失败，也允许用户登录，后续通过API自动创建
+              // 对于OAuth用户，即使创建失败也允许登录
+              // 对于凭据用户，如果创建失败则拒绝登录
+              if (account?.provider === 'credentials') {
+                return false
+              }
             } else {
               console.log('🎉 新用户创建成功:', newUser.id)
 
@@ -283,13 +315,20 @@ export const authOptions: NextAuthOptions = {
             console.log('✅ 现有用户登录信息更新完成')
           } else {
             console.error('🚨 数据库查询异常:', findError)
+            // 对于凭据用户，数据库异常时拒绝登录
+            if (account?.provider === 'credentials') {
+              return false
+            }
           }
         } else {
           console.log('⚠️ 用户邮箱为空，跳过数据库操作')
         }
       } catch (error) {
         console.error('❌ 用户登录处理失败:', error)
-        // 即使数据库操作失败，也允许用户登录
+        // 对于凭据用户，处理失败时拒绝登录
+        if (account?.provider === 'credentials') {
+          return false
+        }
       }
 
       console.log('✅ signIn回调完成，返回true')
@@ -310,14 +349,14 @@ export const authOptions: NextAuthOptions = {
         }
       }
       
-      // 如果是相对路径，添加baseUrl
+      // If it's a relative path, add baseUrl
       if (url.startsWith("/")) return `${baseUrl}${url}`
       
-      // 如果是同域名的完整URL，直接返回
+      // If it's a full URL on the same domain, return it directly
       if (new URL(url).origin === baseUrl) return url
       
-      // 🎯 默认跳转到generate页面（主功能页面）而非dashboard
-      return `${baseUrl}/generate`
+      // 🎯 Default to the dashboard page
+      return `${baseUrl}/dashboard`
     },
     async session({ session, token }) {
       // 🎯 会话信息处理

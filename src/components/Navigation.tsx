@@ -167,7 +167,7 @@ export function Navigation() {
           ) : (
             // 未登录状态
             <>
-              <Link href="/auth/signin">
+              <Link href={`/auth/signin?callbackUrl=${pathname}`}>
                 <Button 
                   variant="ghost" 
                   size="sm" 
@@ -176,7 +176,7 @@ export function Navigation() {
                   {common.navigation.login}
                 </Button>
               </Link>
-              <Link href="/auth/signup">
+              <Link href={`/auth/signup?callbackUrl=${pathname}`}>
                 <Button 
                   size="sm" 
                   className="bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all duration-200"
@@ -263,72 +263,55 @@ export function Navigation() {
               </div>
             ))}
             
-            {/* 移动端用户状态和按钮 */}
-            <div className="flex flex-col space-y-2 pt-4 border-t border-border">
-              {status === "loading" ? (
+            {/* 移动端用户状态按钮 */}
+            <div className="border-t border-border pt-4">
+              {status === 'loading' ? (
                 <div className="flex justify-center">
-                  <div className="w-6 h-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                  <div className="w-8 h-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
                 </div>
               ) : session ? (
                 // 移动端已登录状态
-                <>
-                  <div className="flex items-center space-x-3 p-3 bg-accent rounded-lg">
-                    {session.user?.image ? (
-                      <img 
-                        src={session.user.image} 
-                        alt={session.user.name || "User"} 
-                        className="w-10 h-10 rounded-full"
-                      />
-                    ) : (
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                        <User className="w-5 h-5 text-primary" />
-                      </div>
-                    )}
-                    <div>
-                      <p className="font-medium">{session.user?.name}</p>
-                      <p className="text-sm text-muted-foreground">{session.user?.email}</p>
-                    </div>
-                  </div>
-                  <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="w-full justify-start hover:font-semibold active:scale-95 transition-all duration-200"
-                    >
-                      {common.navigation.dashboard}
-                    </Button>
-                  </Link>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={handleSignOut}
-                    className="w-full justify-start hover:font-semibold active:scale-95 transition-all duration-200 text-red-600 hover:text-red-700"
+                <div className="space-y-2">
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center space-x-3 py-2 px-3 rounded-md text-foreground transition-colors hover:bg-accent"
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    {common.buttons.signOut}
-                  </Button>
-                </>
+                    <User className="w-5 h-5" />
+                    <span>{common.navigation.dashboard}</span>
+                  </Link>
+                  <button
+                    onClick={() => {
+                      handleSignOut()
+                      setIsMobileMenuOpen(false)
+                    }}
+                    className="w-full text-left flex items-center space-x-3 py-2 px-3 rounded-md text-foreground transition-colors hover:bg-accent"
+                  >
+                    <LogOut className="w-5 h-5" />
+                    <span>{common.buttons.signOut}</span>
+                  </button>
+                </div>
               ) : (
                 // 移动端未登录状态
-                <>
-                  <Link href="/auth/signin" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="w-full justify-start hover:font-semibold active:scale-95 transition-all duration-200"
+                <div className="space-y-2">
+                  <Link href={`/auth/signin?callbackUrl=${pathname}`}>
+                    <Button
+                      variant="outline"
+                      className="w-full"
+                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {common.navigation.login}
                     </Button>
                   </Link>
-                  <Link href="/auth/signup" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button 
-                      size="sm" 
-                      className="w-full justify-start bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all duration-200"
+                  <Link href={`/auth/signup?callbackUrl=${pathname}`}>
+                    <Button
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {common.buttons.signUp}
                     </Button>
                   </Link>
-                </>
+                </div>
               )}
             </div>
           </div>
