@@ -1,92 +1,96 @@
 {
-  "title": "Flux Kontext AI Generator",
-  "description": "Create and edit professional images with advanced AI technology",
-  "subtitle": "Transform your ideas into stunning visuals with our cutting-edge AI image generation platform",
-  "prompts": {
-    "textToImage": "Describe the image you want to create...",
-    "editInstructions": "Describe what you want to change in the images...",
-    "referenceImages": "Reference Images (Optional)",
-    "placeholder": "A beautiful sunset over mountains with vibrant colors..."
-  },
-  "settings": {
-    "model": "Model",
-    "aspectRatio": "Aspect Ratio",
-    "imageCount": "Image Count",
-    "guidanceScale": "Guidance Scale",
-    "safetyTolerance": "Safety Tolerance",
-    "outputFormat": "Output Format",
-    "seed": "Seed (Optional)",
-    "privateMode": "Private Mode",
-    "generationMode": "Generation Mode"
+  "title": "Mori Studio - Ghibli Style AI Transformer",
+  "description": "Transform images to magical Ghibli style or create new Ghibli artwork from text",
+  "tabs": {
+    "textToImage": "Text to Ghibli",
+    "editImage": "Transform Photo",
+    "multiEdit": "Multi-Transform"
   },
   "models": {
     "pro": {
-      "name": "Flux Kontext Pro",
-      "description": "Fast generation with good quality"
+      "name": "Ghibli Pro",
+      "description": "Fast Ghibli-style transformation with authentic Studio Ghibli aesthetics"
     },
     "max": {
-      "name": "Flux Kontext Max",
-      "description": "Best quality, slower generation"
+      "name": "Ghibli Max", 
+      "description": "Highest quality Ghibli transformation with fine artistic details"
+    },
+    "schnell": {
+      "name": "Ghibli Quick",
+      "description": "Rapid Ghibli-style generation for quick magical previews"
+    },
+    "dev": {
+      "name": "Ghibli Dev",
+      "description": "Experimental Ghibli features for advanced artistic control"
+    },
+    "realism": {
+      "name": "Ghibli Realism",
+      "description": "Realistic Ghibli-style with photographic elements and magical atmosphere"
+    },
+    "anime": {
+      "name": "Classic Ghibli",
+      "description": "Traditional Studio Ghibli animation style with vintage charm"
     }
   },
-  "aspectRatios": {
-    "1:1": "Square",
-    "16:9": "Landscape",
-    "9:16": "Portrait",
-    "4:3": "Standard",
-    "3:2": "Photo",
-    "21:9": "Ultra-wide"
+  "placeholders": {
+    "textPrompt": "Describe the magical Ghibli scene you want to create... (e.g., 'A peaceful forest glade with mystical spirits dancing among ancient trees')",
+    "editPrompt": "Describe how to transform this image to Ghibli style... (e.g., 'Transform into Totoro forest scene with magical spirits')",
+    "multiEditPrompt": "Describe the unified Ghibli transformation for all images... (e.g., 'Transform all into mystical Spirited Away style with magical atmosphere')"
   },
-  "safetyLevels": {
-    "1": "Most Strict",
-    "2": "Strict",
-    "3": "Moderate",
-    "4": "Permissive",
-    "5": "Most Permissive"
+  "settings": {
+    "aspectRatio": "Aspect Ratio",
+    "guidanceScale": "Artistic Guidance",
+    "numImages": "Number of Images",
+    "safetyTolerance": "Content Safety",
+    "outputFormat": "Output Format",
+    "seed": "Seed (for reproducible magic)",
+    "privateMode": "Private Mode"
   },
-  "modes": {
-    "public": "Public",
-    "private": "Private"
+  "tooltips": {
+    "guidanceScale": "Higher values follow your prompt more closely, lower values allow more creative interpretation",
+    "safetyTolerance": "Content filtering level - maintains Ghibli's family-friendly spirit",
+    "seed": "Use the same seed to reproduce identical magical results",
+    "privateMode": "Your creations won't be visible to other users"
   },
   "errors": {
-    "noPrompt": "Please enter a prompt",
-    "noEditPrompt": "Please enter an edit prompt",
-    "noImages": "Please upload images to edit",
+    "noPrompt": "Please describe your magical Ghibli scene",
+    "noEditPrompt": "Please describe how to transform to Ghibli style",
+    "noImages": "Please upload images to transform",
     "invalidImage": "Invalid image format",
     "rateLimited": "Rate limit exceeded",
     "serverError": "Server error occurred",
     "uploadFailed": "File upload failed",
-    "generationFailed": "Sign in to start creating! Get 100 free credits instantly.",
+    "generationFailed": "Sign in to start creating Ghibli magic! Get 100 free credits instantly.",
     "verificationFailed": "Verification failed, please try again",
     "verificationRequired": "Please complete verification"
   },
   "features": {
     "characterConsistency": "Character Consistency",
-    "styleTransfer": "Style Transfer",
-    "multiImageSupport": "Multi-Image Support",
+    "styleTransfer": "Ghibli Style Transfer",
+    "multiImageSupport": "Multi-Image Transform",
     "highResolution": "High Resolution Output",
-    "commercialUse": "Commercial Use Rights",
+    "commercialUse": "Personal Use Rights",
     "priorityProcessing": "Priority Processing"
   },
   "tips": {
-    "promptEnhancement": "Use descriptive language for better results",
-    "aspectRatioSelection": "Choose aspect ratio based on your intended use",
-    "modelSelection": "Pro for speed, Max for quality",
-    "seedUsage": "Use seed for reproducible results"
+    "promptEnhancement": "Include Ghibli elements like 'magical forest', 'spirits', 'mystical atmosphere' for better results",
+    "aspectRatioSelection": "16:9 works great for landscape scenes, 9:16 for character portraits",
+    "modelSelection": "Ghibli Pro for speed, Ghibli Max for highest artistic quality",
+    "seedUsage": "Use seed to recreate the same magical result consistently"
   },
   "actions": {
-    "textToImage": "Text to Image",
-    "editImage": "Edit Image",
-    "multiEdit": "Multi-Image Edit",
-    "enhance": "Enhance",
-    "upscale": "Upscale"
+    "textToImage": "Text to Ghibli",
+    "editImage": "Transform to Ghibli",
+    "multiEdit": "Multi-Transform",
+    "enhance": "Enhance Magic",
+    "upscale": "Upscale Artwork"
   },
   "enhancementPrefixes": [
-    "Professional photo of ",
-    "High-quality image of ",
-    "Artistic rendering of ",
-    "Detailed photograph of ",
-    "Masterpiece depicting ",
-    "Premium quality "
+    "Studio Ghibli style ",
+    "Magical Ghibli scene of ",
+    "Enchanted Ghibli artwork depicting ",
+    "Mystical Ghibli landscape with ",
+    "Dreamy Ghibli-style ",
+    "Spirited Away inspired "
   ]
 } 

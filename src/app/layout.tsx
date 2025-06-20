@@ -20,27 +20,28 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Flux Kontext - AI Image Generation Platform | Professional AI Art Creator",
-    template: "%s | Flux Kontext"
+    default: "Mori Studio - Ghibli Style AI Platform | Transform Images to Magical Ghibli Art",
+    template: "%s | Mori Studio"
   },
-  description: "Professional AI image generation platform powered by Flux Kontext. Create stunning images from text descriptions with advanced AI technology. Free AI art generator.",
+  description: "Transform any image to magical Studio Ghibli style with Mori Studio AI. Create enchanting Ghibli-style artwork from photos or text descriptions. Bring Studio Ghibli magic to your creative projects.",
   keywords: [
-    "flux kontext",
-    "ai image generator",
-    "text to image ai",
-    "ai art generator",
-    "flux ai",
-    "image generation ai",
-    "ai art creator",
-    "flux kontext ai",
-    "professional ai images",
-    "ai image creation",
-    "flux kontext pro",
-    "flux kontext max"
+    "mori studio",
+    "ghibli style ai",
+    "studio ghibli transformation",
+    "ghibli art generator",
+    "ghibli style converter",
+    "anime style transformation",
+    "ghibli image generator",
+    "mori studio ai",
+    "studio ghibli art",
+    "ghibli character creator",
+    "totoro style art",
+    "spirited away style",
+    "miyazaki art style"
   ],
-  authors: [{ name: "Flux Kontext Team" }],
-  creator: "Flux Kontext",
-  publisher: "Flux Kontext",
+  authors: [{ name: "Mori Studio Team" }],
+  creator: "Mori Studio",
+  publisher: "Mori Studio",
   formatDetection: {
     email: false,
     address: false,

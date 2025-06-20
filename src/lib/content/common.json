@@ -1,6 +1,6 @@
 {
   "buttons": {
-    "startCreating": "Start Creating Images Now",
+    "startCreating": "Start Creating Ghibli Magic",
     "viewPricing": "View Pricing Plans",
     "signIn": "Sign In",
     "signUp": "Sign Up",
@@ -8,7 +8,7 @@
     "signingIn": "Signing in...",
     "creatingAccount": "Creating Account...",
     "download": "Download",
-    "edit": "Edit",
+    "edit": "Transform",
     "delete": "Delete",
     "save": "Save",
     "cancel": "Cancel",
@@ -17,25 +17,25 @@
     "subscribe": "Subscribe",
     "purchase": "Purchase",
     "getStartedFree": "Get Started Free",
-    "startCreatingAI": "Start Creating AI Images",
+    "startCreatingAI": "Start Creating Ghibli Art",
     "continueWithGoogle": "Continue with Google",
     "continueWithGitHub": "Continue with GitHub",
     "goHome": "Go Home",
-    "tryGenerate": "Try Generate",
+    "tryGenerate": "Try Transform",
     "signOut": "Sign Out",
-    "generate": "Generate",
+    "generate": "Transform to Ghibli",
     "retry": "Retry",
     "copyLink": "Copy Link",
-    "downloadPic": "Download Pic",
-    "aiEnhance": "✨ AI Enhance",
+    "downloadPic": "Download Artwork",
+    "aiEnhance": "✨ Ghibli Transform",
     "uploadImages": "Upload Images",
     "removeImage": "Remove Image",
-    "editThisImage": "Edit This Image",
+    "editThisImage": "Transform This Image",
     "mostPopular": "MOST POPULAR"
   },
   "navigation": {
     "home": "Home",
-    "generate": "Generate",
+    "generate": "Transform",
     "pricing": "Pricing",
     "resources": "Resources",
     "dashboard": "Dashboard",
@@ -69,7 +69,7 @@
     "processing": "Processing",
     "completed": "Completed",
     "failed": "Failed",
-    "generating": "Generating...",
+    "generating": "Creating Ghibli magic...",
     "uploading": "Uploading...",
     "verifying": "Verifying..."
   },
@@ -87,11 +87,11 @@
     "copyFailed": "Failed to copy",
     "uploadSuccess": "Upload successful",
     "uploadFailed": "Upload failed",
-    "generationSuccess": "Generation completed successfully",
-    "generationFailed": "Sign in to start creating! Get 100 free credits instantly.",
+    "generationSuccess": "Ghibli transformation completed successfully",
+    "generationFailed": "Sign in to start creating Ghibli magic! Get 100 free credits instantly.",
     "verificationRequired": "Please complete verification",
     "verificationExpired": "Verification expired, please try again",
     "upgradeRequired": "Current user type supports up to ",
-    "upgradeAccount": " images, please upgrade your account"
+    "upgradeAccount": " transformations, please upgrade your account"
   }
 } 

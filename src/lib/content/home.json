@@ -1,114 +1,106 @@
 {
   "hero": {
-    "badge": "Professional AI Image Generation Platform",
-    "title": "Create Stunning Images with Flux Kontext AI",
-    "description": "Transform your ideas into professional images with our cutting-edge AI technology. Generate images from text, edit existing images, and process multiple images with the power of Flux Kontext AI."
+    "badge": "Professional Ghibli Style AI Platform",
+    "title": "Transform Any Image to Magical Ghibli Style",
+    "description": "Bring Studio Ghibli magic to your images with our advanced AI. Transform existing photos into enchanting Ghibli-style artwork, or create new magical scenes from text descriptions with the power of Mori Studio AI."
   },
   "features": {
-    "title": "Key Features of Flux Kontext AI Platform",
-    "description": "Our Flux Kontext AI combines cutting-edge technology to deliver professional image generation and editing in one seamless platform.",
+    "title": "Key Features of Mori Studio AI Platform",
+    "description": "Our Mori Studio AI combines cutting-edge technology with Studio Ghibli's artistic magic to deliver professional image transformation and generation in one seamless platform.",
     "items": [
       {
-        "title": "Text to Image Generation",
-        "description": "Transform your text descriptions into stunning, high-quality images with advanced AI technology."
+        "title": "Ghibli Style Transformation",
+        "description": "Transform any photo into beautiful Ghibli-style artwork with authentic character design and magical atmosphere."
       },
       {
-        "title": "Professional Image Editing",
-        "description": "Edit existing images with natural language instructions for precise modifications."
+        "title": "Text to Ghibli Generation",
+        "description": "Create new Ghibli-style images from text descriptions with authentic Studio Ghibli aesthetics and storytelling."
       },
       {
-        "title": "Multi-Image Processing",
-        "description": "Process multiple images simultaneously with consistent style and quality."
+        "title": "Character Consistency",
+        "description": "Maintain consistent character designs across multiple images for cohesive Ghibli-style storytelling."
       },
       {
-        "title": "Advanced AI Models",
-        "description": "Powered by Flux Pro and Max models for superior image quality and detail."
+        "title": "Magical Atmosphere",
+        "description": "Powered by advanced AI models fine-tuned for Studio Ghibli's signature magical and natural elements."
       },
       {
-        "title": "Flexible Aspect Ratios",
-        "description": "Generate images in various aspect ratios from square to ultra-wide formats."
+        "title": "Multiple Art Styles",
+        "description": "Choose from various Ghibli film styles: Totoro, Spirited Away, Princess Mononoke, and more classic aesthetics."
       },
       {
-        "title": "Professional Output",
-        "description": "Export high-resolution images in multiple formats for professional use."
+        "title": "Professional Quality",
+        "description": "Export high-resolution Ghibli-style images perfect for storytelling, art projects, and creative works."
       }
     ]
   },
   "howTo": {
-    "title": "How to Create AI Images in 4 Simple Steps",
-    "description": "Follow these easy steps to create professional AI-generated images with Flux Kontext AI platform.",
-    "alternativeTitle": "How to Create Images with AI",
-    "alternativeDescription": "Follow these simple steps to transform your ideas into professional images using our advanced AI image generation technology.",
+    "title": "How to Create Ghibli Magic in 4 Simple Steps",
+    "description": "Follow these easy steps to transform your images or create new Ghibli-style artwork with Mori Studio AI platform.",
+    "alternativeTitle": "How to Create Ghibli-Style Images",
+    "alternativeDescription": "Follow these simple steps to transform your photos into magical Ghibli artwork or create new enchanting scenes using our advanced AI technology.",
     "steps": [
       {
         "number": "1",
-        "title": "Write Your Prompt",
-        "description": "Enter your text description or creative prompt that you want to convert into a professional image."
+        "title": "Upload Image or Write Prompt",
+        "description": "Upload a photo to transform into Ghibli style, or enter a text description to create new magical scenes."
       },
       {
         "number": "2",
-        "title": "Customize Settings",
-        "description": "Choose image style, aspect ratio, quality, and additional features like model type and guidance scale."
+        "title": "Choose Ghibli Style",
+        "description": "Select your preferred Studio Ghibli film style: classic Totoro, mystical Spirited Away, or epic Princess Mononoke aesthetics."
       },
       {
         "number": "3",
-        "title": "Generate Image",
-        "description": "Our AI image generation system processes your prompt and creates professional images with advanced AI technology."
+        "title": "AI Magic Processing",
+        "description": "Our specialized Ghibli AI processes your input and creates authentic Studio Ghibli-style artwork with magical details."
       },
       {
         "number": "4",
-        "title": "Download & Edit",
-        "description": "Preview your AI-generated images, make any edits, and download your professional image creations."
+        "title": "Download Your Magic",
+        "description": "Preview your Ghibli-style creation, make adjustments if needed, and download your magical artwork in high resolution."
       }
     ]
   },
   "faq": {
-    "title": "Flux Kontext AI - Frequently Asked Questions",
-    "description": "Find answers to common questions about our Flux Kontext AI platform and its powerful image generation features.",
+    "title": "Frequently Asked Questions",
+    "description": "Find answers to common questions about our Mori Studio AI platform and its magical Ghibli-style image transformation features.",
     "items": [
       {
-        "question": "What is Flux Kontext AI?",
-        "answer": "Flux Kontext AI is an advanced image generation platform that uses cutting-edge artificial intelligence to create stunning images from text descriptions, edit existing images, and process multiple images simultaneously."
+        "question": "What is Mori Studio AI?",
+        "answer": "Mori Studio AI is a specialized image transformation platform that uses advanced artificial intelligence to convert any photo into authentic Studio Ghibli-style artwork, or create new Ghibli-inspired images from text descriptions."
       },
       {
-        "question": "How does text-to-image generation work?",
-        "answer": "Our AI analyzes your text description and generates high-quality images using advanced Flux Pro and Max models. Simply describe what you want to see, and our AI creates professional-grade images in seconds."
+        "question": "How does Ghibli-style transformation work?",
+        "answer": "Our AI analyzes your input image and applies Studio Ghibli's signature artistic elements: soft textures, magical lighting, character design principles, and natural atmospheric effects to create authentic Ghibli-style artwork."
       },
       {
-        "question": "Can I edit existing images with Flux Kontext?",
-        "answer": "Yes! Our platform supports image editing through natural language instructions. Upload an image and describe the changes you want, and our AI will apply those modifications professionally."
+        "question": "Can I create new Ghibli scenes from text?",
+        "answer": "Yes! You can describe a scene in text and our AI will generate new Ghibli-style artwork with authentic Studio Ghibli aesthetics, character designs, and magical storytelling elements."
       },
       {
-        "question": "What image formats and sizes are supported?",
-        "answer": "Flux Kontext AI supports multiple aspect ratios including 1:1, 16:9, 9:16, 4:3, 3:2, and 21:9. You can export images in JPEG and PNG formats at high resolution for professional use."
-      },
-      {
-        "question": "How many images can I generate at once?",
-        "answer": "You can generate up to 4 images simultaneously with our multi-image processing feature. This allows you to explore different variations of your concept efficiently."
-      },
-      {
-        "question": "What makes Flux Kontext different from other AI image generators?",
-        "answer": "Flux Kontext stands out with its advanced Flux Pro and Max models, professional image editing capabilities, multi-image processing, and flexible aspect ratio support all in one seamless platform."
+        "question": "Which Ghibli film styles are available?",
+        "answer": "We offer multiple Studio Ghibli film styles including My Neighbor Totoro, Spirited Away, Princess Mononoke, Howl's Moving Castle, and other classic Ghibli aesthetics with authentic artistic details."
       },
       {
         "question": "Are there any usage limits or restrictions?",
-        "answer": "Usage depends on your plan and API limits. Our platform includes safety controls and content filtering to ensure responsible AI image generation while maintaining creative freedom."
+        "answer": "Usage depends on your plan and API limits. Our platform includes content filtering to ensure appropriate use while maintaining the magical and family-friendly spirit of Studio Ghibli films."
       },
       {
-        "question": "Can I use generated images commercially?",
-        "answer": "Yes, images generated through Flux Kontext AI can typically be used for commercial purposes. Please review the specific terms of service and licensing agreements for detailed usage rights."
+        "question": "Can I use generated Ghibli-style images commercially?",
+        "answer": "Generated images are for personal and creative use. Please review our terms of service for detailed usage rights regarding Ghibli-style artwork and commercial applications."
       }
     ]
   },
   "footer": {
     "brand": {
-      "name": "Flux Kontext",
-      "description": "Professional AI image generation platform. Create stunning images from text, edit existing images, and process multiple images with advanced AI technology.",
-      "copyright": "© 2025 Flux Kontext. All rights reserved."
+      "name": "Mori Studio",
+      "description": "Professional Ghibli-style AI transformation platform. Transform photos into magical Ghibli artwork, create new enchanting scenes, and bring Studio Ghibli magic to your creative projects.",
+      "copyright": "© 2025 Mori Studio. All rights reserved."
     },
     "contact": {
       "title": "Contact",
-      "email": "support@fluxkontext.space"
+      "email": "support@moristudio.space"
     },
     "legal": {
       "title": "Legal",
@@ -120,7 +112,7 @@
       "title": "Languages"
     },
     "social": {
-      "builtWith": "Built with ❤️ for creators worldwide",
+      "builtWith": "Built with ❤️ for Ghibli fans worldwide",
       "followUs": "Follow us on"
     }
   }

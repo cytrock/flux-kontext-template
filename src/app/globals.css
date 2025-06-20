@@ -4,25 +4,26 @@
 
 @layer base {
   :root {
-    --background: 11 16 19; /* #0b1013 */
-    --foreground: 250 250 250; /* #fafafa */
-    --card: 11 16 19;
+    /* 吉卜力风格色彩系统 - Ghibli Style Color System */
+    --background: 15 23 20; /* #0f1714 - 深森林绿背景 */
+    --foreground: 250 250 250; /* #fafafa - 纯白前景 */
+    --card: 15 23 20; /* 卡片背景同主背景 */
     --card-foreground: 250 250 250;
-    --popover: 11 16 19;
+    --popover: 15 23 20;
     --popover-foreground: 250 250 250;
-    --primary: 204 175 133; /* #ccaf85 - orange accent */
-    --primary-foreground: 11 16 19;
-    --secondary: 53 61 81; /* #353d51 */
+    --primary: 127 176 105; /* #7fb069 - 森林绿主色 */
+    --primary-foreground: 255 255 255; /* 主色按钮白色文字 */
+    --secondary: 46 79 67; /* #2e4f43 - 深绿灰 */
     --secondary-foreground: 250 250 250;
-    --muted: 52 48 46; /* #34302e */
-    --muted-foreground: 161 161 170;
-    --accent: 78 154 203; /* #4e9acb - blue accent */
-    --accent-foreground: 11 16 19;
-    --destructive: 193 43 51; /* #c12b33 */
+    --muted: 58 94 82; /* #3a5e52 - 中等绿灰 */
+    --muted-foreground: 161 161 170; /* 保持中性灰 */
+    --accent: 167 211 212; /* #a7d3d4 - 天空蓝强调色 */
+    --accent-foreground: 15 23 20; /* 强调色深色文字 */
+    --destructive: 193 43 51; /* #c12b33 - 保持红色 */
     --destructive-foreground: 250 250 250;
-    --border: 39 39 42;
-    --input: 39 39 42;
-    --ring: 204 175 133;
+    --border: 46 79 67; /* 边框使用深绿 */
+    --input: 46 79 67; /* 输入框边框 */
+    --ring: 127 176 105; /* 焦点环使用主绿色 */
     --radius: 0.5rem;
   }
 }
@@ -33,7 +34,8 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
-    background: linear-gradient(180deg, #0b1013 0%, #000 100%);
+    /* 吉卜力风格背景渐变 - 从深森林绿到更深的绿 */
+    background: linear-gradient(180deg, #0f1714 0%, #0a120f 100%);
     min-height: 100vh;
   }
 
@@ -42,11 +44,12 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-primary via-yellow-400 to-accent bg-clip-text text-transparent;
+    /* 吉卜力风格渐变文字 - 森林绿到天空蓝到暖黄 */
+    @apply bg-gradient-to-r from-primary via-accent to-yellow-400 bg-clip-text text-transparent;
     background-size: 200% 200%;
     animation: gradient-shift 4s ease-in-out infinite;
     font-weight: 700;
-    text-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+    text-shadow: 0 0 30px rgba(127, 176, 105, 0.3); /* 绿色光晕 */
     filter: brightness(1.2) contrast(1.1);
   }
 
@@ -58,7 +61,8 @@
   }
 
   .hero-gradient {
-    background: radial-gradient(ellipse at center, rgba(204, 175, 133, 0.1) 0%, rgba(11, 16, 19, 0.8) 70%);
+    /* 英雄区域吉卜力风格渐变 */
+    background: radial-gradient(ellipse at center, rgba(127, 176, 105, 0.1) 0%, rgba(15, 23, 20, 0.8) 70%);
   }
 
   /* Hide scrollbars */
