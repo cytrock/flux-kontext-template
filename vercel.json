@@ -73,11 +73,6 @@
       "statusCode": 301
     },
     {
-      "source": "/docs",
-      "destination": "/resources/api",
-      "permanent": true
-    },
-    {
       "source": "/(.*)",
       "has": [
         {
@@ -91,16 +86,6 @@
     {
       "source": "/free",
       "destination": "/resources",
-      "statusCode": 301
-    },
-    {
-      "source": "/api-docs",
-      "destination": "/resources/api",
-      "statusCode": 301
-    },
-    {
-      "source": "/documentation",
-      "destination": "/resources/api",
       "statusCode": 301
     }
   ]

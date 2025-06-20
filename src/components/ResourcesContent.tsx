@@ -56,13 +56,6 @@ const resourceCategories = [
     icon: Code,
     resources: [
       {
-        title: "Flux Kontext API Documentation",
-        description: "Complete API reference and integration guide",
-        type: "Documentation",
-        link: "/resources/api",
-        difficulty: "Developer"
-      },
-      {
         title: "Python SDK",
         description: "Official Python library for Flux Kontext",
         type: "SDK",
@@ -159,12 +152,6 @@ export function ResourcesContent() {
               <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
                 <Zap className="w-5 h-5 mr-2" />
                 Start Creating
-              </Button>
-            </Link>
-            <Link href="/resources/api" prefetch={true}>
-              <Button variant="outline" size="lg">
-                <Code className="w-5 h-5 mr-2" />
-                API Documentation
               </Button>
             </Link>
           </div>

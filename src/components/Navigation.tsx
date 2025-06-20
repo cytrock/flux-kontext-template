@@ -28,20 +28,8 @@ const navigationLinks = [
   },
   {
     name: "Resources",
-    href: "#",
+    href: "/resources",
     icon: BookOpen,
-    dropdown: [
-      {
-        name: "Resources Hub",
-        href: "/resources",
-        description: "Comprehensive guides and tutorials",
-      },
-      {
-        name: "API Documentation",
-        href: "/docs",
-        description: "Technical documentation for developers",
-      },
-    ],
   },
 ]
 
@@ -50,14 +38,12 @@ export function Navigation() {
   const { data: session, status } = useSession()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
-  const [isResourcesMenuOpen, setIsResourcesMenuOpen] = useState(false)
 
   // 点击外部关闭下拉菜单
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element
-      if (!target.closest('.resources-dropdown') && !target.closest('.user-dropdown')) {
-        setIsResourcesMenuOpen(false)
+      if (!target.closest('.user-dropdown')) {
         setIsUserMenuOpen(false)
       }
     }
@@ -70,7 +56,6 @@ export function Navigation() {
   useEffect(() => {
     const handleRouteChange = () => {
       setIsMobileMenuOpen(false)
-      setIsResourcesMenuOpen(false)
     }
 
     // 监听路由变化
@@ -110,63 +95,20 @@ export function Navigation() {
         <nav className="hidden md:flex items-center justify-center flex-1 space-x-8">
           {navigationLinks.map((link) => (
             <div key={link.name} className="relative">
-              {link.dropdown ? (
-                // Resources下拉菜单
-                <div className="relative resources-dropdown">
-                  <button
-                    onClick={() => setIsResourcesMenuOpen(!isResourcesMenuOpen)}
-                    className={`flex items-center space-x-1 relative transition-all duration-200 hover:font-semibold active:scale-95 ${
-                      pathname.startsWith('/resources') 
-                        ? 'text-ghibli-warm font-semibold' 
-                        : 'text-ghibli-cream hover:text-ghibli-warm'
-                    }`}
-                  >
-                    <span>{link.name}</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isResourcesMenuOpen ? 'rotate-180' : ''}`} />
-                    {pathname.startsWith('/resources') && (
-                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-ghibli-warm rounded-full" />
-                    )}
-                  </button>
-                  
-                  {/* Resources下拉菜单内容 */}
-                  {isResourcesMenuOpen && (
-                    <div className="absolute top-full left-0 mt-2 w-56 bg-ghibli-olive/98 backdrop-blur-xl border border-ghibli-forest/30 rounded-xl shadow-ghibli-strong z-[9999]">
-                      <div className="p-2">
-                        {link.dropdown.map((item) => (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                            className="block p-3 rounded-lg hover:bg-ghibli-forest/20 transition-all duration-200 group"
-                            onClick={() => setIsResourcesMenuOpen(false)}
-                          >
-                            <div className="text-sm font-medium text-ghibli-cream group-hover:text-ghibli-warm transition-colors duration-200">
-                              {item.name}
-                            </div>
-                            <div className="text-xs text-ghibli-sage mt-1 group-hover:text-ghibli-mint transition-colors duration-200">
-                              {item.description}
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                // 普通导航链接
-                <Link 
-                  href={link.href} 
-                  className={`relative transition-all duration-200 hover:font-semibold active:scale-95 ${
-                    pathname === link.href 
-                      ? 'text-ghibli-warm font-semibold' 
-                      : 'text-ghibli-cream hover:text-ghibli-warm'
-                  }`}
-                >
-                  {link.name}
-                  {pathname === link.href && (
-                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-ghibli-warm rounded-full" />
-                  )}
-                </Link>
-              )}
+              {/* 普通导航链接 */}
+              <Link 
+                href={link.href} 
+                className={`relative transition-all duration-200 hover:font-semibold active:scale-95 ${
+                  pathname === link.href || (link.href === '/resources' && pathname.startsWith('/resources'))
+                    ? 'text-ghibli-warm font-semibold' 
+                    : 'text-ghibli-cream hover:text-ghibli-warm'
+                }`}
+              >
+                {link.name}
+                {(pathname === link.href || (link.href === '/resources' && pathname.startsWith('/resources'))) && (
+                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-ghibli-warm rounded-full" />
+                )}
+              </Link>
             </div>
           ))}
         </nav>
@@ -268,54 +210,18 @@ export function Navigation() {
             {/* 移动端导航链接 */}
             {navigationLinks.map((link) => (
               <div key={link.name}>
-                {link.dropdown ? (
-                  // 移动端Resources下拉菜单
-                  <div>
-                    <button
-                      onClick={() => setIsResourcesMenuOpen(!isResourcesMenuOpen)}
-                      className={`flex items-center justify-between w-full py-2 px-3 rounded-md transition-all duration-200 hover:bg-ghibli-forest/20 hover:font-semibold active:scale-95 ${
-                        pathname.startsWith('/resources') 
-                          ? 'text-ghibli-warm font-semibold bg-ghibli-forest/20' 
-                        : 'text-ghibli-cream'
-                      }`}
-                    >
-                      <span>{link.name}</span>
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isResourcesMenuOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    
-                    {/* 移动端Resources子菜单 */}
-                    {isResourcesMenuOpen && (
-                      <div className="ml-4 mt-2 space-y-1">
-                        {link.dropdown.map((item) => (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                            className="block px-3 py-2 text-sm text-ghibli-sage hover:text-ghibli-mint hover:bg-ghibli-forest/10 rounded-lg transition-all duration-200"
-                            onClick={() => {
-                              setIsResourcesMenuOpen(false)
-                              setIsMobileMenuOpen(false)
-                            }}
-                          >
-                            {item.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  // 普通移动端导航链接
-                  <Link
-                    href={link.href}
-                    className={`block py-2 px-3 rounded-md transition-all duration-200 hover:bg-ghibli-forest/20 hover:font-semibold active:scale-95 ${
-                      pathname === link.href 
-                        ? 'text-ghibli-warm font-semibold bg-ghibli-forest/20' 
-                        : 'text-ghibli-cream'
-                    }`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                )}
+                {/* 普通移动端导航链接 */}
+                <Link
+                  href={link.href}
+                  className={`block py-2 px-3 rounded-md transition-all duration-200 hover:bg-ghibli-forest/20 hover:font-semibold active:scale-95 ${
+                    pathname === link.href || (link.href === '/resources' && pathname.startsWith('/resources'))
+                      ? 'text-ghibli-warm font-semibold bg-ghibli-forest/20' 
+                      : 'text-ghibli-cream'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
               </div>
             ))}
             
