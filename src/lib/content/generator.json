@@ -32,6 +32,13 @@
       "description": "Traditional Studio Ghibli animation style with vintage charm"
     }
   },
+  "safetyLevels": {
+    "1": "Strict (Family-friendly)",
+    "2": "Moderate (Some artistic content)",
+    "3": "Balanced (Artistic freedom)",
+    "4": "Relaxed (Creative expression)",
+    "5": "Minimal (Maximum creativity)"
+  },
   "placeholders": {
     "textPrompt": "Describe the magical Ghibli scene you want to create... (e.g., 'A peaceful forest glade with mystical spirits dancing among ancient trees')",
     "editPrompt": "Describe how to transform this image to Ghibli style... (e.g., 'Transform into Totoro forest scene with magical spirits')",
