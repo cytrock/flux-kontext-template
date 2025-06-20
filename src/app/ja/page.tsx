@@ -2,70 +2,97 @@ import type { Metadata } from 'next'
 import { HomeContentSimple } from '@/components/HomeContentSimple'
 
 export const metadata: Metadata = {
-  title: 'Flux Kontext AI - プロフェッショナルAI画像生成プラットフォーム | 素晴らしい画像を作成',
-  description: '最先端のAI技術でアイデアをプロフェッショナルな画像に変換します。テキストから画像を生成し、既存の画像を編集し、Flux Kontext AIの力で複数の画像を処理します。',
+  title: 'Mori Studio AI - ジブリスタイルAI変換プラットフォーム | 画像を魔法のジブリアートに変換',
+  description: 'Mori Studio AIを使用して、あらゆる写真を魅力的なジブリスタイルのアートワークに変換します。テキスト説明から新しいジブリシーンを作成するか、既存の画像を本格的なジブリアートスタイルに変換します。',
+  keywords: 'ジブリスタイルAI, 宮崎駿アートスタイル, アニメスタイル変換, ジブリ画像生成器, Mori Studio, トトロスタイル, 千と千尋スタイル',
   openGraph: {
-    title: 'Flux Kontext AI - プロフェッショナルAI画像生成プラットフォーム',
-    description: '最先端のAI技術でアイデアをプロフェッショナルな画像に変換します。',
-    url: 'https://fluxkontext.space/ja',
+    title: 'Mori Studio AI - ジブリスタイルAI変換プラットフォーム',
+    description: 'Mori Studio AIを使用して、あらゆる写真を魅力的なジブリスタイルのアートワークに変換します。',
+    url: 'https://moristudio.space/ja',
+    siteName: 'Mori Studio',
     locale: 'ja_JP',
     type: 'website',
+  },
+  alternates: {
+    canonical: 'https://moristudio.space/ja',
+    languages: {
+      'en': 'https://moristudio.space',
+      'de': 'https://moristudio.space/de',
+      'es': 'https://moristudio.space/es',
+      'fr': 'https://moristudio.space/fr',
+      'it': 'https://moristudio.space/it',
+      'ja': 'https://moristudio.space/ja',
+      'ko': 'https://moristudio.space/ko',
+      'nl': 'https://moristudio.space/nl',
+      'pl': 'https://moristudio.space/pl',
+      'pt': 'https://moristudio.space/pt',
+      'ru': 'https://moristudio.space/ru',
+      'tr': 'https://moristudio.space/tr',
+      'ar': 'https://moristudio.space/ar',
+      'hi': 'https://moristudio.space/hi',
+      'bn': 'https://moristudio.space/bn',
+      'zh': 'https://moristudio.space/zh'
+    }
   }
 }
 
 const jaDictionary = {
   hero: {
-    badge: "プロフェッショナルAI画像生成プラットフォーム",
-    title: "素晴らしい画像を作成",
-    subtitle: "Flux Kontext AI",
-    description: "最先端のAI技術でアイデアをプロフェッショナルな画像に変換します。テキストから画像を生成し、既存の画像を編集し、Flux Kontext AIの力で複数の画像を処理します。",
+    badge: "プロフェッショナルジブリスタイルAIプラットフォーム",
+    title: "あらゆる画像を魔法のジブリスタイルに変換",
+    subtitle: "Mori Studio AI",
+    description: "Mori Studio AIを使用して、画像にスタジオジブリの魔法を与えます。既存の写真を魅力的なジブリスタイルのアートワークに変換するか、テキスト説明から新しい魔法のシーンを作成します。",
     cta: {
-      primary: "作成を開始",
+      primary: "魔法の創造を始める",
       secondary: "価格を見る"
     }
   },
   features: {
-    title: "Flux Kontext AIプラットフォームの主要機能",
-    subtitle: "私たちのFlux Kontext AIは最先端技術を組み合わせ、シームレスなプラットフォームでプロフェッショナルな画像生成と編集を提供します。",
+    title: "Mori Studio AIプラットフォームの主要機能",
+    subtitle: "私たちのMori Studio AIは最先端技術とスタジオジブリの芸術的魔法を組み合わせ、シームレスなプラットフォームでプロフェッショナルな画像変換と生成を提供します。",
     items: [
       {
-        title: "テキストから画像生成",
-        description: "高度なAI技術でテキスト説明を素晴らしい高品質画像に変換します。"
+        title: "ジブリスタイル変換",
+        description: "あらゆる写真を美しいジブリスタイルのアートワークに変換し、本格的なキャラクターデザインと魔法の雰囲気を実現します。"
       },
       {
-        title: "プロフェッショナル画像編集",
-        description: "自然言語指示で既存画像を編集し、精密な修正を行います。"
+        title: "テキストからジブリ生成",
+        description: "テキスト説明から新しいジブリスタイルの画像を作成し、本格的なスタジオジブリの美学と物語要素を持つ作品を生成します。"
       },
       {
-        title: "マルチ画像処理",
-        description: "一貫したスタイルと品質で複数の画像を同時に処理します。"
+        title: "キャラクター一貫性",
+        description: "複数の画像間で一貫したキャラクターデザインを維持し、一貫したジブリスタイルの物語を作成します。"
       }
     ]
   },
   faq: {
     title: "よくある質問",
-    subtitle: "Flux Kontext AIプラットフォームとその強力な画像生成機能に関するよくある質問の回答を見つけてください。",
+    subtitle: "Mori Studio AIプラットフォームとその魔法のジブリスタイル画像変換機能に関するよくある質問の回答を見つけてください。",
     items: [
       {
-        question: "Flux Kontext AIとは何ですか？",
-        answer: "Flux Kontext AIは、最先端の人工知能を使用してテキスト説明から素晴らしい画像を作成し、既存の画像を編集し、複数の画像を同時に処理する高度な画像生成プラットフォームです。"
+        question: "Mori Studio AIとは何ですか？",
+        answer: "Mori Studio AIは、高度な人工知能を使用してあらゆる写真を本格的なスタジオジブリスタイルのアートワークに変換する、または テキスト説明から新しいジブリスタイルの画像を作成する専門の画像変換プラットフォームです。"
+      },
+      {
+        question: "ジブリスタイル変換はどのように機能しますか？",
+        answer: "私たちのAIは入力画像を分析し、スタジオジブリの象徴的な芸術要素を適用します：柔らかいテクスチャ、魔法の照明、キャラクターデザインの原則、自然の大気効果により、本格的なジブリスタイルのアートワークを作成します。"
       }
     ]
   },
   cta: {
-    title: "素晴らしい画像を作成する準備はできましたか？",
-    subtitle: "Flux Kontext AIを使ってアイデアを実現している何千ものクリエイターに参加しましょう。",
+    title: "ジブリの魔法を創造する準備はできましたか？",
+    subtitle: "Mori Studio AIを使ってクリエイティブを実現している何千ものジブリファンに参加しましょう。",
     button: "今すぐ始める"
   },
   footer: {
     brand: {
-      name: "Flux Kontext",
-      description: "プロフェッショナルAI画像生成プラットフォーム。",
-      copyright: "© 2025 Flux Kontext. 全著作権所有。"
+      name: "Mori Studio",
+      description: "プロフェッショナルジブリスタイルAI変換プラットフォーム。写真を魔法のジブリアートワークに変換し、新しい魅力的なシーンを作成し、クリエイティブプロジェクトにスタジオジブリの魔法をもたらします。",
+      copyright: "© 2025 Mori Studio. 全著作権所有。"
     },
     contact: {
       title: "お問い合わせ",
-      email: "support@fluxkontext.space"
+      email: "support@moristudio.space"
     },
     legal: {
       title: "法的事項",
@@ -77,7 +104,7 @@ const jaDictionary = {
       title: "言語"
     },
     social: {
-      builtWith: "世界中のクリエイターのために❤️で構築",
+      builtWith: "世界中のジブリファンのために❤️で構築",
       followUs: "フォローする"
     }
   }

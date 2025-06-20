@@ -1,39 +1,38 @@
 import type { Metadata } from 'next'
 import { HomeContentSimple } from '@/components/HomeContentSimple'
-import { getDictionary } from '@/lib/i18n/home-config'
 
 // 德语页面SEO元数据
 export const metadata: Metadata = {
-  title: 'Flux Kontext AI - Professionelle KI-Bildgenerierung | Erstelle beeindruckende Bilder',
-  description: 'Verwandle deine Ideen in professionelle Bilder mit unserer hochmodernen KI-Technologie. Generiere Bilder aus Text, bearbeite vorhandene Bilder und verarbeite mehrere Bilder mit der Kraft von Flux Kontext AI.',
-  keywords: 'KI Bildgenerierung, Text zu Bild, Bildbearbeitung, Flux Kontext, künstliche Intelligenz, professionelle Bilder',
+  title: 'Mori Studio AI - Ghibli-Stil KI-Transformationsplattform | Verwandle Bilder in magische Ghibli-Kunst',
+  description: 'Verwende Mori Studio AI, um jedes Foto in bezaubernde Ghibli-Stil-Kunstwerke zu verwandeln. Erstelle neue Ghibli-Szenen aus Textbeschreibungen oder konvertiere bestehende Bilder in authentischen Ghibli-Kunststil.',
+  keywords: 'Ghibli-Stil KI, Miyazaki-Kunststil, Anime-Stil-Transformation, Ghibli-Bildgenerator, Mori Studio, Totoro-Stil, Chihiros Reise-Stil',
   openGraph: {
-    title: 'Flux Kontext AI - Professionelle KI-Bildgenerierung',
-    description: 'Verwandle deine Ideen in professionelle Bilder mit unserer hochmodernen KI-Technologie.',
-    url: 'https://fluxkontext.space/de',
-    siteName: 'Flux Kontext',
+    title: 'Mori Studio AI - Ghibli-Stil KI-Transformationsplattform',
+    description: 'Verwende Mori Studio AI, um jedes Foto in bezaubernde Ghibli-Stil-Kunstwerke zu verwandeln.',
+    url: 'https://moristudio.space/de',
+    siteName: 'Mori Studio',
     locale: 'de_DE',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://fluxkontext.space/de',
+    canonical: 'https://moristudio.space/de',
     languages: {
-      'en': 'https://fluxkontext.space',
-      'de': 'https://fluxkontext.space/de',
-      'es': 'https://fluxkontext.space/es',
-      'fr': 'https://fluxkontext.space/fr',
-      'it': 'https://fluxkontext.space/it',
-      'ja': 'https://fluxkontext.space/ja',
-      'ko': 'https://fluxkontext.space/ko',
-      'nl': 'https://fluxkontext.space/nl',
-      'pl': 'https://fluxkontext.space/pl',
-      'pt': 'https://fluxkontext.space/pt',
-      'ru': 'https://fluxkontext.space/ru',
-      'tr': 'https://fluxkontext.space/tr',
-      'ar': 'https://fluxkontext.space/ar',
-      'hi': 'https://fluxkontext.space/hi',
-      'bn': 'https://fluxkontext.space/bn',
-      'zh': 'https://fluxkontext.space/zh'
+      'en': 'https://moristudio.space',
+      'de': 'https://moristudio.space/de',
+      'es': 'https://moristudio.space/es',
+      'fr': 'https://moristudio.space/fr',
+      'it': 'https://moristudio.space/it',
+      'ja': 'https://moristudio.space/ja',
+      'ko': 'https://moristudio.space/ko',
+      'nl': 'https://moristudio.space/nl',
+      'pl': 'https://moristudio.space/pl',
+      'pt': 'https://moristudio.space/pt',
+      'ru': 'https://moristudio.space/ru',
+      'tr': 'https://moristudio.space/tr',
+      'ar': 'https://moristudio.space/ar',
+      'hi': 'https://moristudio.space/hi',
+      'bn': 'https://moristudio.space/bn',
+      'zh': 'https://moristudio.space/zh'
     }
   }
 }
@@ -41,61 +40,61 @@ export const metadata: Metadata = {
 // 德语内容字典
 const deDictionary = {
   hero: {
-    badge: "Professionelle KI-Bildgenerierungsplattform",
-    title: "Erstelle beeindruckende Bilder mit",
-    subtitle: "Flux Kontext AI",
-    description: "Verwandle deine Ideen in professionelle Bilder mit unserer hochmodernen KI-Technologie. Generiere Bilder aus Text, bearbeite vorhandene Bilder und verarbeite mehrere Bilder mit der Kraft von Flux Kontext AI.",
+    badge: "Professionelle Ghibli-Stil KI-Plattform",
+    title: "Verwandle jedes Bild in magischen Ghibli-Stil",
+    subtitle: "Mori Studio AI",
+    description: "Verwende Mori Studio AI, um die Magie von Studio Ghibli in deine Bilder zu bringen. Konvertiere bestehende Fotos in bezaubernde Ghibli-Stil-Kunstwerke oder erstelle neue magische Szenen aus Textbeschreibungen.",
     cta: {
-      primary: "Jetzt erstellen",
+      primary: "Beginne Magie zu erschaffen",
       secondary: "Preise ansehen"
     }
   },
   features: {
-    title: "Hauptfunktionen der Flux Kontext AI Plattform",
-    subtitle: "Unsere Flux Kontext AI kombiniert modernste Technologie, um professionelle Bildgenerierung und -bearbeitung in einer nahtlosen Plattform zu liefern.",
+    title: "Hauptfunktionen der Mori Studio AI Plattform",
+    subtitle: "Unser Mori Studio AI kombiniert modernste Technologie mit der künstlerischen Magie von Studio Ghibli, um professionelle Bildtransformation und -generierung in einer nahtlosen Plattform zu liefern.",
     items: [
       {
-        title: "Text-zu-Bild-Generierung",
-        description: "Verwandle deine Textbeschreibungen in atemberaubende, hochwertige Bilder mit fortschrittlicher KI-Technologie."
+        title: "Ghibli-Stil-Transformation",
+        description: "Verwandle jedes Foto in wunderschöne Ghibli-Stil-Kunstwerke mit authentischen Charakterdesigns und magischer Atmosphäre."
       },
       {
-        title: "Professionelle Bildbearbeitung",
-        description: "Bearbeite vorhandene Bilder mit natürlichsprachlichen Anweisungen für präzise Änderungen."
+        title: "Text-zu-Ghibli-Generierung",
+        description: "Erstelle neue Ghibli-Stil-Bilder aus Textbeschreibungen mit authentischer Studio Ghibli-Ästhetik und narrativen Elementen."
       },
       {
-        title: "Multi-Bild-Verarbeitung",
-        description: "Verarbeite mehrere Bilder gleichzeitig mit konsistentem Stil und Qualität."
+        title: "Charakter-Konsistenz",
+        description: "Erhalte konsistente Charakterdesigns über mehrere Bilder hinweg für kohärente Ghibli-Stil-Erzählungen."
       }
     ]
   },
   faq: {
     title: "Häufig gestellte Fragen",
-    subtitle: "Finde Antworten auf häufige Fragen zu unserer Flux Kontext AI Plattform und ihren leistungsstarken Bildgenerierungsfunktionen.",
+    subtitle: "Finde Antworten auf häufige Fragen zu unserer Mori Studio AI Plattform und ihren magischen Ghibli-Stil-Bildtransformationsfunktionen.",
     items: [
       {
-        question: "Was ist Flux Kontext AI?",
-        answer: "Flux Kontext AI ist eine fortschrittliche Bildgenerierungsplattform, die modernste künstliche Intelligenz nutzt, um atemberaubende Bilder aus Textbeschreibungen zu erstellen, vorhandene Bilder zu bearbeiten und mehrere Bilder gleichzeitig zu verarbeiten."
+        question: "Was ist Mori Studio AI?",
+        answer: "Mori Studio AI ist eine spezialisierte Bildtransformationsplattform, die fortschrittliche künstliche Intelligenz nutzt, um jedes Foto in authentische Studio Ghibli-Stil-Kunstwerke zu verwandeln oder neue Ghibli-Stil-Bilder aus Textbeschreibungen zu erstellen."
       },
       {
-        question: "Wie funktioniert die Text-zu-Bild-Generierung?",
-        answer: "Unsere KI analysiert deine Textbeschreibung und generiert hochwertige Bilder mit fortschrittlichen Flux Pro und Max Modellen. Beschreibe einfach, was du sehen möchtest, und unsere KI erstellt professionelle Bilder in Sekunden."
+        question: "Wie funktioniert die Ghibli-Stil-Transformation?",
+        answer: "Unsere KI analysiert dein Eingabebild und wendet ikonische Studio Ghibli-Kunstelemente an: weiche Texturen, magische Beleuchtung, Charakterdesign-Prinzipien und natürliche atmosphärische Effekte, um authentische Ghibli-Stil-Kunstwerke zu erstellen."
       }
     ]
   },
   cta: {
-    title: "Bereit, erstaunliche Bilder zu erstellen?",
-    subtitle: "Schließe dich Tausenden von Kreativen an, die Flux Kontext AI nutzen, um ihre Ideen zum Leben zu erwecken.",
+    title: "Bereit, Ghibli-Magie zu erschaffen?",
+    subtitle: "Schließe dich Tausenden von Ghibli-Fans an, die Mori Studio AI nutzen, um ihre kreativen Ideen zum Leben zu erwecken.",
     button: "Jetzt loslegen"
   },
   footer: {
     brand: {
-      name: "Flux Kontext",
-      description: "Professionelle KI-Bildgenerierungsplattform. Erstelle atemberaubende Bilder aus Text, bearbeite vorhandene Bilder und verarbeite mehrere Bilder mit fortschrittlicher KI-Technologie.",
-      copyright: "© 2025 Flux Kontext. Alle Rechte vorbehalten."
+      name: "Mori Studio",
+      description: "Professionelle Ghibli-Stil KI-Transformationsplattform. Verwandle Fotos in magische Ghibli-Kunstwerke, erstelle neue bezaubernde Szenen und bringe die Magie von Studio Ghibli in deine kreativen Projekte.",
+      copyright: "© 2025 Mori Studio. Alle Rechte vorbehalten."
     },
     contact: {
       title: "Kontakt",
-      email: "support@fluxkontext.space"
+      email: "support@moristudio.space"
     },
     legal: {
       title: "Rechtliches",
@@ -107,7 +106,7 @@ const deDictionary = {
       title: "Sprachen"
     },
     social: {
-      builtWith: "Mit ❤️ für Kreative weltweit entwickelt",
+      builtWith: "Mit ❤️ für Ghibli-Fans weltweit entwickelt",
       followUs: "Folge uns auf"
     }
   }
