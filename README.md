@@ -434,8 +434,3 @@ FluxKontext.space是一个功能完整的AI图像生成平台，具有：
 - 📄 PAYMENT_SECURITY_GUIDE.md - 支付安全指南
 - 📄 env.example - 环境变量配置示例
 - 📁 scripts/ - 各种检查和设置脚本 
-
-## 🛠️ 更新日志
-
-### 2025-06-21
-- **修复 (build)**: 解决了在 Cloudflare 部署环境中因缺少 `"baseUrl"` 配置而导致的“模块未找到” (Module not found) 的严重构建错误。通过在 `tsconfig.json` 中添加 `"baseUrl": "."`，确保了路径别名 `@/*` 能够被正确解析，恢复了项目的正常构建能力。 
