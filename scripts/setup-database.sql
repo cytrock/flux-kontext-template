@@ -222,10 +222,8 @@ COMMENT ON TABLE otp_codes IS '存储一次性验证码，用于邮箱验证和�
 
 
 -- 存储用于验证的Turnstile令牌，防止重放攻击
-CREATE TABLE IF NOT EXISTS turnstile_tokens (
-  id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  token TEXT NOT NULL UNIQUE,
+-- CREATE TABLE IF NOT EXISTS turnstile_tokens (
+--   id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+--   token TEXT NOT NULL UNIQUE,
   -- ... existing code ...
 
--- 完成提示
-SELECT 'Database setup completed successfully!' as message; 
