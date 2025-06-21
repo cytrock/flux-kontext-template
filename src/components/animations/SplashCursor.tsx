@@ -12,7 +12,7 @@ interface Point {
   color: string
 }
 
-export function SplashCursor() {
+export default function SplashCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pointsRef = useRef<Point[]>([])
   const mouseRef = useRef({ x: 0, y: 0 })
