@@ -220,10 +220,14 @@ CREATE TABLE IF NOT EXISTS otp_codes (
 );
 COMMENT ON TABLE otp_codes IS '存储一次性验证码，用于邮箱验证和密码重置等功能。';
 
-
 -- 存储用于验证的Turnstile令牌，防止重放攻击
--- CREATE TABLE IF NOT EXISTS turnstile_tokens (
---   id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
---   token TEXT NOT NULL UNIQUE,
-  -- ... existing code ...
+CREATE TABLE IF NOT EXISTS turnstile_tokens (
+  id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  token TEXT NOT NULL UNIQUE,
+  user_ip TEXT,
+  used_at TIMESTAMP WITH TIME ZONE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  expires_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP + INTERVAL '10 minutes'
+);
+COMMENT ON TABLE turnstile_tokens IS '存储Turnstile验证令牌，防止重放攻击和机器人访问。';
 

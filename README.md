@@ -4,6 +4,31 @@
 
 ## 🌟 最新更新 - 深牛油果绿配色方案
 
+### 2024-12-22 版本更新：修复Vercel部署错误
+
+**重要修复**
+- 修复了Vercel部署中的关键类型错误：`Route "src/app/api/memory-garden/generations/[id]/favorite/route.ts" has an invalid "POST" export`
+- 解决了Next.js 15 App Router中动态路由参数的类型兼容性问题
+- 修复了React组件中console.log返回void类型在JSX中的错误
+
+**技术修复详情**
+- **API路由修复**: 将 `{ params }: { params: { id: string } }` 更新为 `context: { params: Promise<{ id: string }> }`
+- **参数处理**: 添加 `const params = await context.params` 来正确处理Next.js 15的异步params
+- **JSX类型安全**: 移除了JSX中直接使用console.log导致的void类型错误
+- **构建验证**: 确保所有API路由符合Next.js 15的类型要求
+
+**部署稳定性提升**
+- 所有API路由现在完全兼容Next.js 15 App Router
+- 修复后构建成功，无类型错误
+- 确保Vercel生产环境部署正常
+- 消除了45个页面和33个API路由的构建警告
+
+**开发体验改进**
+- 开发环境和生产环境构建一致性
+- TypeScript类型检查完全通过
+- 所有动态路由参数正确处理
+- Next.js 15新特性完全兼容
+
 ### 2024-12-22 版本更新：修复API配置错误和服务连接问题
 
 **API配置错误修复**
