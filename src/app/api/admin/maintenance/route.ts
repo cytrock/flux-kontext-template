@@ -8,6 +8,7 @@ import {
   withErrorHandler 
 } from "@/lib/utils/response"
 import { runSystemMaintenance } from "@/lib/tasks/order-cleanup"
+import { getOrderStatistics, getPaymentProviderStats } from "@/lib/services/payment-database"
 
 /**
  * 系统维护API - 只允许管理员访问
@@ -53,9 +54,7 @@ export const GET = withErrorHandler(async (req: NextRequest) => {
     return respAuthErr("Admin access required")
   }
   
-  // 2. 获取系统状态
-  const { getOrderStatistics, getPaymentProviderStats } = await import("@/lib/services/payment-database")
-  
+  // 2. 获取系统状态 - 使用静态导入
   const [orderStats, providerStats] = await Promise.all([
     getOrderStatistics(),
     getPaymentProviderStats(24)

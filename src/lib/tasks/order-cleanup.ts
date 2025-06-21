@@ -1,4 +1,9 @@
-import { getExpiredOrders, markOrdersAsExpired } from "@/lib/services/payment-database"
+import { 
+  getExpiredOrders, 
+  markOrdersAsExpired,
+  getOrderStatistics,
+  getPaymentProviderStats 
+} from "@/lib/services/payment-database"
 
 /**
  * 订单清理任务 - 处理过期订单
@@ -47,11 +52,9 @@ export async function cleanupExpiredOrders() {
  */
 export async function generateOrderReport() {
   try {
-    const { getOrderStatistics } = await import("@/lib/services/payment-database")
-    
     console.log("📊 生成订单统计报告...")
     
-    // 获取全局统计
+    // 获取全局统计 - 使用静态导入
     const globalStats = await getOrderStatistics()
     
     console.log("📈 全局订单统计:")
@@ -74,10 +77,9 @@ export async function generateOrderReport() {
  */
 export async function generateProviderLoadReport() {
   try {
-    const { getPaymentProviderStats } = await import("@/lib/services/payment-database")
-    
     console.log("⚖️ 生成支付提供商负载报告...")
     
+    // 使用静态导入
     const stats = await getPaymentProviderStats(24) // 24小时统计
     
     console.log("📊 支付提供商负载 (24小时):")

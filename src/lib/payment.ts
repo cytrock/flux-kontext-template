@@ -6,6 +6,8 @@ import { validateCheckoutParams } from "@/lib/services/pricing"
 import { CheckoutParams } from "@/lib/types/pricing"
 import { generateOrderNo } from "@/lib/utils/hash"
 import { getIsoTimestr, addMonthsToDate } from "@/lib/utils/time"
+import { getPaymentProviderStats as getProviderStats, createPaymentOrder as createOrderRecord } from "@/lib/services/payment-database"
+import { getActivePaymentProvider, validatePaymentConfig } from "@/lib/config/payment"
 
 // 支付提供商类型
 export type PaymentProvider = "stripe" | "creem"
@@ -111,12 +113,10 @@ export async function createPaymentSession(params: PaymentParams): Promise<Payme
 }
 
 /**
- * 获取24小时内支付提供商使用统计 - 使用数据库服务
+ * 获取24小时内支付提供商使用统计 - 使用静态导入
  */
 async function getPaymentProviderStats(): Promise<ProviderStats[]> {
-  const { getPaymentProviderStats: getStats } = await import("@/lib/services/payment-database")
-  
-  return await getStats(24) // 24小时内的统计
+  return await getProviderStats(24) // 24小时内的统计
 }
 
 /**
@@ -129,10 +129,7 @@ async function determinePaymentProvider(
   amount?: number
 ): Promise<PaymentProvider> {
   
-  // 导入配置文件
-  const { getActivePaymentProvider, validatePaymentConfig } = await import("@/lib/config/payment")
-  
-  // 验证配置
+  // 验证配置 - 使用静态导入
   try {
     validatePaymentConfig()
   } catch (error) {
@@ -140,7 +137,7 @@ async function determinePaymentProvider(
     throw error
   }
   
-  // 获取活跃的支付提供商
+  // 获取活跃的支付提供商 - 使用静态导入
   const activeProvider = getActivePaymentProvider(userLocation, amount, preferredProvider)
   
   if (!activeProvider) {
@@ -151,14 +148,12 @@ async function determinePaymentProvider(
 }
 
 /**
- * 创建内部支付订单记录 - 使用数据库服务
+ * 创建内部支付订单记录 - 使用静态导入
  */
 async function createPaymentOrder(params: PaymentParams, provider: PaymentProvider) {
-  const { createPaymentOrder: createOrder } = await import("@/lib/services/payment-database")
-  
   const orderNumber = `ORDER_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
   
-  return await createOrder({
+  return await createOrderRecord({
     userId: params.userId,
     orderNumber,
     amount: params.amount,
