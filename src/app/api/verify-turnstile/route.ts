@@ -167,6 +167,7 @@ export async function POST(request: NextRequest) {
     )
   }
 
+  
 // 🔧 工具函数：验证备用token的格式
 function validateFallbackToken(token: string): boolean {
   // 检查token格式：fallback_math_timestamp_randomId
