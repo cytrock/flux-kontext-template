@@ -166,7 +166,7 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
-
+}
   
 // 🔧 工具函数：验证备用token的格式
 function validateFallbackToken(token: string): boolean {
@@ -200,4 +200,4 @@ function createSuccessResponse(data: any) {
     success: true,
     ...data
   })
-} 
+}
