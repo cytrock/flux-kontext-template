@@ -434,3 +434,9 @@ FluxKontext.space是一个功能完整的AI图像生成平台，具有：
 - 📄 PAYMENT_SECURITY_GUIDE.md - 支付安全指南
 - 📄 env.example - 环境变量配置示例
 - 📁 scripts/ - 各种检查和设置脚本 
+
+## 🆕 2024-06-09 更新日志
+
+- 新增找回密码页面：`src/app/auth/forgot-password/page.tsx`
+- 新增找回密码内容组件：`src/components/ForgotPasswordContent.tsx`
+- 修复 Vercel 部署后访问 `/auth/forgot-password` 404 问题 
