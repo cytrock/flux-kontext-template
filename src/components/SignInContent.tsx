@@ -19,8 +19,13 @@ export function SignInContent() {
   // 获取可用的认证提供商
   useEffect(() => {
     const fetchProviders = async () => {
-      const res = await getProviders()
-      setProviders(res)
+      try {
+        const res = await getProviders()
+        console.log('[SignIn] OAuth providers fetched:', res)
+        setProviders(res)
+      } catch (err) {
+        console.error('[SignIn] Failed to fetch providers:', err)
+      }
     }
     fetchProviders()
   }, [])
@@ -92,16 +97,19 @@ export function SignInContent() {
   const handleOAuthSignIn = async (provider: string) => {
     setIsLoading(true)
     setError("")
-    
+    console.log(`[SignIn] Start OAuth sign in: ${provider}`)
     try {
       const callbackUrl = searchParams.get('callbackUrl') || '/generate'
-      await signIn(provider, { 
+      const result = await signIn(provider, { 
         callbackUrl,
         redirect: true 
       })
+      // signIn 通常会重定向，但如果未重定向可打印返回值
+      console.log(`[SignIn] signIn result for ${provider}:`, result)
     } catch (error) {
       setError(common.messages.loginFailed)
       setIsLoading(false)
+      console.error(`[SignIn] OAuth sign in error for ${provider}:`, error)
     }
   }
 
@@ -148,7 +156,10 @@ export function SignInContent() {
               {/* Google 登录 - 只有在启用时才显示 */}
               {providers.google && process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED === "true" && (
                 <button
-                  onClick={() => handleOAuthSignIn("google")}
+                  onClick={() => {
+                    console.log('[SignIn] Google login button clicked')
+                    handleOAuthSignIn("google")
+                  }}
                   disabled={isLoading}
                   className="group relative w-full flex justify-center py-3 px-4 border border-border text-sm font-medium rounded-md text-foreground bg-card hover:bg-card/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
                 >
